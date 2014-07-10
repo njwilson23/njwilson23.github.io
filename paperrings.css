@@ -1,6 +1,6 @@
 
 body {
-  font-family: 'Roboto Slab', sans;
+  font-family: 'Titillium', sans;
   font-size: xx-large;
 }
 
@@ -14,6 +14,7 @@ div#sleeps {
 
 div#rings {
   padding-top: 20%;
+  font-family: 'Vollkorn', serif;
   font-size: 200%;
   letter-spacing: -0.3em;
   text-align: center;
