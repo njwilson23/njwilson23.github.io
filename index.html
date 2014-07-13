@@ -1,9 +1,8 @@
 <!doctype html>
 <html>
 <head>
-
-<link href='http://fonts.googleapis.com/css?family=Cardo:400,400italic,700' rel='stylesheet' type='text/css'>
-
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="http://brick.a.ssl.fastly.net/Alegreya:400">
 </head>
 
 <body>
@@ -13,11 +12,11 @@ html {
   color: #222222;
   padding-top: 3%;
   padding-bottom: 3%;
-  font-family: Cardo, serif;
+  font-family: Alegreya, Palatino, serif;
   font-size: 14pt;
 }
 
-p {
+p.center {
   text-align: center;
 }
 
@@ -25,15 +24,38 @@ h1 {
   text-align: center;
 }
 
+div.index {
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+  max-width: 30em;
+}
+
 </style>
 <body>
 
-<p><img src="images/bullkelp.png"></p>
-<h1>Ironicmtn</h1>
+<p class="center"><img src="images/bullkelp.png"></p>
 
-<p><a href="http://web.mit.edu/~njwilson/www/waves.html">Wave simulator</a></p>
+<div class="index">
+  <h1>Ironicmtn</h1>
 
-<p><a href="http://www.isitquaking.ca">Is it Quaking?</a></p>
+  <h3>For fun:</h3>
+  <p><a href="http://web.mit.edu/~njwilson/www/waves.html">Linear wave simulator</a></p>
+  <p><a href="http://www.isitquaking.ca">Is it Quaking in Vancouver?</a></p>
+
+  <h3>Code:</h3>
+  <p><a href="http://www.ironicmtn.com/karta">Karta</a><br>
+      Python library classes for vector and raster geographical data.
+  </p>
+  <p><a href="http://www.ironicmtn.com/narwhal">Narwhal</a><br>
+      Python tools for oceanography. Narwhal is an experimental package for
+      analysing CTD and XBT data.
+  </p>
+  <p><a href="http://www.ironicmtn.com/irlib">irlib</a><br>
+      Tools for analyzing glacier-penetrating radar data, particularly that
+      collected using Blue System's ice-penetrating radar hardware.
+  </p>
+</div>
 
 
 </body>
