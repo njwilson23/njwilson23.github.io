@@ -1,68 +1,76 @@
-@font-face{
-  font-family:'Sorts Mill Goudy';
-  font-style:normal;
-  font-weight:400;
-  src:local('OFL Sorts Mill Goudy'),url(http://brick.a.ssl.fastly.net/fonts/sortsmillgoudy/400.woff) format('woff')
+@font-face {
+    font-family: 'Cardo';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Cardo'),url(http://brick.a.ssl.fastly.net/fonts/cardo/400.woff) format('woff');
 }
+
+@font-face {
+    font-family: 'Cardo';
+    font-style: italic;
+    font-weight: 400;
+    src: local('Cardo Italic'),url(http://brick.a.ssl.fastly.net/fonts/cardo/400i.woff) format('woff');
+}
+
+@font-face {
+    font-family: 'Cardo';
+    font-style: normal;
+    font-weight: 700;
+    src: local('Cardo Bold'),url(http://brick.a.ssl.fastly.net/fonts/cardo/700.woff) format('woff');
+}
+
+@font-face {
+    font-family: 'Bitter';
+    font-style: normal;
+    font-weight: 700;
+    src: local('Bitter Bold'),url(http://brick.a.ssl.fastly.net/fonts/bitter/700.woff) format('woff');
+}
+
 
 html {
   color: #222222;
   padding-top: 3%;
   padding-bottom: 3%;
-  font-family: Sorts Mill Goudy, serif;
-  font-size: 14pt;
+  font-family: Cardo, Garamond, serif;
+  font-size: 12pt;
 }
 
 body {
-  background: #eee;
+  background: #efefef;
 }
 
-p.center {
-  text-align: center;
+h1, h2, h3 {
+  font-family: Bitter, Garamond, serif;
+  text-decoration: underline;
 }
 
-h1.center {
-  text-align: center;
-}
-
-h2, h3 {
-  background: black;
-  color: white;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  box-shadow: -2em 0 black, 2em 0 black;
-}
-
-section {
+div.page {
+  width: 80%;
+  max-width: 50em;
+  overflow: auto;
   margin: 0 auto;
-  width: 80%;
-  max-width: 30em;
-  background: white;
-  padding: 20px;
-  box-shadow: 0 0 12px black;
+  padding: 2em;
+  background: #f7f7f7;
+  box-shadow: 0 0 8px black;
 }
 
-/********************************/
-
-/*div.text {
-  margin-left: auto;
-  margin-right: auto;
-  width: 80%;
-  max-width: 30em;
+.center {
+  text-align: center;
 }
 
-div.full-width {
-  margin-left: 0px;
-  margin-right: 0px;
-  margin-top: 0px;
-  margin-bottom: 0px;
-  width: 100%;
+.half {
+  float: left;
+  position: relative;
+  width: 50%;
+  overflow: hidden;
 }
 
-.bg1 {
-  background-color: firebrick;
+a:link, a:visited {
+  color: #2D74AD;
+  text-decoration: none;
 }
 
-.bg2 {
-  background-color: steelblue;
-}*/
+a:hover {
+  color: #6F9BBF;
+}
+
