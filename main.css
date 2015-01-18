@@ -10,6 +10,10 @@ body {
   background: #efefef;
 }
 
+section {
+  clear: both;
+}
+
 h1, h2, h3 {
   font-family: Bitter, Garamond, serif;
   margin-bottom: -0.5em;
