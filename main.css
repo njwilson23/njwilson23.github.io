@@ -3,7 +3,7 @@ html {
   padding-top: 3%;
   padding-bottom: 3%;
   font-family: Cardo, Garamond, serif;
-  font-size: 12pt;
+  font-size: medium;
 }
 
 body {
@@ -25,7 +25,7 @@ div.page {
   overflow: auto;
   margin: 0 auto;
   padding: 2em;
-  background: #f7f7f7;
+  background: #fafafa;
   box-shadow: 0 0 8px black;
 }
 
