@@ -1,32 +1,3 @@
-@font-face {
-    font-family: 'Cardo';
-    font-style: normal;
-    font-weight: 400;
-    src: local('Cardo'),url(http://brick.a.ssl.fastly.net/fonts/cardo/400.woff) format('woff');
-}
-
-@font-face {
-    font-family: 'Cardo';
-    font-style: italic;
-    font-weight: 400;
-    src: local('Cardo Italic'),url(http://brick.a.ssl.fastly.net/fonts/cardo/400i.woff) format('woff');
-}
-
-@font-face {
-    font-family: 'Cardo';
-    font-style: normal;
-    font-weight: 700;
-    src: local('Cardo Bold'),url(http://brick.a.ssl.fastly.net/fonts/cardo/700.woff) format('woff');
-}
-
-@font-face {
-    font-family: 'Bitter';
-    font-style: normal;
-    font-weight: 700;
-    src: local('Bitter Bold'),url(http://brick.a.ssl.fastly.net/fonts/bitter/700.woff) format('woff');
-}
-
-
 html {
   color: #222222;
   padding-top: 3%;
@@ -41,7 +12,7 @@ body {
 
 h1, h2, h3 {
   font-family: Bitter, Garamond, serif;
-  text-decoration: underline;
+  margin-bottom: -0.5em;
 }
 
 div.page {
@@ -70,6 +41,7 @@ div.heading-left, div.heading-right {
 div.heading {
   width: 100%;
   float: left;
+  margin-top: -1em;
   clear: both;
 }
 
@@ -88,7 +60,9 @@ div.heading {
 .half {
   float: left;
   position: relative;
-  width: 50%;
+  width: 45%;
+  margin-left: 2.5%;
+  margin-right: 2.5%;
   overflow: hidden;
 }
 
