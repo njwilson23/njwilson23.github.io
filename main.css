@@ -75,7 +75,7 @@ a:hover {
   color: #6F9BBF;
 }
 
-@media screen and (max-width: 800px) {
+@media (max-width: 800px), (orientation: portrait) {
   .half {
     width: 95%;
   }
