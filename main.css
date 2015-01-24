@@ -1,86 +1,38 @@
-html {
-  color: #222222;
-  padding-top: 3%;
-  padding-bottom: 3%;
-  font-family: Cardo, Garamond, serif;
-  font-size: medium;
-}
-
 body {
-  background: #efefef;
-}
-
-section {
-  clear: both;
-}
-
-h1, h2, h3 {
-  font-family: Bitter, Garamond, serif;
-  margin-bottom: -0.5em;
-}
-
-div.page {
-  width: 80%;
-  max-width: 50em;
-  overflow: auto;
-  margin: 0 auto;
-  padding: 2em;
-  background: #fafafa;
-  box-shadow: 0 0 8px black;
-}
-
-div.heading-left{
-  float: left;
-}
-
-div.heading-right{
-  float: right;
-}
-
-div.heading-left, div.heading-right {
-  width: 10em;
-  overflow: hidden;
-}
-
-div.heading {
-  width: 100%;
-  float: left;
-  margin-top: -1em;
-  clear: both;
+  padding-top: 50px; /* move content down because navbar is 50 tall */
+  padding-bottom: 20px;
 }
 
 .center {
   text-align: center;
 }
 
-.align-right {
-  text-align: right;
+.headerimage {
+  max-width: 100%;
 }
 
-.tight {
-  margin: 0;
+.projectimage {
+  width: 140px;
+  max-width: 50%;
 }
 
-.half {
-  float: left;
-  position: relative;
-  width: 45%;
-  margin-left: 2.5%;
-  margin-right: 2.5%;
-  overflow: hidden;
+.jumbotron{
+	/*padding:30px 15px;
+	margin-bottom:30px;
+	color:inherit;
+	background-color:#eee;*/
+  background-image:url("images/ranier-sunset-banner.jpg");
+  background-size: cover;
 }
 
-a:link, a:visited {
-  color: #2D74AD;
-  text-decoration: none;
+.btn-custom {
+	color:#fff;
+	background-color:#2D74AD;
+	border-color:#ccc;
 }
 
-a:hover {
-  color: #6F9BBF;
-}
-
-@media (max-width: 800px), (orientation: portrait) {
-  .half {
-    width: 95%;
-  }
+.btn-custom.active,.btn-custom.focus,.btn-custom:active,.btn-custom:focus,.btn-custom:hover,.open>.dropdown-toggle.btn-custom{
+	color:#fff;
+	background-color:#6F9BBF;
+	border-color:#adadad;
 }
