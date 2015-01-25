@@ -27,16 +27,24 @@ body {
   max-width: 50%;
 }
 
-.jumbotron{
-	/*padding:30px 15px;
-	margin-bottom:30px;
-	color:inherit;
-	background-color:#eee;*/
-  height: 110%;
+.jumbotron {
   background-attachment: scroll;
-  background-image: url(images/ranier-sunset-banner.jpg);
-  background-position:center;
+  background-repeat: no-repeat;
+  background-position: center;
   background-size: cover;
+  zorder: -1;
+}
+
+#top-jumbotron{
+  height: 110%;
+  background-image: url(images/ranier-sunset-banner.jpg);
+}
+
+#bottom-jumbotron{
+  margin-bottom: 0px;
+  height: 50%;
+  background-attachment: fixed;
+  background-image: url(images/ice_ravine_banner.jpg);
 }
 
 .btn-custom {

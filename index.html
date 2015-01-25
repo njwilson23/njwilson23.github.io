@@ -40,7 +40,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">
+          <a class="navbar-brand" href="index.html">
             <img class="img-navbar" src="images/mustache_mtn_bw_small_inverted.png" alt="Logo">
           </a>
         </div>
@@ -75,7 +75,7 @@
     </nav>
 
     <!-- Main jumbotron -->
-    <div class="jumbotron">
+    <div id="top-jumbotron" class="jumbotron">
       <div class="container">
         <div class="heading center">
           <img class="img-header" src="images/mustache_mtn_small.png" alt="Large logo">
@@ -84,7 +84,7 @@
           <span id="chevron" class="glyphicon glyphicon-chevron-down" aria-hidden="true">
         </div>
       </div>
-    </div>
+    </div>  <!-- /jumbotron -->
 
     <div id="content" class="container">
       <div class="row">
@@ -142,11 +142,16 @@
         </div>
       </div>  <!-- /row -->
 
-      <hr>
-      <footer>
-        <p>&copy; ironicmtn 2015</p>
-      </footer>
     </div> <!-- /container -->
+
+    <hr>
+
+      <footer>
+        <div class="container"><p>&copy; ironicmtn 2015</p></div>
+      </footer>
+
+    <div id="bottom-jumbotron" class="jumbotron">
+    </div>  <!-- /jumbotron -->
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
@@ -154,10 +159,12 @@
 
       $(window).scroll(function() {
         var dy = $(window).scrollTop();
-        $(".jumbotron").css("background-position", "center " + 0.5*dy + "px");
+        $("#top-jumbotron").css("background-position", "center " + 0.5*dy + "px");
+        var yshift = Math.min(0.2*dy, 400);
+        $("#bottom-jumbotron").css("background-position", "center " + yshift + "px");
       });
 
-      $("#chevron").click(function() {
+      $("#chevron,.img-header").click(function() {
           $('html, body').animate({
               scrollTop: $("#content").offset().top - 70
           }, 1000);
