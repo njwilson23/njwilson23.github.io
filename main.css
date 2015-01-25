@@ -51,6 +51,12 @@ body {
 	border-color:#adadad;
 }
 
-.down-arrow {
-  margin-top: 10%;
+#chevron {
+  font-size: x-large;
+  margin-top: 5%;
 }
+
+#chevron:hover {
+  font-size: xx-large;
+}
+
