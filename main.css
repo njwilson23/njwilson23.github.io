@@ -1,17 +1,28 @@
+html {
+	height: 100%;
+}
+
 body {
   padding-top: 50px; /* move content down because navbar is 50 tall */
   padding-bottom: 20px;
+  height: 100%;
 }
 
 .center {
   text-align: center;
 }
 
-.headerimage {
-  max-width: 100%;
+.img-navbar {
+  max-height: 30px;
+  margin-top: -5px;
 }
 
-.projectimage {
+.img-header {
+  max-width: 100%;
+  margin-top: 20%;
+}
+
+.img-project {
   width: 140px;
   max-width: 50%;
 }
@@ -21,7 +32,10 @@ body {
 	margin-bottom:30px;
 	color:inherit;
 	background-color:#eee;*/
-  background-image:url("images/ranier-sunset-banner.jpg");
+  height: 110%;
+  background-attachment: fixed;
+  background-image: url(images/ranier-sunset-banner.jpg);
+  background-position:center;
   background-size: cover;
 }
 
@@ -35,4 +49,8 @@ body {
 	color:#fff;
 	background-color:#6F9BBF;
 	border-color:#adadad;
+}
+
+.down-arrow {
+  margin-top: 10%;
 }
