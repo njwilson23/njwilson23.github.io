@@ -1,11 +1,4 @@
 template: ../templates/main-template.html
-
-title: Karta
-
-header:
-
-body:
-
-footer:
-
-
+title-raw: Karta
+header: karta/header.html
+body: karta/body.html
