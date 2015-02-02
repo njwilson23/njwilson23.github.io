@@ -46,6 +46,15 @@
       x = Array.apply(null, Array(n)).map(function (_, i) {return L/n*i;});
       waterclr = createWaterGradient(H);
       document.getElementById("HValue").textContent = H;
+
+      // calculate the number of particle columns
+      var ncols = Math.round(H/3);
+      var dx = 0.8/ncols;
+      particleX = [];
+      for (var i=0; i <= ncols; i++) {
+        particleX.push(0.1 + i*dx);
+      }
+
       updateResults();
       return;
     }
