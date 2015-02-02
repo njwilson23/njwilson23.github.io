@@ -1,3 +1,4 @@
 [submodule "linear-wave"]
 	path = linear-wave
 	url = https://github.com/njwilson23/linear-wave.git
+    ignore = dirty
