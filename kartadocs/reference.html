@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Package reference &mdash; karta 0.4.1 documentation</title>
+    <title>Package reference &mdash; karta 0.4.2 documentation</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.4.1',
+        VERSION:     '0.4.2',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -24,7 +24,7 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="karta 0.4.1 documentation" href="index.html" />
+    <link rel="top" title="karta 0.4.2 documentation" href="index.html" />
     <link rel="prev" title="Karta tutorial" href="tutorial.html" />
    
   
@@ -44,7 +44,7 @@
         <li class="right" >
           <a href="tutorial.html" title="Karta tutorial"
              accesskey="P">previous</a> |</li>
-        <li><a href="karta-manual.html">karta 0.4.1 documentation</a> &raquo;</li> 
+        <li><a href="karta-manual.html">karta 0.4.2 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -55,21 +55,18 @@
             
   <div class="section" id="package-reference">
 <h1>Package reference<a class="headerlink" href="#package-reference" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="module-karta.crs">
-<span id="coordinate-reference-systems"></span><h2>Coordinate reference systems<a class="headerlink" href="#module-karta.crs" title="Permalink to this headline">¶</a></h2>
-<p>Coordinate reference systems</p>
-<p>Implements CRS classes for different kinds of spatial reference systems:</p>
-<blockquote>
-<div><ul class="simple">
-<li>Cartesian</li>
-<li>GeographicalCRS</li>
-<li>Spherical</li>
-<li>Proj4CRS</li>
-</ul>
-</div></blockquote>
-<p>These coordinate systems can be passed to define geographical references for
-objects (e.g. vector geometries, raster grids).</p>
-<p>Predefined coordinate system instances are provided:</p>
+<div class="section" id="coordinate-reference-systems-karta-crs">
+<h2>Coordinate reference systems (<tt class="docutils literal"><span class="pre">karta.crs</span></tt>)<a class="headerlink" href="#coordinate-reference-systems-karta-crs" title="Permalink to this headline">¶</a></h2>
+<p>Coordinate reference systems describe how the numerical coordinates of a
+geometry or grid relate to space in the real world. Difference coordinate
+systems take different approaches to reducing position on the curved surface of
+the earth to two-dimensional coordinates, making different assumptions about
+Earth&#8217;s geometry and choosing to preserve different invariants.</p>
+<p>In <em>Karta</em>, coordinate systems objects handle both projection from geographical
+coordinates and geodetic operations such as calculating distances and azimuths.
+Basic coordinate systems (<em>Cartesian</em> and <em>SphericalEarth</em>) are provided, while
+more specialized systems employ <a class="reference external" href="http://jswhit.github.io/pyproj/">pyproj</a> to handle calculations.</p>
+<p>The following predefined coordinate systems instances are available:</p>
 <blockquote>
 <div><ul class="simple">
 <li><em>SphericalEarth</em></li>
@@ -83,6 +80,32 @@ objects (e.g. vector geometries, raster grids).</p>
 </ul>
 </div></blockquote>
 <p>Additionally, the <em>Cartesian</em> class can be used without instantiation.</p>
+<p>To use a pre-defined coordinate system,</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">karta.crs</span> <span class="kn">import</span> <span class="n">LonLatWGS84</span>
+</pre></div>
+</div>
+<p>The object <tt class="docutils literal"><span class="pre">LonLatWGS84</span></tt> can be passed to <em>Geometry</em> and <em>Grid</em> instances in
+<em>Karta</em>. To define their coordinate system.</p>
+<p>To create a specialized coordinate system, provide a <em>proj.4</em> string and a
+spheroid definition.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">karta.crs</span> <span class="kn">import</span> <span class="n">Proj4CRS</span>
+<span class="n">my_crs</span> <span class="o">=</span> <span class="n">Proj4CRS</span><span class="p">(</span><span class="s">&quot;+proj=aea +lat_1=50 +lat_2=58.5 +lat_0=45 &quot;</span>
+                  <span class="s">&quot;+lon_0=-126 +x_0=1000000 +y_0=0 &quot;</span>
+                  <span class="s">&quot;+ellps=GRS80 +datum=NAD83 +units=m +no_defs&quot;</span><span class="p">,</span>
+                  <span class="s">&quot;+ellps=GRS80&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>See the <a class="reference external" href="http://trac.osgeo.org/proj/">proj.4</a> documentation for more details.</p>
+<span class="target" id="module-karta.crs"></span><p>Coordinate reference systems</p>
+<p>Implements CRS classes for different kinds of spatial reference systems:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Cartesian</li>
+<li>GeographicalCRS</li>
+<li>Spherical</li>
+<li>Proj4CRS</li>
+</ul>
+</div></blockquote>
 <dl class="class">
 <dt id="karta.crs.CRS">
 <em class="property">class </em><tt class="descclassname">karta.crs.</tt><tt class="descname">CRS</tt><a class="reference internal" href="_modules/karta/crs.html#CRS"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#karta.crs.CRS" title="Permalink to this definition">¶</a></dt>
@@ -154,9 +177,14 @@ or a custom projection function</p>
 </dd></dl>
 
 </div>
-<div class="section" id="module-karta.vector.geometry">
-<span id="vector-package"></span><h2>Vector package<a class="headerlink" href="#module-karta.vector.geometry" title="Permalink to this headline">¶</a></h2>
-<p>Geographical measurement and simple analysis module for Python. Provides
+<div class="section" id="vector-package-karta-vector">
+<h2>Vector package (<tt class="docutils literal"><span class="pre">karta.vector</span></tt>)<a class="headerlink" href="#vector-package-karta-vector" title="Permalink to this headline">¶</a></h2>
+<p>The package <tt class="docutils literal"><span class="pre">karta.vector</span></tt> provides <em>Geometry</em> classes as well as readers and
+writers for ESRI shapefiles, GeoJSON, and GPX files.</p>
+<p>Geometries may be one of <em>Point</em>, <em>Multipoint</em>, <em>Line</em>, or <em>Polygon</em>. All
+geometries support the <a class="reference external" href="https://gist.github.com/sgillies/2217756">__geo_interface__</a> attribute, and map to <em>Point</em>,
+<em>MultiPoint</em>, <em>LineString</em>, and <em>Polygon</em> types, respectively.</p>
+<span class="target" id="module-karta.vector.geometry"></span><p>Geographical measurement and simple analysis module for Python. Provides
 Point, Multipoint, Line, and Polygon classes, with methods for simple
 measurements such as distance, area, and bearing.</p>
 <dl class="class">
@@ -249,13 +277,6 @@ the same units as the real-world horizontal distance (i.e. meters).</p>
 <dt id="karta.vector.Point.get_vertex">
 <tt class="descname">get_vertex</tt><big>(</big><em>crs=None</em><big>)</big><a class="headerlink" href="#karta.vector.Point.get_vertex" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the Point vertex as a tuple.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="karta.vector.Point.isat">
-<tt class="descname">isat</tt><big>(</big><em>other</em>, <em>tol=0.001</em><big>)</big><a class="headerlink" href="#karta.vector.Point.isat" title="Permalink to this definition">¶</a></dt>
-<dd><p>Test whether point vertices are the same, regardless of properties or data.
-Tolarance is not geodetic.</p>
 </dd></dl>
 
 <dl class="method">
@@ -465,7 +486,7 @@ fields      :   specify the fields to be written (default all)</p>
 <dt id="karta.vector.Multipoint.within_bbox">
 <tt class="descname">within_bbox</tt><big>(</big><em>bbox</em><big>)</big><a class="headerlink" href="#karta.vector.Multipoint.within_bbox" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return Multipoint subset that is within a square bounding box
-given by (xmin, xmax, ymin, ymax).</p>
+given by (xmin, xymin, xmax, ymax).</p>
 </dd></dl>
 
 <dl class="method">
@@ -534,6 +555,13 @@ new geometry.</p>
 <tt class="descname">bbox</tt><a class="headerlink" href="#karta.vector.Line.bbox" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the extents of a bounding box as
 (xmin, ymin, xmax, ymax)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="karta.vector.Line.convex_hull">
+<tt class="descname">convex_hull</tt><big>(</big><big>)</big><a class="headerlink" href="#karta.vector.Line.convex_hull" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a Polygon representing the convex hull. Assumes that the CRS
+may be treated as cartesian.</p>
 </dd></dl>
 
 <dl class="method">
@@ -763,8 +791,8 @@ new geometry.</p>
 <dl class="attribute">
 <dt id="karta.vector.Polygon.area">
 <tt class="descname">area</tt><a class="headerlink" href="#karta.vector.Polygon.area" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return the two-dimensional area of the polygon. If there are
-sub-polygons, their areas are subtracted.</p>
+<dd><p>Return the two-dimensional area of the polygon, excluding
+sub-polygons.</p>
 </dd></dl>
 
 <dl class="method">
@@ -795,6 +823,13 @@ sub-polygons, their areas are subtracted.</p>
 <tt class="descname">contains</tt><big>(</big><em>pt</em><big>)</big><a class="headerlink" href="#karta.vector.Polygon.contains" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns True if pt is inside or on the boundary of the
 polygon, and False otherwise. Uses a crossing number scheme.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="karta.vector.Polygon.convex_hull">
+<tt class="descname">convex_hull</tt><big>(</big><big>)</big><a class="headerlink" href="#karta.vector.Polygon.convex_hull" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a Polygon representing the convex hull. Assumes that the CRS
+may be treated as cartesian.</p>
 </dd></dl>
 
 <dl class="method">
@@ -1034,7 +1069,7 @@ dictionary of the file objects.</p>
 
 <dl class="function">
 <dt id="karta.vector.read.read_shapefile">
-<tt class="descclassname">karta.vector.read.</tt><tt class="descname">read_shapefile</tt><big>(</big><em>name</em>, <em>crs=&lt;karta.crs.GeographicalCRS object at 0x2aeae9c4b860&gt;</em><big>)</big><a class="reference internal" href="_modules/karta/vector/read.html#read_shapefile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#karta.vector.read.read_shapefile" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">karta.vector.read.</tt><tt class="descname">read_shapefile</tt><big>(</big><em>name</em>, <em>crs=&lt;karta.crs.GeographicalCRS object at 0x2b7256e59c88&gt;</em><big>)</big><a class="reference internal" href="_modules/karta/vector/read.html#read_shapefile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#karta.vector.read.read_shapefile" title="Permalink to this definition">¶</a></dt>
 <dd><p>Read a shapefile given <cite>name</cite>, which may include or exclude the .shp
 extension. The CRS must be specified, otherwise it is assumed to be
 cartesian.</p>
@@ -1339,9 +1374,15 @@ geometry object.</p>
 
 </div>
 </div>
-<div class="section" id="module-karta.raster.grid">
-<span id="raster-package"></span><h2>Raster package<a class="headerlink" href="#module-karta.raster.grid" title="Permalink to this headline">¶</a></h2>
-<p>Classes for basic grid types</p>
+<div class="section" id="raster-package-karta-raster">
+<h2>Raster package (<tt class="docutils literal"><span class="pre">karta.raster</span></tt>)<a class="headerlink" href="#raster-package-karta-raster" title="Permalink to this headline">¶</a></h2>
+<p>The <tt class="docutils literal"><span class="pre">karta.raster</span></tt> package provides <em>Grid</em> classes as well as readers for ESRI
+ASCII grids and GeoTiff files. The most commonly used <em>Grid</em> subclass is
+<em>RegularGrid</em>, which can efficiently handle gridded datasets with constant
+offsets between nodes. <em>Grids</em> support geographically-aware clipping, sampling,
+and profile extraction.</p>
+<p>A more specialized grid class, <em>WarpedGrid</em>, is experimental.</p>
+<span class="target" id="module-karta.raster.grid"></span><p>Classes for basic grid types</p>
 <dl class="class">
 <dt id="karta.raster.grid.Grid">
 <em class="property">class </em><tt class="descclassname">karta.raster.grid.</tt><tt class="descname">Grid</tt><a class="reference internal" href="_modules/karta/raster/grid.html#Grid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#karta.raster.grid.Grid" title="Permalink to this definition">¶</a></dt>
@@ -1436,12 +1477,6 @@ flexible data layouts.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="karta.raster.grid.RegularGrid.fill_sinks">
-<tt class="descname">fill_sinks</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/karta/raster/grid.html#RegularGrid.fill_sinks"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#karta.raster.grid.RegularGrid.fill_sinks" title="Permalink to this definition">¶</a></dt>
-<dd><p>Fill depressions. Use the algorithm of Wang and Liu (2006).</p>
-</dd></dl>
-
-<dl class="method">
 <dt id="karta.raster.grid.RegularGrid.get_extents">
 <tt class="descname">get_extents</tt><big>(</big><em>reference='center'</em><big>)</big><a class="reference internal" href="_modules/karta/raster/grid.html#RegularGrid.get_extents"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#karta.raster.grid.RegularGrid.get_extents" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the region characteristics as a tuple (xmin, xmax, ymin,
@@ -1530,12 +1565,6 @@ sampling scheme.</p>
 <dd><p>Warped Grid class. A WarpedGrid contains a fixed number of rows
 and columns and a scalar or vector field defined on the z-axis. Grid
 spacing is not necessarily constant.</p>
-<dl class="method">
-<dt id="karta.raster.grid.WarpedGrid.fill_sinks">
-<tt class="descname">fill_sinks</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/karta/raster/grid.html#WarpedGrid.fill_sinks"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#karta.raster.grid.WarpedGrid.fill_sinks" title="Permalink to this definition">¶</a></dt>
-<dd><p>Fill depressions. Use the algorithm of Wang and Liu (2006).</p>
-</dd></dl>
-
 <dl class="method">
 <dt id="karta.raster.grid.WarpedGrid.resample">
 <tt class="descname">resample</tt><big>(</big><em>X</em>, <em>Y</em><big>)</big><a class="reference internal" href="_modules/karta/raster/grid.html#WarpedGrid.resample"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#karta.raster.grid.WarpedGrid.resample" title="Permalink to this definition">¶</a></dt>
@@ -1873,12 +1902,12 @@ method.
   <h3><a href="karta-manual.html">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Package reference</a><ul>
-<li><a class="reference internal" href="#module-karta.crs">Coordinate reference systems</a></li>
-<li><a class="reference internal" href="#module-karta.vector.geometry">Vector package</a><ul>
+<li><a class="reference internal" href="#coordinate-reference-systems-karta-crs">Coordinate reference systems (<tt class="docutils literal"><span class="pre">karta.crs</span></tt>)</a></li>
+<li><a class="reference internal" href="#vector-package-karta-vector">Vector package (<tt class="docutils literal"><span class="pre">karta.vector</span></tt>)</a><ul>
 <li><a class="reference internal" href="#module-karta.vector.read">Vector IO modules</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#module-karta.raster.grid">Raster package</a></li>
+<li><a class="reference internal" href="#raster-package-karta-raster">Raster package (<tt class="docutils literal"><span class="pre">karta.raster</span></tt>)</a></li>
 </ul>
 </li>
 </ul>
