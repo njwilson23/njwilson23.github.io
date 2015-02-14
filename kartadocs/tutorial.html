@@ -134,9 +134,9 @@ and metadata.</p>
 </pre></div>
 </div>
 <div class="highlight-python"><div class="highlight"><pre>Point((-123.1, 49.25))
-&lt;class &#39;karta.vector.guppy.Multipoint&#39;([(-122.93, 48.62), (-123.1, 48.54), (-122.9, 48.49), (-122.81, 48.56)])&gt;
-&lt;class &#39;karta.vector.guppy.Line&#39;([(-124.35713, 49.31437), (-124.37857, 49.3172)...(-124.41681, 49.32477), (-124.42278, 49.32588)])&gt;
-&lt;class &#39;karta.vector.guppy.Polygon&#39;([(-25.41, 67.03), (-24.83, 62.92), (-12.76, 63.15), (-11.44, 66.82)])&gt;
+&lt;class &#39;karta.vector.geometry.Multipoint&#39;([(-122.93, 48.62), (-123.1, 48.54), (-122.9, 48.49), (-122.81, 48.56)])&gt;
+&lt;class &#39;karta.vector.geometry.Line&#39;([(-124.35713, 49.31437), (-124.37857, 49.3172)...(-124.41681, 49.32477), (-124.42278, 49.32588)])&gt;
+&lt;class &#39;karta.vector.geometry.Polygon&#39;([(-25.41, 67.03), (-24.83, 62.92), (-12.76, 63.15), (-11.44, 66.82)])&gt;
 </pre></div>
 </div>
 <p>Each geometrical object now contains a vertex/vertices in a cartesian
@@ -187,7 +187,7 @@ sliced:</p>
 <div class="code python highlight-python"><div class="highlight"><pre><span class="k">print</span><span class="p">(</span><span class="n">poly</span><span class="p">[:</span><span class="mi">2</span><span class="p">])</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre>&lt;class &#39;karta.vector.guppy.Line&#39;([(-25.41, 67.03), (-24.83, 62.92)])&gt;
+<div class="highlight-python"><div class="highlight"><pre>&lt;class &#39;karta.vector.geometry.Line&#39;([(-25.41, 67.03), (-24.83, 62.92)])&gt;
 </pre></div>
 </div>
 <p>Points have a <tt class="docutils literal"><span class="pre">distance</span></tt> that calculates the distance to another
@@ -197,7 +197,7 @@ point. However, if we do</p>
 <span class="k">print</span><span class="p">(</span><span class="n">pt</span><span class="o">.</span><span class="n">distance</span><span class="p">(</span><span class="n">pt2</span><span class="p">))</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="mf">53.00666508061746</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="mf">53.00666467530286</span>
 </pre></div>
 </div>
 <p>this probably isn&#8217;t what we wanted. Be default, geometries in Karta use
@@ -207,8 +207,8 @@ each geometry at creation, as in</p>
 <div class="code python highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">karta</span> <span class="kn">import</span> <span class="n">crs</span>
 </pre></div>
 </div>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="n">pt</span> <span class="o">=</span> <span class="n">Point</span><span class="p">((</span><span class="o">-</span><span class="mf">123.1</span><span class="p">,</span> <span class="mf">49.25</span><span class="p">),</span> <span class="n">crs</span><span class="o">=</span><span class="n">crs</span><span class="o">.</span><span class="n">LONLAT</span><span class="p">)</span>
-<span class="n">pt2</span> <span class="o">=</span> <span class="n">Point</span><span class="p">((</span><span class="o">-</span><span class="mf">70.66</span><span class="p">,</span> <span class="mf">41.52</span><span class="p">),</span> <span class="n">crs</span><span class="o">=</span><span class="n">crs</span><span class="o">.</span><span class="n">LONLAT</span><span class="p">)</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="n">pt</span> <span class="o">=</span> <span class="n">Point</span><span class="p">((</span><span class="o">-</span><span class="mf">123.1</span><span class="p">,</span> <span class="mf">49.25</span><span class="p">),</span> <span class="n">crs</span><span class="o">=</span><span class="n">crs</span><span class="o">.</span><span class="n">LonLatWGS84</span><span class="p">)</span>
+<span class="n">pt2</span> <span class="o">=</span> <span class="n">Point</span><span class="p">((</span><span class="o">-</span><span class="mf">70.66</span><span class="p">,</span> <span class="mf">41.52</span><span class="p">),</span> <span class="n">crs</span><span class="o">=</span><span class="n">crs</span><span class="o">.</span><span class="n">LonLatWGS84</span><span class="p">)</span>
 <span class="n">pt</span><span class="o">.</span><span class="n">distance</span><span class="p">(</span><span class="n">pt2</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -221,7 +221,7 @@ meters.</p>
 that coordinate system. We can use this to perform queries, such which
 American state capitols are within 2000 km of Mexico City?</p>
 <div class="code python highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">karta.examples</span> <span class="kn">import</span> <span class="n">us_capitols</span>
-<span class="n">mexico_city</span> <span class="o">=</span> <span class="n">Point</span><span class="p">((</span><span class="o">-</span><span class="mf">99.13</span><span class="p">,</span> <span class="mf">19.43</span><span class="p">),</span> <span class="n">crs</span><span class="o">=</span><span class="n">crs</span><span class="o">.</span><span class="n">LONLAT</span><span class="p">)</span>
+<span class="n">mexico_city</span> <span class="o">=</span> <span class="n">Point</span><span class="p">((</span><span class="o">-</span><span class="mf">99.13</span><span class="p">,</span> <span class="mf">19.43</span><span class="p">),</span> <span class="n">crs</span><span class="o">=</span><span class="n">crs</span><span class="o">.</span><span class="n">LonLatWGS84</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="code python highlight-python"><div class="highlight"><pre><span class="c"># List all US state capitols</span>
@@ -359,32 +359,8 @@ Austin, Texas, United States
 </pre></div>
 </div>
 <p>All of the above calculations are performed on a geoid. The
-<tt class="docutils literal"><span class="pre">crs.LONLAT</span></tt> coordinate system is just a <em>Karta</em> shorthand for WGS 84
-with geographical coordinates.</p>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="n">crs</span><span class="o">.</span><span class="n">LONLAT_WGS84</span>
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre>geographical CRS (urn: {&#39;urn&#39;: &#39;urn:ogc:def:crs:EPSG::4326&#39;})
-</pre></div>
-</div>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="n">crs</span><span class="o">.</span><span class="n">LONLAT</span>
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre>geographical CRS (urn: {&#39;urn&#39;: &#39;urn:ogc:def:crs:EPSG::4326&#39;})
-</pre></div>
-</div>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="n">crs</span><span class="o">.</span><span class="n">LONLAT</span> <span class="o">==</span> <span class="n">crs</span><span class="o">.</span><span class="n">LONLAT_WGS84</span>
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre><span class="bp">True</span>
-</pre></div>
-</div>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="n">crs</span><span class="o">.</span><span class="n">LONLAT</span> <span class="o">==</span> <span class="n">crs</span><span class="o">.</span><span class="n">LONLAT_NAD83</span>
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre><span class="bp">False</span>
-</pre></div>
-</div>
+<tt class="docutils literal"><span class="pre">crs.LonLatWGS84</span></tt> coordinate system means to use geographical
+(longitude and latitude) coordinates on the WGS 84 ellipsoid.</p>
 <p><strong>TODO: describe other geometries</strong></p>
 <div class="section" id="associated-data">
 <h3>Associated data<a class="headerlink" href="#associated-data" title="Permalink to this headline">¶</a></h3>
@@ -421,7 +397,7 @@ geometry.</p>
 <span class="k">print</span><span class="p">(</span><span class="n">poly</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">])</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre>&lt;class &#39;karta.vector.guppy.Line&#39;([(-25.41, 67.03), (-24.83, 62.92), (-12.76, 63.15)])&gt;
+<div class="highlight-python"><div class="highlight"><pre>&lt;class &#39;karta.vector.geometry.Line&#39;([(-25.41, 67.03), (-24.83, 62.92), (-12.76, 63.15)])&gt;
 </pre></div>
 </div>
 </div>
@@ -434,7 +410,7 @@ make is easy to visualize a geometry.</p>
 plt.plot(*line.get_coordinate_lists())
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre>[&lt;matplotlib.lines.Line2D at 0x7f0b978bd3c8&gt;]
+<div class="highlight-python"><div class="highlight"><pre>[&lt;matplotlib.lines.Line2D at 0x7f5939d55358&gt;]
 </pre></div>
 </div>
 <p>Data can be read from several common formats, including ESRI shapefiles
@@ -447,7 +423,12 @@ separated value tables. Convenience functions are kept in the
 <span class="n">poly</span><span class="o">.</span><span class="n">to_geojson</span><span class="p">(</span><span class="s">&quot;my_json.json&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre>&lt;karta.vector.geojson.GeoJSONWriter at 0x7f0b978f0c18&gt;
+<div class="highlight-python"><div class="highlight"><pre>Warning: CRS URN lookup not implemented
+&lt;class &#39;karta.crs.Cartesian&#39;&gt;
+returning CRS name instead
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>&lt;karta.vector.geojson.GeoJSONWriter at 0x7f5939d389b0&gt;
 </pre></div>
 </div>
 </div>
