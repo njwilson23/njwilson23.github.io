@@ -62,9 +62,8 @@
 <span class="n">IntegerType</span> <span class="o">=</span> <span class="p">(</span><span class="n">numbers</span><span class="o">.</span><span class="n">Integral</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span>
 
 <div class="viewcode-block" id="Grid"><a class="viewcode-back" href="../../../reference.html#karta.raster.grid.Grid">[docs]</a><span class="k">class</span> <span class="nc">Grid</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Grid baseclass. Don&#39;t use this directly except to implement subclasses.</span>
-<span class="sd">    The primary attributes defined by all Grid-derived classed are _hdr and</span>
-<span class="sd">    data.</span>
+    <span class="sd">&quot;&quot;&quot; Grid base class. Intended only for implementing subclasses. The primary</span>
+<span class="sd">    attributes defined by all Grid-derived classed are _hdr and data.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="nd">@property</span>
@@ -104,7 +103,7 @@
 
 <span class="sd">    Positions on a RegularGrid are referenced to their array indices *(i,j)*</span>
 <span class="sd">    using an affine transform *T* such that</span>
-<span class="sd">    </span>
+
 <span class="sd">    (a, b, c, d, e, f) = T</span>
 
 <span class="sd">    X = a + j * c + i * e</span>
@@ -207,7 +206,7 @@
         <span class="k">return</span> <span class="n">xcoords</span><span class="p">,</span> <span class="n">ycoords</span>
 
 <div class="viewcode-block" id="RegularGrid.vertex_coords"><a class="viewcode-back" href="../../../reference.html#karta.raster.grid.RegularGrid.vertex_coords">[docs]</a>    <span class="k">def</span> <span class="nf">vertex_coords</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Return the coordinates of vertices. &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot; Return the coordinates of cell vertices. &quot;&quot;&quot;</span>
         <span class="n">xllcorner</span><span class="p">,</span> <span class="n">yllcorner</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">corner_llref</span><span class="p">()</span>
         <span class="n">t</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_transform</span>
         <span class="n">ny</span><span class="p">,</span> <span class="n">nx</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">shape</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span>
@@ -223,7 +222,7 @@
 
 <div class="viewcode-block" id="RegularGrid.get_extents"><a class="viewcode-back" href="../../../reference.html#karta.raster.grid.RegularGrid.get_extents">[docs]</a>    <span class="k">def</span> <span class="nf">get_extents</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reference</span><span class="o">=</span><span class="s">&#39;center&#39;</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; Return the region characteristics as a tuple (xmin, xmax, ymin,</span>
-<span class="sd">        ymax). *reference* may be `center` or `edge`. &quot;&quot;&quot;</span>
+<span class="sd">        ymax). *reference* is a string and may be &#39;center&#39; or &#39;edge&#39;. &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">reference</span> <span class="o">==</span> <span class="s">&#39;center&#39;</span><span class="p">:</span>
             <span class="n">x0</span><span class="p">,</span> <span class="n">y0</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">center_llref</span><span class="p">()</span>
             <span class="n">n</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
@@ -249,7 +248,10 @@
         <span class="k">return</span> <span class="nb">min</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span> <span class="n">x0</span><span class="o">+</span><span class="n">xrng</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span> <span class="n">x0</span><span class="o">+</span><span class="n">xrng</span><span class="p">),</span> <span class="nb">min</span><span class="p">(</span><span class="n">y0</span><span class="p">,</span> <span class="n">y0</span><span class="o">+</span><span class="n">yrng</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="n">y0</span><span class="p">,</span> <span class="n">y0</span><span class="o">+</span><span class="n">yrng</span><span class="p">)</span>
 </div>
 <div class="viewcode-block" id="RegularGrid.clip"><a class="viewcode-back" href="../../../reference.html#karta.raster.grid.RegularGrid.clip">[docs]</a>    <span class="k">def</span> <span class="nf">clip</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="n">ymin</span><span class="p">,</span> <span class="n">ymax</span><span class="p">,</span> <span class="n">crs</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Return a clipped version of grid constrained to a bounding box. &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot; Return a clipped version of grid constrained to a bounding box</span>
+<span class="sd">        defined by *xmin*, *xmax*, *ymin*, *ymax*. If *crs* is not provided, it</span>
+<span class="sd">        is assumed that the bounding box shares the same coordinate system as</span>
+<span class="sd">        the grid. &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">crs</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
             <span class="n">xg</span><span class="p">,</span> <span class="n">yg</span> <span class="o">=</span> <span class="n">crs</span><span class="o">.</span><span class="n">proj</span><span class="p">([</span><span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">],</span> <span class="p">[</span><span class="n">ymin</span><span class="p">,</span> <span class="n">ymax</span><span class="p">],</span> <span class="n">inverse</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
             <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">crs</span><span class="o">.</span><span class="n">proj</span><span class="p">(</span><span class="n">xg</span><span class="p">,</span> <span class="n">yg</span><span class="p">)</span>
@@ -277,6 +279,9 @@
 </div>
 <div class="viewcode-block" id="RegularGrid.resample_griddata"><a class="viewcode-back" href="../../../reference.html#karta.raster.grid.RegularGrid.resample_griddata">[docs]</a>    <span class="k">def</span> <span class="nf">resample_griddata</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dx</span><span class="p">,</span> <span class="n">dy</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s">&#39;nearest&#39;</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; Resample array to have spacing `dx`, `dy&#39; using *scipy.griddata*</span>
+
+<span class="sd">        Warning: This method is likely to be removed in the future, once</span>
+<span class="sd">        the built-in `resample` method matures.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -382,8 +387,6 @@
                 <span class="n">i</span> <span class="o">=</span> <span class="n">ip</span>
 
         <span class="n">ny</span><span class="p">,</span> <span class="n">nx</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span>
-        <span class="c">#j = ind[::2].clip(0, nx-1)</span>
-        <span class="c">#i = ind[1::2].clip(0, ny-1)</span>
         <span class="n">j</span> <span class="o">=</span> <span class="n">ind</span><span class="p">[::</span><span class="mi">2</span><span class="p">]</span>
         <span class="n">i</span> <span class="o">=</span> <span class="n">ind</span><span class="p">[</span><span class="mi">1</span><span class="p">::</span><span class="mi">2</span><span class="p">]</span>
         <span class="k">return</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span>
@@ -412,7 +415,9 @@
         <span class="n">ny</span><span class="p">,</span> <span class="n">nx</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">shape</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span>
 </div>
-    <span class="k">def</span> <span class="nf">sample_bilinear</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+<div class="viewcode-block" id="RegularGrid.sample_bilinear"><a class="viewcode-back" href="../../../reference.html#karta.raster.grid.RegularGrid.sample_bilinear">[docs]</a>    <span class="k">def</span> <span class="nf">sample_bilinear</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Return the value nearest to (`x`, `y`). Bilinear sampling scheme.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_positions</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
         <span class="n">i0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
         <span class="n">i1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
@@ -434,10 +439,12 @@
         <span class="n">z</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="n">i0</span><span class="p">,</span><span class="n">j0</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="n">i1</span><span class="o">-</span><span class="n">i</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">j1</span><span class="o">-</span><span class="n">j</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="n">i1</span><span class="p">,</span><span class="n">j0</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="n">i0</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">j1</span><span class="o">-</span><span class="n">j</span><span class="p">)</span> <span class="o">+</span> \
              <span class="bp">self</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="n">i0</span><span class="p">,</span><span class="n">j1</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="n">i1</span><span class="o">-</span><span class="n">i</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">j</span><span class="o">-</span><span class="n">j0</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="n">i1</span><span class="p">,</span><span class="n">j1</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="n">i0</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">j</span><span class="o">-</span><span class="n">j0</span><span class="p">))</span>
         <span class="k">return</span> <span class="n">z</span>
-
+</div>
 <div class="viewcode-block" id="RegularGrid.sample"><a class="viewcode-back" href="../../../reference.html#karta.raster.grid.RegularGrid.sample">[docs]</a>    <span class="k">def</span> <span class="nf">sample</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">crs</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s">&quot;bilinear&quot;</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Return the values nearest (`x`, `y`), where `x` and `y` may be</span>
-<span class="sd">        equal length vectors. *method* may be one of `nearest`, `bilinear`. &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot; Return the values nearest (*x*, *y*), where *x* and *y* may be</span>
+<span class="sd">        equal length vectors. Keyword *method* may be one of &#39;nearest&#39;,</span>
+<span class="sd">        &#39;bilinear&#39; (default).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">crs</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
             <span class="n">xg</span><span class="p">,</span> <span class="n">yg</span> <span class="o">=</span> <span class="n">crs</span><span class="o">.</span><span class="n">project</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">inverse</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
             <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">crs</span><span class="o">.</span><span class="n">project</span><span class="p">(</span><span class="n">xg</span><span class="p">,</span> <span class="n">yg</span><span class="p">)</span>
@@ -450,14 +457,16 @@
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;method </span><span class="se">\&quot;</span><span class="s">{0}</span><span class="se">\&quot;</span><span class="s"> not available&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">method</span><span class="p">))</span>
 </div>
 <div class="viewcode-block" id="RegularGrid.profile"><a class="viewcode-back" href="../../../reference.html#karta.raster.grid.RegularGrid.profile">[docs]</a>    <span class="k">def</span> <span class="nf">profile</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">line</span><span class="p">,</span> <span class="n">resolution</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Sample along a line defined as `segments`.</span>
+        <span class="sd">&quot;&quot;&quot; Sample along a *line* at *resolution*.</span>
 
 <span class="sd">        Parameters:</span>
 <span class="sd">        -----------</span>
-<span class="sd">        line : Line-like object describing the sampling path</span>
+<span class="sd">        line : `geometry.Line`-like object describing the sampling path</span>
+
 <span class="sd">        resolution : sample spacing</span>
 
-<span class="sd">        Additional keyword arguments passed to `RegularGrid.sample`</span>
+<span class="sd">        Additional keyword arguments passed to `RegularGrid.sample` (e.g. to</span>
+<span class="sd">        specify sampling method)</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">        --------</span>
@@ -491,9 +500,10 @@
         <span class="k">return</span> <span class="n">vertices</span><span class="p">,</span> <span class="n">z</span>
 </div>
 <div class="viewcode-block" id="RegularGrid.as_warpedgrid"><a class="viewcode-back" href="../../../reference.html#karta.raster.grid.RegularGrid.as_warpedgrid">[docs]</a>    <span class="k">def</span> <span class="nf">as_warpedgrid</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Return a copy as a WarpedGrid instance. This is a more general</span>
+        <span class="sd">&quot;&quot;&quot; Return a copy of grid as a `WarpedGrid`. This is a more general</span>
 <span class="sd">        grid class that has a larger memory footprint but can represent more</span>
-<span class="sd">        flexible data layouts. &quot;&quot;&quot;</span>
+<span class="sd">        flexible data layouts.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">Xc</span><span class="p">,</span> <span class="n">Yc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">center_coords</span><span class="p">()</span>
         <span class="k">return</span> <span class="n">WarpedGrid</span><span class="p">(</span><span class="n">Xc</span><span class="p">,</span> <span class="n">Yc</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">copy</span><span class="p">())</span>
 </div>
@@ -513,9 +523,11 @@
 
 <span class="sd">        Parameters:</span>
 <span class="sd">        -----------</span>
-<span class="sd">        f : either a file-like object or a filename</span>
-<span class="sd">        reference : specify a header reference (&quot;center&quot; | &quot;corner&quot;)</span>
-<span class="sd">        nodata_value : specify how nans should be represented (int or float)</span>
+<span class="sd">        f : a file-like object or a filename</span>
+
+<span class="sd">        reference : specify a header reference (&#39;center&#39; | &#39;corner&#39;)</span>
+
+<span class="sd">        nodata_value : specify how NaNs should be represented (int or float)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">reference</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="s">&#39;center&#39;</span><span class="p">,</span> <span class="s">&#39;corner&#39;</span><span class="p">):</span>
             <span class="k">raise</span> <span class="n">GridIOError</span><span class="p">(</span><span class="s">&quot;reference in AAIGrid.tofile() must be &#39;center&#39; or &quot;</span>
@@ -564,7 +576,9 @@
 <span class="sd">        Parameters:</span>
 <span class="sd">        -----------</span>
 <span class="sd">        X : first-dimension coordinates of grid centers</span>
+
 <span class="sd">        Y : second-dimension coordinates of grid centers</span>
+
 <span class="sd">        values : dependent m-dimensional quantity (nrows x ncols)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
@@ -606,7 +620,7 @@
         <span class="k">raise</span> <span class="ne">NotImplementedError</span>
 </div>
 <div class="viewcode-block" id="WarpedGrid.resample"><a class="viewcode-back" href="../../../reference.html#karta.raster.grid.WarpedGrid.resample">[docs]</a>    <span class="k">def</span> <span class="nf">resample</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Resample internal grid to the points defined by `X`, `Y`. &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot; Resample internal grid to the points defined by *X*, *Y*. &quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span>
 
 </div></div>

@@ -246,7 +246,7 @@ manipulating the properties dict, this avoids accidents.</p>
 
 <dl class="method">
 <dt id="karta.vector.Point.azimuth">
-<tt class="descname">azimuth</tt><big>(</big><em>other</em>, <em>crs=&lt;karta.crs.Spherical object at 0x2b87396714a8&gt;</em><big>)</big><a class="headerlink" href="#karta.vector.Point.azimuth" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">azimuth</tt><big>(</big><em>other</em>, <em>crs=&lt;karta.crs.Spherical object at 0x2b0faf23d2e8&gt;</em><big>)</big><a class="headerlink" href="#karta.vector.Point.azimuth" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the compass azimuth from self to other in radians (i.e.
 clockwise, with north at 0). Returns NaN if points are coincident.</p>
 </dd></dl>
@@ -1076,7 +1076,7 @@ dictionary of the file objects.</p>
 
 <dl class="function">
 <dt id="karta.vector.read.read_shapefile">
-<tt class="descclassname">karta.vector.read.</tt><tt class="descname">read_shapefile</tt><big>(</big><em>name</em>, <em>crs=&lt;karta.crs.GeographicalCRS object at 0x2b87396714e0&gt;</em><big>)</big><a class="reference internal" href="_modules/karta/vector/read.html#read_shapefile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#karta.vector.read.read_shapefile" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">karta.vector.read.</tt><tt class="descname">read_shapefile</tt><big>(</big><em>name</em>, <em>crs=&lt;karta.crs.GeographicalCRS object at 0x2b0faf23d320&gt;</em><big>)</big><a class="reference internal" href="_modules/karta/vector/read.html#read_shapefile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#karta.vector.read.read_shapefile" title="Permalink to this definition">¶</a></dt>
 <dd><p>Read a shapefile given <cite>name</cite>, which may include or exclude the .shp
 extension. The CRS must be specified, otherwise it is assumed to be
 cartesian.</p>
@@ -1393,9 +1393,8 @@ and profile extraction.</p>
 <dl class="class">
 <dt id="karta.raster.grid.Grid">
 <em class="property">class </em><tt class="descclassname">karta.raster.grid.</tt><tt class="descname">Grid</tt><a class="reference internal" href="_modules/karta/raster/grid.html#Grid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#karta.raster.grid.Grid" title="Permalink to this definition">¶</a></dt>
-<dd><p>Grid baseclass. Don&#8217;t use this directly except to implement subclasses.
-The primary attributes defined by all Grid-derived classed are _hdr and
-data.</p>
+<dd><p>Grid base class. Intended only for implementing subclasses. The primary
+attributes defined by all Grid-derived classed are _hdr and data.</p>
 <dl class="method">
 <dt id="karta.raster.grid.Grid.clipz">
 <tt class="descname">clipz</tt><big>(</big><em>bounds</em><big>)</big><a class="reference internal" href="_modules/karta/raster/grid.html#Grid.clipz"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#karta.raster.grid.Grid.clipz" title="Permalink to this definition">¶</a></dt>
@@ -1454,7 +1453,7 @@ otherwise <cite>GridIOError</cite> is thrown.</p>
 <dl class="method">
 <dt id="karta.raster.grid.RegularGrid.as_warpedgrid">
 <tt class="descname">as_warpedgrid</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/karta/raster/grid.html#RegularGrid.as_warpedgrid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#karta.raster.grid.RegularGrid.as_warpedgrid" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return a copy as a WarpedGrid instance. This is a more general
+<dd><p>Return a copy of grid as a <cite>WarpedGrid</cite>. This is a more general
 grid class that has a larger memory footprint but can represent more
 flexible data layouts.</p>
 </dd></dl>
@@ -1468,7 +1467,10 @@ flexible data layouts.</p>
 <dl class="method">
 <dt id="karta.raster.grid.RegularGrid.clip">
 <tt class="descname">clip</tt><big>(</big><em>xmin</em>, <em>xmax</em>, <em>ymin</em>, <em>ymax</em>, <em>crs=None</em><big>)</big><a class="reference internal" href="_modules/karta/raster/grid.html#RegularGrid.clip"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#karta.raster.grid.RegularGrid.clip" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return a clipped version of grid constrained to a bounding box.</p>
+<dd><p>Return a clipped version of grid constrained to a bounding box
+defined by <em>xmin</em>, <em>xmax</em>, <em>ymin</em>, <em>ymax</em>. If <em>crs</em> is not provided, it
+is assumed that the bounding box shares the same coordinate system as
+the grid.</p>
 </dd></dl>
 
 <dl class="method">
@@ -1487,7 +1489,7 @@ flexible data layouts.</p>
 <dt id="karta.raster.grid.RegularGrid.get_extents">
 <tt class="descname">get_extents</tt><big>(</big><em>reference='center'</em><big>)</big><a class="reference internal" href="_modules/karta/raster/grid.html#RegularGrid.get_extents"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#karta.raster.grid.RegularGrid.get_extents" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the region characteristics as a tuple (xmin, xmax, ymin,
-ymax). <em>reference</em> may be <cite>center</cite> or <cite>edge</cite>.</p>
+ymax). <em>reference</em> is a string and may be &#8216;center&#8217; or &#8216;edge&#8217;.</p>
 </dd></dl>
 
 <dl class="method">
@@ -1513,7 +1515,7 @@ geographical coordinates (x, y).</p>
 <dl class="method">
 <dt id="karta.raster.grid.RegularGrid.profile">
 <tt class="descname">profile</tt><big>(</big><em>line</em>, <em>resolution=None</em>, <em>**kw</em><big>)</big><a class="reference internal" href="_modules/karta/raster/grid.html#RegularGrid.profile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#karta.raster.grid.RegularGrid.profile" title="Permalink to this definition">¶</a></dt>
-<dd><p>Sample along a line defined as <cite>segments</cite>.</p>
+<dd><p>Sample along a <em>line</em> at <em>resolution</em>.</p>
 </dd></dl>
 
 <dl class="method">
@@ -1537,6 +1539,8 @@ geographical coordinates (x, y).</p>
 <dt id="karta.raster.grid.RegularGrid.resample_griddata">
 <tt class="descname">resample_griddata</tt><big>(</big><em>dx</em>, <em>dy</em>, <em>method='nearest'</em><big>)</big><a class="reference internal" href="_modules/karta/raster/grid.html#RegularGrid.resample_griddata"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#karta.raster.grid.RegularGrid.resample_griddata" title="Permalink to this definition">¶</a></dt>
 <dd><p>Resample array to have spacing <cite>dx</cite>, <a href="#id3"><span class="problematic" id="id4">`</span></a>dy&#8217; using <em>scipy.griddata</em></p>
+<p>Warning: This method is likely to be removed in the future, once
+the built-in <cite>resample</cite> method matures.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -1553,8 +1557,15 @@ geographical coordinates (x, y).</p>
 <dl class="method">
 <dt id="karta.raster.grid.RegularGrid.sample">
 <tt class="descname">sample</tt><big>(</big><em>x</em>, <em>y</em>, <em>crs=None</em>, <em>method='bilinear'</em><big>)</big><a class="reference internal" href="_modules/karta/raster/grid.html#RegularGrid.sample"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#karta.raster.grid.RegularGrid.sample" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return the values nearest (<cite>x</cite>, <cite>y</cite>), where <cite>x</cite> and <cite>y</cite> may be
-equal length vectors. <em>method</em> may be one of <cite>nearest</cite>, <cite>bilinear</cite>.</p>
+<dd><p>Return the values nearest (<em>x</em>, <em>y</em>), where <em>x</em> and <em>y</em> may be
+equal length vectors. Keyword <em>method</em> may be one of &#8216;nearest&#8217;,
+&#8216;bilinear&#8217; (default).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="karta.raster.grid.RegularGrid.sample_bilinear">
+<tt class="descname">sample_bilinear</tt><big>(</big><em>x</em>, <em>y</em><big>)</big><a class="reference internal" href="_modules/karta/raster/grid.html#RegularGrid.sample_bilinear"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#karta.raster.grid.RegularGrid.sample_bilinear" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the value nearest to (<cite>x</cite>, <cite>y</cite>). Bilinear sampling scheme.</p>
 </dd></dl>
 
 <dl class="method">
@@ -1567,7 +1578,7 @@ sampling scheme.</p>
 <dl class="method">
 <dt id="karta.raster.grid.RegularGrid.vertex_coords">
 <tt class="descname">vertex_coords</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/karta/raster/grid.html#RegularGrid.vertex_coords"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#karta.raster.grid.RegularGrid.vertex_coords" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return the coordinates of vertices.</p>
+<dd><p>Return the coordinates of cell vertices.</p>
 </dd></dl>
 
 </dd></dl>
@@ -1581,7 +1592,7 @@ spacing is not necessarily constant.</p>
 <dl class="method">
 <dt id="karta.raster.grid.WarpedGrid.resample">
 <tt class="descname">resample</tt><big>(</big><em>X</em>, <em>Y</em><big>)</big><a class="reference internal" href="_modules/karta/raster/grid.html#WarpedGrid.resample"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#karta.raster.grid.WarpedGrid.resample" title="Permalink to this definition">¶</a></dt>
-<dd><p>Resample internal grid to the points defined by <cite>X</cite>, <cite>Y</cite>.</p>
+<dd><p>Resample internal grid to the points defined by <em>X</em>, <em>Y</em>.</p>
 </dd></dl>
 
 <dl class="method">
