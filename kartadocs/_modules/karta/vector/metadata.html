@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>karta.vector.metadata &mdash; karta 0.4.2 documentation</title>
+    <title>karta.vector.metadata &mdash; karta 0.4.2.3 documentation</title>
     
     <link rel="stylesheet" href="../../../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '0.4.2',
+        VERSION:     '0.4.2.3',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -24,7 +24,7 @@
     <script type="text/javascript" src="../../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../../_static/doctools.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="karta 0.4.2 documentation" href="../../../index.html" />
+    <link rel="top" title="karta 0.4.2.3 documentation" href="../../../index.html" />
     <link rel="up" title="karta.vector" href="../vector.html" />
    
   
@@ -41,7 +41,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../../karta-manual.html">karta 0.4.2 documentation</a> &raquo;</li>
+        <li><a href="../../../karta-manual.html">karta 0.4.2.3 documentation</a> &raquo;</li>
           <li><a href="../../index.html" >Module code</a> &raquo;</li>
           <li><a href="../vector.html" accesskey="U">karta.vector</a> &raquo;</li> 
       </ul>
@@ -55,7 +55,7 @@
   <h1>Source code for karta.vector.metadata</h1><div class="highlight"><pre>
 <span class="sd">&quot;&quot;&quot; Vector geospatial metadata management &quot;&quot;&quot;</span>
 
-<span class="kn">import</span> <span class="nn">copy</span>
+<span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
 <span class="kn">import</span> <span class="nn">numbers</span>
 <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">Mapping</span>
 <span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">isnan</span><span class="p">,</span> <span class="n">int32</span><span class="p">,</span> <span class="n">int64</span>
@@ -73,7 +73,7 @@
     <span class="n">_data</span> <span class="o">=</span> <span class="p">{}</span>
     <span class="n">_fieldtypes</span> <span class="o">=</span> <span class="p">[]</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">singleton</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">copydata</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">singleton</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; Create a collection of metadata from *data*, which may be a list</span>
 <span class="sd">        with uniform type or a dictionary with equally-sized fields of uniform</span>
 <span class="sd">        type.</span>
@@ -86,8 +86,8 @@
 <span class="sd">        *kwargs*:</span>
 <span class="sd">        singleton : treat data as a single unit, rather than as a list of units</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="n">copydata</span><span class="p">:</span>
-            <span class="n">data</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">copy</span><span class="p">:</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">data</span> <span class="ow">is</span> <span class="bp">None</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_len</span> <span class="o">=</span> <span class="mi">0</span>
@@ -164,10 +164,6 @@
 
     <span class="k">def</span> <span class="nf">__setitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="p">(</span><span class="n">IntegerType</span><span class="p">,</span> <span class="nb">slice</span><span class="p">)):</span>
-            <span class="c">#       if len(self._fieldtypes) == 1:</span>
-            <span class="c">#           return self.values()[0][key]</span>
-            <span class="c">#       else:</span>
-
             <span class="n">nkeys</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
             <span class="k">if</span> <span class="p">(</span><span class="n">nkeys</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">nkeys</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">value</span><span class="p">))):</span>
                 <span class="k">raise</span> <span class="ne">IndexError</span><span class="p">(</span><span class="s">&quot;Setting Metadata requires a value to be &quot;</span>
@@ -212,7 +208,7 @@
 
         <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">items</span><span class="p">:</span>
             <span class="n">newdata</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="n">key</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">idxs</span><span class="p">]</span>
-        <span class="k">return</span> <span class="n">Metadata</span><span class="p">(</span><span class="n">newdata</span><span class="p">,</span> <span class="n">copydata</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">Metadata</span><span class="p">(</span><span class="n">newdata</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
 </div>
 <div class="viewcode-block" id="Metadata.getfield"><a class="viewcode-back" href="../../../reference.html#karta.vector.metadata.Metadata.getfield">[docs]</a>    <span class="k">def</span> <span class="nf">getfield</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; Return all values from field *name*. &quot;&quot;&quot;</span>

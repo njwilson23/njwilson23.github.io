@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>karta.vector &mdash; karta 0.4.2 documentation</title>
+    <title>karta.vector &mdash; karta 0.4.2.3 documentation</title>
     
     <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '0.4.2',
+        VERSION:     '0.4.2.3',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -24,7 +24,7 @@
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="karta 0.4.2 documentation" href="../../index.html" />
+    <link rel="top" title="karta 0.4.2.3 documentation" href="../../index.html" />
     <link rel="up" title="Module code" href="../index.html" />
    
   
@@ -41,7 +41,7 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../karta-manual.html">karta 0.4.2 documentation</a> &raquo;</li>
+        <li><a href="../../karta-manual.html">karta 0.4.2.3 documentation</a> &raquo;</li>
           <li><a href="../index.html" accesskey="U">Module code</a> &raquo;</li> 
       </ul>
     </div>  
@@ -64,7 +64,7 @@
 <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">quadtree</span>
 
 <span class="kn">from</span> <span class="nn">.geometry</span> <span class="kn">import</span> <span class="n">Point</span><span class="p">,</span> <span class="n">Multipoint</span><span class="p">,</span> <span class="n">Line</span><span class="p">,</span> <span class="n">Polygon</span>
-<span class="kn">from</span> <span class="nn">.read</span> <span class="kn">import</span> <span class="n">read_geojson</span><span class="p">,</span> <span class="n">read_shapefile</span>
+<span class="kn">from</span> <span class="nn">.read</span> <span class="kn">import</span> <span class="n">read_geojson</span><span class="p">,</span> <span class="n">read_shapefile</span><span class="p">,</span> <span class="n">from_shape</span>
 <span class="kn">from</span> <span class="nn">.shp</span> <span class="kn">import</span> <span class="n">write_shapefile</span>
 <span class="kn">from</span> <span class="nn">.gpx</span> <span class="kn">import</span> <span class="n">GPX</span>
 <span class="kn">from</span> <span class="nn">.xyfile</span> <span class="kn">import</span> <span class="n">load_xy</span><span class="p">,</span> <span class="n">xyz2array_reg</span><span class="p">,</span> <span class="n">array2xyz</span>

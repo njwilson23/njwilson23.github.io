@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Package reference &mdash; karta 0.4.2 documentation</title>
+    <title>Package reference &mdash; karta 0.4.2.3 documentation</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.4.2',
+        VERSION:     '0.4.2.3',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -24,7 +24,7 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="karta 0.4.2 documentation" href="index.html" />
+    <link rel="top" title="karta 0.4.2.3 documentation" href="index.html" />
     <link rel="prev" title="Karta tutorial" href="tutorial.html" />
    
   
@@ -44,7 +44,7 @@
         <li class="right" >
           <a href="tutorial.html" title="Karta tutorial"
              accesskey="P">previous</a> |</li>
-        <li><a href="karta-manual.html">karta 0.4.2 documentation</a> &raquo;</li> 
+        <li><a href="karta-manual.html">karta 0.4.2.3 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -210,7 +210,7 @@ manipulating the properties dict, this avoids accidents.</p>
 
 <dl class="class">
 <dt id="karta.vector.Point">
-<em class="property">class </em><tt class="descclassname">karta.vector.</tt><tt class="descname">Point</tt><big>(</big><em>coords</em>, <em>data=None</em>, <em>properties=None</em>, <em>copy_metadata=True</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#karta.vector.Point" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">karta.vector.</tt><tt class="descname">Point</tt><big>(</big><em>coords</em>, <em>data=None</em>, <em>properties=None</em>, <em>copy_metadata=False</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#karta.vector.Point" title="Permalink to this definition">¶</a></dt>
 <dd><p>Point object instantiated with:</p>
 <p><em>coords</em>        2-tuple or 3-tuple
 <em>data</em>          List, dictionary, or Metadata object for point-specific</p>
@@ -246,7 +246,7 @@ manipulating the properties dict, this avoids accidents.</p>
 
 <dl class="method">
 <dt id="karta.vector.Point.azimuth">
-<tt class="descname">azimuth</tt><big>(</big><em>other</em>, <em>spherical=False</em><big>)</big><a class="headerlink" href="#karta.vector.Point.azimuth" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">azimuth</tt><big>(</big><em>other</em>, <em>crs=&lt;karta.crs.Spherical object at 0x2b87396714a8&gt;</em><big>)</big><a class="headerlink" href="#karta.vector.Point.azimuth" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the compass azimuth from self to other in radians (i.e.
 clockwise, with north at 0). Returns NaN if points are coincident.</p>
 </dd></dl>
@@ -318,7 +318,7 @@ direction (float): walk azimuth (clockwise with &#8220;north&#8221; at 0)</div><
 
 <dl class="class">
 <dt id="karta.vector.Multipoint">
-<em class="property">class </em><tt class="descclassname">karta.vector.</tt><tt class="descname">Multipoint</tt><big>(</big><em>vertices</em>, <em>data=None</em>, <em>properties=None</em>, <em>copy_metadata=True</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#karta.vector.Multipoint" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">karta.vector.</tt><tt class="descname">Multipoint</tt><big>(</big><em>vertices</em>, <em>data=None</em>, <em>properties=None</em>, <em>copy_metadata=False</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#karta.vector.Multipoint" title="Permalink to this definition">¶</a></dt>
 <dd><p>Point cloud with associated attributes. This is a base class for the
 polyline and polygon classes.</p>
 <p><em>coords</em>        List of 2-tuples or 3-tuples
@@ -499,7 +499,7 @@ given by (xmin, xymin, xmax, ymax).</p>
 
 <dl class="class">
 <dt id="karta.vector.Line">
-<em class="property">class </em><tt class="descclassname">karta.vector.</tt><tt class="descname">Line</tt><big>(</big><em>vertices</em>, <em>data=None</em>, <em>properties=None</em>, <em>copy_metadata=True</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#karta.vector.Line" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">karta.vector.</tt><tt class="descname">Line</tt><big>(</big><em>vertices</em>, <em>data=None</em>, <em>properties=None</em>, <em>copy_metadata=False</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#karta.vector.Line" title="Permalink to this definition">¶</a></dt>
 <dd><p>Line composed of connected vertices.</p>
 <p><em>coords</em>        List of 2-tuples or 3-tuples
 <em>data</em>          List, dictionary, or Metadata object for point-specific</p>
@@ -967,8 +967,8 @@ boundary to <em>pt</em> (Point).</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="karta.vector.Polygon.to_polyline">
-<tt class="descname">to_polyline</tt><big>(</big><big>)</big><a class="headerlink" href="#karta.vector.Polygon.to_polyline" title="Permalink to this definition">¶</a></dt>
+<dt id="karta.vector.Polygon.to_line">
+<tt class="descname">to_line</tt><big>(</big><big>)</big><a class="headerlink" href="#karta.vector.Polygon.to_line" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a self-closing polyline. Discards sub-polygons.</p>
 </dd></dl>
 
@@ -1005,7 +1005,7 @@ fields      :   specify the fields to be written (default all)</p>
 <span class="target" id="module-karta.vector.metadata"></span><p>Vector geospatial metadata management</p>
 <dl class="class">
 <dt id="karta.vector.metadata.Metadata">
-<em class="property">class </em><tt class="descclassname">karta.vector.metadata.</tt><tt class="descname">Metadata</tt><big>(</big><em>data</em>, <em>singleton=False</em>, <em>copydata=True</em><big>)</big><a class="reference internal" href="_modules/karta/vector/metadata.html#Metadata"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#karta.vector.metadata.Metadata" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">karta.vector.metadata.</tt><tt class="descname">Metadata</tt><big>(</big><em>data</em>, <em>singleton=False</em>, <em>copy=False</em><big>)</big><a class="reference internal" href="_modules/karta/vector/metadata.html#Metadata"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#karta.vector.metadata.Metadata" title="Permalink to this definition">¶</a></dt>
 <dd><p>Class for handling collections of metadata. Data are organized similar
 to a Python dict, however different values must all have the same length
 and be of uniform type.</p>
@@ -1048,6 +1048,13 @@ index).</p>
 <span id="vector-io-modules"></span><h3>Vector IO modules<a class="headerlink" href="#module-karta.vector.read" title="Permalink to this headline">¶</a></h3>
 <p>Convenience reader functions</p>
 <dl class="function">
+<dt id="karta.vector.read.from_shape">
+<tt class="descclassname">karta.vector.read.</tt><tt class="descname">from_shape</tt><big>(</big><em>obj</em>, <em>properties=None</em><big>)</big><a class="reference internal" href="_modules/karta/vector/read.html#from_shape"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#karta.vector.read.from_shape" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read a __geo_interface__ dictionary and return an appropriate karta
+object</p>
+</dd></dl>
+
+<dl class="function">
 <dt id="karta.vector.read.get_filenames">
 <tt class="descclassname">karta.vector.read.</tt><tt class="descname">get_filenames</tt><big>(</big><em>stem</em>, <em>check=False</em><big>)</big><a class="reference internal" href="_modules/karta/vector/read.html#get_filenames"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#karta.vector.read.get_filenames" title="Permalink to this definition">¶</a></dt>
 <dd><p>Given a filename basename, return the associated shapefile paths. If
@@ -1069,7 +1076,7 @@ dictionary of the file objects.</p>
 
 <dl class="function">
 <dt id="karta.vector.read.read_shapefile">
-<tt class="descclassname">karta.vector.read.</tt><tt class="descname">read_shapefile</tt><big>(</big><em>name</em>, <em>crs=&lt;karta.crs.GeographicalCRS object at 0x2b7256e59c88&gt;</em><big>)</big><a class="reference internal" href="_modules/karta/vector/read.html#read_shapefile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#karta.vector.read.read_shapefile" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">karta.vector.read.</tt><tt class="descname">read_shapefile</tt><big>(</big><em>name</em>, <em>crs=&lt;karta.crs.GeographicalCRS object at 0x2b87396714e0&gt;</em><big>)</big><a class="reference internal" href="_modules/karta/vector/read.html#read_shapefile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#karta.vector.read.read_shapefile" title="Permalink to this definition">¶</a></dt>
 <dd><p>Read a shapefile given <cite>name</cite>, which may include or exclude the .shp
 extension. The CRS must be specified, otherwise it is assumed to be
 cartesian.</p>
@@ -1495,6 +1502,12 @@ geographical coordinates (x, y).</p>
 <tt class="descname">get_positions</tt><big>(</big><em>x</em>, <em>y</em><big>)</big><a class="reference internal" href="_modules/karta/raster/grid.html#RegularGrid.get_positions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#karta.raster.grid.RegularGrid.get_positions" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the column and row indices for the point nearest
 geographical coordinates (x, y).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="karta.raster.grid.RegularGrid.gtiffwrite">
+<tt class="descname">gtiffwrite</tt><big>(</big><em>fnm</em><big>)</big><a class="reference internal" href="_modules/karta/raster/grid.html#RegularGrid.gtiffwrite"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#karta.raster.grid.RegularGrid.gtiffwrite" title="Permalink to this definition">¶</a></dt>
+<dd><p>Write data to a GeoTiff file using GDAL</p>
 </dd></dl>
 
 <dl class="method">
