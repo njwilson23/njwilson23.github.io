@@ -1,63 +1,62 @@
-    <!-- Main jumbotron -->
-    <div id="top-jumbotron" class="jumbotron">
-      <div class="container">
-        <div class="heading center">
-          <img class="img-header" src="images/mustache_mtn_small.png" alt="Large logo">
-        </div>
-        <div class="center">
-          <span id="chevron" class="glyphicon glyphicon-chevron-down" aria-hidden="true">
-        </div>
+    <div class="container-fluid">
+      <div class="heading center">
+        <img class="img-header" src="images/mustache_mtn_small.png" alt="logo">
       </div>
-    </div>  <!-- /jumbotron -->
+    </div>
 
     <div id="content" class="container">
+
       <div class="row">
 
-        <div class="col-md-4">
+        <div class="col-md-4 project-div">
           <h2>karta</h2>
-          <p> <img class="img-project" src="images/map.png" align="right" alt="Karta icon"> Library for
-          vector and raster geographical data processing. It's sort of like a
-          lightweight programmable GIS in Python with relatively few
-          dependencies (numpy, pyproj, optional GDAL bindings). </p>
+
+          <p> <img class="img-project" src="images/map.png" align="right"
+          alt="Karta icon"> Python package for geographical data processing.
+          Vector and raster data types that are coordinate system-aware,
+          implementations of frequently-used of geospatial analysis methods,
+          and the read/write interfaces to several formats. </p>
+
           <p><a class="btn btn-custom" href="karta.html" role="button">View details &raquo;</a></p>
+
         </div>
 
-        <div class="col-md-4">
-          <h2>irlib</h2>
-          <p> Software for analyzing glacier-penetrating radar data,
-          particularly that collected using Blue System's ice-penetrating radar
-          hardware. <em>irlib</em> can be used to read data, perform
-          pre-processing and post-processing steps, and pick reflection
-          events.</p>
-          <p><a class="btn btn-custom" href="irlib.html" role="button">View details &raquo;</a></p>
-        </div>
-
-        <div class="col-md-4">
+        <div class="col-md-4 project-div">
           <h2>narwhal</h2>
-          <p> <!--<img src="images/bullkelp.png" width=150 align="right"> -->
-          Narwhal is an experimental Python package for analysing data collected
-          on oceanographic cruises. It provides routines for performing common
-          calculations such as geostrophic flow, mixing fractions, EOFs, and
-          baroclinic mode analysis. It also provides a <em>ctypes</em> wrapper
-          to the Gibbs Seawater (GSW) library.</p>
+
+          <p> <img src="images/narwhal.png" width=150 align="right"> Narwhal is
+          experimental software for analysing managing oceanographic data. It
+          provides routines for performing common calculations such as
+          geostrophic flow, mixing fractions, EOFs, and baroclinic mode
+          analysis. It also provides a Python <em>ctypes</em> wrapper to the
+          TEOS-10 GSW library.</p>
+
           <p><a class="btn btn-custom" href="narwhal.html" role="button">View details &raquo;</a></p>
+        </div>
+
+        <div class="col-md-4 project-div">
+          <h2>irlib</h2>
+
+          <p>Package for analyzing glacier-penetrating radar data, particularly
+          that collected using Blue System's ice-penetrating radar hardware.
+          <em>irlib</em> can be used to read data, perform pre-processing and
+          post-processing steps, and pick reflection events.</p>
+
+          <p><a class="btn btn-custom" href="irlib.html" role="button">View details &raquo;</a></p>
         </div>
       </div>  <!-- /row -->
 
-      <hr>
+      <br>
 
       <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-6 project-div">
           <h3>Javascript Wave Tank</h3>
-          <p>Linear gravity waves propogating through an HTML5 canvas!</p>
           <p><a class="btn btn-default" href="waves.html" 
                 role="button">Watch it &raquo;</a></p>
         </div>
 
-        <div class="col-md-6">
+        <div class="col-md-6 project-div">
           <h3>Is it Quaking in Vancouver?</h3>
-          <img src="images/iiq_logo.png" width=70 align="right" alt="Quaking icon">
-          <p>Better check often.</p>
           <p><a class="btn btn-default" href="http://www.isitquaking.ca" 
                 role="button">Find out &raquo;</a></p>
         </div>
@@ -65,12 +64,10 @@
 
     </div> <!-- /container -->
 
-    <hr>
+    <br>
+    <footer>
+      <div class="container center"><img src="images/copyright.png" width=250 alt="&copy; ironicmtn 2015"></div>
+      <!--<div class="container"><p>&copy; ironicmtn 2015</p></div>-->
+    </footer>
 
-      <footer>
-        <div class="container"><p>&copy; ironicmtn 2015</p></div>
-      </footer>
-
-    <div id="bottom-jumbotron" class="jumbotron">
-    </div>  <!-- /jumbotron -->
 

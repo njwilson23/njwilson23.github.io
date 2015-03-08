@@ -1,11 +1,16 @@
 html {
-	height: 100%;
+/* 	height: 100%; */
 }
 
 body {
-  padding-top: 50px; /* move content down because navbar is 50 tall */
+  /*padding-top: 50px; /*move content down because navbar is 50 tall*/
   padding-bottom: 20px;
   height: 100%;
+  background-image: url(../images/ranier-sunset-banner.jpg);
+/*   background-attachment: scroll; */
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
 }
 
 .center {
@@ -19,7 +24,8 @@ body {
 
 .img-header {
   max-width: 100%;
-  margin-top: 20%;
+  margin-top: 80px;
+  margin-bottom: 4%;
 }
 
 .img-project {
@@ -27,44 +33,24 @@ body {
   max-width: 50%;
 }
 
-.jumbotron {
-  background-attachment: scroll;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-  zorder: -1;
+#content {
+  background-color: rgba(255, 255, 255, 0.6);
+  font-size: medium;
+  padding: 2em;
 }
 
-#top-jumbotron{
-  height: 110%;
-  background-image: url(../images/ranier-sunset-banner.jpg);
-}
-
-#bottom-jumbotron{
-  margin-bottom: 0px;
-  height: 50%;
-  background-attachment: fixed;
-  background-image: url(../images/ice_ravine_banner.jpg);
-}
+/* .project-div {
+  background-color: rgba(255, 255, 255, 0.6);
+} */
 
 .btn-custom {
 	color:#fff;
 	background-color:#2D74AD;
-	border-color:#ccc;
+	border-color:#2D74AD;
 }
 
 .btn-custom.active,.btn-custom.focus,.btn-custom:active,.btn-custom:focus,.btn-custom:hover,.open>.dropdown-toggle.btn-custom{
 	color:#fff;
 	background-color:#6F9BBF;
-	border-color:#adadad;
+	border-color:#6F9BBF;
 }
-
-#chevron {
-  font-size: x-large;
-  margin-top: 5%;
-}
-
-#chevron:hover {
-  font-size: xx-large;
-}
-
