@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Karta tutorial &mdash; karta 0.4.2.3 documentation</title>
+    <title>Karta tutorial &mdash; karta 0.4.3 documentation</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.4.2.3',
+        VERSION:     '0.4.3',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -24,7 +24,7 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="karta 0.4.2.3 documentation" href="index.html" />
+    <link rel="top" title="karta 0.4.3 documentation" href="index.html" />
     <link rel="next" title="Package reference" href="reference.html" />
     <link rel="prev" title="Installation" href="installation.html" />
    
@@ -48,7 +48,7 @@
         <li class="right" >
           <a href="installation.html" title="Installation"
              accesskey="P">previous</a> |</li>
-        <li><a href="karta-manual.html">karta 0.4.2.3 documentation</a> &raquo;</li> 
+        <li><a href="karta-manual.html">karta 0.4.3 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -173,9 +173,9 @@ or the nearest point on an edge to an external point:</p>
 </div>
 <p>The vertices of multiple vertex objects can be iterated through and
 sliced:</p>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="n">subline</span> <span class="o">=</span> <span class="n">line</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span>
-<span class="k">for</span> <span class="n">pt_</span> <span class="ow">in</span> <span class="n">subline</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">pt_</span><span class="o">.</span><span class="n">vertex</span><span class="p">)</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="n">section</span> <span class="o">=</span> <span class="n">line</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">pt</span> <span class="ow">in</span> <span class="n">section</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">pt</span><span class="o">.</span><span class="n">vertex</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="highlight-python"><div class="highlight"><pre><span class="p">(</span><span class="o">-</span><span class="mf">124.39442</span><span class="p">,</span> <span class="mf">49.31833</span><span class="p">)</span>
@@ -205,9 +205,8 @@ a planar cartesian coordinate system. If our positions are meant to be
 geographical coordinates, then we can provide the <tt class="docutils literal"><span class="pre">crs</span></tt> argument to
 each geometry at creation, as in</p>
 <div class="code python highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">karta</span> <span class="kn">import</span> <span class="n">crs</span>
-</pre></div>
-</div>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="n">pt</span> <span class="o">=</span> <span class="n">Point</span><span class="p">((</span><span class="o">-</span><span class="mf">123.1</span><span class="p">,</span> <span class="mf">49.25</span><span class="p">),</span> <span class="n">crs</span><span class="o">=</span><span class="n">crs</span><span class="o">.</span><span class="n">LonLatWGS84</span><span class="p">)</span>
+
+<span class="n">pt</span> <span class="o">=</span> <span class="n">Point</span><span class="p">((</span><span class="o">-</span><span class="mf">123.1</span><span class="p">,</span> <span class="mf">49.25</span><span class="p">),</span> <span class="n">crs</span><span class="o">=</span><span class="n">crs</span><span class="o">.</span><span class="n">LonLatWGS84</span><span class="p">)</span>
 <span class="n">pt2</span> <span class="o">=</span> <span class="n">Point</span><span class="p">((</span><span class="o">-</span><span class="mf">70.66</span><span class="p">,</span> <span class="mf">41.52</span><span class="p">),</span> <span class="n">crs</span><span class="o">=</span><span class="n">crs</span><span class="o">.</span><span class="n">LonLatWGS84</span><span class="p">)</span>
 <span class="n">pt</span><span class="o">.</span><span class="n">distance</span><span class="p">(</span><span class="n">pt2</span><span class="p">)</span>
 </pre></div>
@@ -376,11 +375,11 @@ through subsequent operations.</p>
 <div class="code python highlight-python"><div class="highlight"><pre><span class="n">pt</span> <span class="o">=</span> <span class="n">mp</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
 
 <span class="k">print</span><span class="p">(</span><span class="n">pt</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">pt</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s">&quot;species&quot;</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="n">pt</span><span class="o">.</span><span class="n">d</span><span class="p">[</span><span class="s">&quot;species&quot;</span><span class="p">])</span>
 </pre></div>
 </div>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">Point</span><span class="p">((</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
-<span class="n">M</span><span class="o">.</span> <span class="n">alba</span>
+<span class="p">[</span><span class="s">&#39;M. alba&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
 <p>Metadata at the geometry level rather than the point level can be
@@ -407,10 +406,7 @@ geometry.</p>
 make is easy to visualize a geometry.</p>
 <div class="code python highlight-python"><div class="highlight"><pre>import matplotlib.pyplot as plt
 %matplotlib qt
-plt.plot(*line.get_coordinate_lists())
-</pre></div>
-</div>
-<div class="highlight-python"><div class="highlight"><pre>[&lt;matplotlib.lines.Line2D at 0x7f5939d55358&gt;]
+plt.plot(*line.coordinates)
 </pre></div>
 </div>
 <p>Data can be read from several common formats, including ESRI shapefiles
@@ -493,7 +489,7 @@ returning CRS name instead
       
       |
       Powered by <a href="http://sphinx-doc.org/">Sphinx 1.2.3</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.6.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.1</a>
       
       |
       <a href="_sources/tutorial.txt"

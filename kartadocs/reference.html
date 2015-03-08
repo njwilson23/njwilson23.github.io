@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Package reference &mdash; karta 0.4.2.3 documentation</title>
+    <title>Package reference &mdash; karta 0.4.3 documentation</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.4.2.3',
+        VERSION:     '0.4.3',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -24,7 +24,7 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="karta 0.4.2.3 documentation" href="index.html" />
+    <link rel="top" title="karta 0.4.3 documentation" href="index.html" />
     <link rel="prev" title="Karta tutorial" href="tutorial.html" />
    
   
@@ -44,7 +44,7 @@
         <li class="right" >
           <a href="tutorial.html" title="Karta tutorial"
              accesskey="P">previous</a> |</li>
-        <li><a href="karta-manual.html">karta 0.4.2.3 documentation</a> &raquo;</li> 
+        <li><a href="karta-manual.html">karta 0.4.3 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -156,6 +156,18 @@ back azimuth, and a distance</p>
 <em class="property">class </em><tt class="descclassname">karta.crs.</tt><tt class="descname">Proj4CRS</tt><big>(</big><em>proj</em>, <em>spheroid</em>, <em>name=None</em><big>)</big><a class="reference internal" href="_modules/karta/crs.html#Proj4CRS"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#karta.crs.Proj4CRS" title="Permalink to this definition">¶</a></dt>
 <dd><p>Custom reference systems, which may be backed by a <em>pypoj.Proj</em> instance
 or a custom projection function</p>
+<dl class="attribute">
+<dt id="karta.crs.Proj4CRS.initstring_geod">
+<tt class="descname">initstring_geod</tt><a class="reference internal" href="_modules/karta/crs.html#Proj4CRS.initstring_geod"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#karta.crs.Proj4CRS.initstring_geod" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the proj.4 init string defining the geoid.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="karta.crs.Proj4CRS.initstring_proj">
+<tt class="descname">initstring_proj</tt><a class="reference internal" href="_modules/karta/crs.html#Proj4CRS.initstring_proj"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#karta.crs.Proj4CRS.initstring_proj" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the proj.4 init string defining the projection.</p>
+</dd></dl>
+
 </dd></dl>
 
 <dl class="class">
@@ -246,7 +258,7 @@ manipulating the properties dict, this avoids accidents.</p>
 
 <dl class="method">
 <dt id="karta.vector.Point.azimuth">
-<tt class="descname">azimuth</tt><big>(</big><em>other</em>, <em>crs=&lt;karta.crs.Spherical object at 0x2b0faf23d2e8&gt;</em><big>)</big><a class="headerlink" href="#karta.vector.Point.azimuth" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">azimuth</tt><big>(</big><em>other</em>, <em>crs=&lt;karta.crs.Spherical object at 0x2b84ec3102e8&gt;</em><big>)</big><a class="headerlink" href="#karta.vector.Point.azimuth" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the compass azimuth from self to other in radians (i.e.
 clockwise, with north at 0). Returns NaN if points are coincident.</p>
 </dd></dl>
@@ -342,6 +354,12 @@ manipulating the properties dict, this avoids accidents.</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="karta.vector.Multipoint.append">
+<tt class="descname">append</tt><big>(</big><em>point</em><big>)</big><a class="headerlink" href="#karta.vector.Multipoint.append" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a vertex to self.vertices.</p>
+</dd></dl>
+
+<dl class="method">
 <dt id="karta.vector.Multipoint.apply_affine_transform">
 <tt class="descname">apply_affine_transform</tt><big>(</big><em>M</em><big>)</big><a class="headerlink" href="#karta.vector.Multipoint.apply_affine_transform" title="Permalink to this definition">¶</a></dt>
 <dd><p>Apply an affine transform given by matrix <em>M</em> to data and return a
@@ -420,6 +438,12 @@ may be treated as cartesian.</p>
 <tt class="descname">nearest_point_to</tt><big>(</big><em>pt</em><big>)</big><a class="headerlink" href="#karta.vector.Multipoint.nearest_point_to" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the internal Point that is nearest to <em>pt</em>. If two points
 are equidistant, only one will be returned.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="karta.vector.Multipoint.pop">
+<tt class="descname">pop</tt><big>(</big><em>index=-1</em><big>)</big><a class="headerlink" href="#karta.vector.Multipoint.pop" title="Permalink to this definition">¶</a></dt>
+<dd><p>Removes a vertex from the register by index.</p>
 </dd></dl>
 
 <dl class="method">
@@ -516,15 +540,15 @@ manipulating the properties dict, this avoids accidents.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="karta.vector.Line.add_vertex">
-<tt class="descname">add_vertex</tt><big>(</big><em>vertex</em><big>)</big><a class="headerlink" href="#karta.vector.Line.add_vertex" title="Permalink to this definition">¶</a></dt>
-<dd><p>Add a vertex to self.vertices.</p>
-</dd></dl>
-
-<dl class="method">
 <dt id="karta.vector.Line.any_within_poly">
 <tt class="descname">any_within_poly</tt><big>(</big><em>poly</em><big>)</big><a class="headerlink" href="#karta.vector.Line.any_within_poly" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return whether any vertices are inside <em>poly</em></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="karta.vector.Line.append">
+<tt class="descname">append</tt><big>(</big><em>point</em><big>)</big><a class="headerlink" href="#karta.vector.Line.append" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a vertex to self.vertices.</p>
 </dd></dl>
 
 <dl class="method">
@@ -567,7 +591,7 @@ may be treated as cartesian.</p>
 <dl class="method">
 <dt id="karta.vector.Line.cumlength">
 <tt class="descname">cumlength</tt><big>(</big><big>)</big><a class="headerlink" href="#karta.vector.Line.cumlength" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the cumulative length by segment, prefixed by zero.</p>
+<dd><p>Returns the cumulative length by vertex.</p>
 </dd></dl>
 
 <dl class="method">
@@ -652,15 +676,15 @@ are equidistant, only one will be returned.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="karta.vector.Line.print_vertices">
-<tt class="descname">print_vertices</tt><big>(</big><big>)</big><a class="headerlink" href="#karta.vector.Line.print_vertices" title="Permalink to this definition">¶</a></dt>
-<dd><p>Prints an enumerated list of indices.</p>
+<dt id="karta.vector.Line.pop">
+<tt class="descname">pop</tt><big>(</big><em>index=-1</em><big>)</big><a class="headerlink" href="#karta.vector.Line.pop" title="Permalink to this definition">¶</a></dt>
+<dd><p>Removes a vertex from the register by index.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="karta.vector.Line.remove_vertex">
-<tt class="descname">remove_vertex</tt><big>(</big><em>index</em><big>)</big><a class="headerlink" href="#karta.vector.Line.remove_vertex" title="Permalink to this definition">¶</a></dt>
-<dd><p>Removes a vertex from the register by index.</p>
+<dt id="karta.vector.Line.print_vertices">
+<tt class="descname">print_vertices</tt><big>(</big><big>)</big><a class="headerlink" href="#karta.vector.Line.print_vertices" title="Permalink to this definition">¶</a></dt>
+<dd><p>Prints an enumerated list of indices.</p>
 </dd></dl>
 
 <dl class="method">
@@ -782,6 +806,12 @@ manipulating the properties dict, this avoids accidents.</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="karta.vector.Polygon.append">
+<tt class="descname">append</tt><big>(</big><em>point</em><big>)</big><a class="headerlink" href="#karta.vector.Polygon.append" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a vertex to self.vertices.</p>
+</dd></dl>
+
+<dl class="method">
 <dt id="karta.vector.Polygon.apply_affine_transform">
 <tt class="descname">apply_affine_transform</tt><big>(</big><em>M</em><big>)</big><a class="headerlink" href="#karta.vector.Polygon.apply_affine_transform" title="Permalink to this definition">¶</a></dt>
 <dd><p>Apply an affine transform given by matrix <em>M</em> to data and return a
@@ -818,11 +848,17 @@ sub-polygons.</p>
 (xmin, ymin, xmax, ymax)</p>
 </dd></dl>
 
+<dl class="attribute">
+<dt id="karta.vector.Polygon.centroid">
+<tt class="descname">centroid</tt><a class="headerlink" href="#karta.vector.Polygon.centroid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return Polygon centroid as a Point, ignoring sub-polygons.</p>
+</dd></dl>
+
 <dl class="method">
 <dt id="karta.vector.Polygon.contains">
 <tt class="descname">contains</tt><big>(</big><em>pt</em><big>)</big><a class="headerlink" href="#karta.vector.Polygon.contains" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns True if pt is inside or on the boundary of the
-polygon, and False otherwise. Uses a crossing number scheme.</p>
+<dd><p>Returns True if pt is inside or on the boundary of the polygon, and
+False otherwise. Uses a crossing number scheme.</p>
 </dd></dl>
 
 <dl class="method">
@@ -906,6 +942,12 @@ are equidistant, only one will be returned.</p>
 <tt class="descname">perimeter</tt><a class="headerlink" href="#karta.vector.Polygon.perimeter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the perimeter of the polygon. If there are sub-polygons,
 their perimeters are added recursively.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="karta.vector.Polygon.pop">
+<tt class="descname">pop</tt><big>(</big><em>index=-1</em><big>)</big><a class="headerlink" href="#karta.vector.Polygon.pop" title="Permalink to this definition">¶</a></dt>
+<dd><p>Removes a vertex from the register by index.</p>
 </dd></dl>
 
 <dl class="method">
@@ -1002,46 +1044,17 @@ fields      :   specify the fields to be written (default all)</p>
 
 </dd></dl>
 
-<span class="target" id="module-karta.vector.metadata"></span><p>Vector geospatial metadata management</p>
-<dl class="class">
-<dt id="karta.vector.metadata.Metadata">
-<em class="property">class </em><tt class="descclassname">karta.vector.metadata.</tt><tt class="descname">Metadata</tt><big>(</big><em>data</em>, <em>singleton=False</em>, <em>copy=False</em><big>)</big><a class="reference internal" href="_modules/karta/vector/metadata.html#Metadata"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#karta.vector.metadata.Metadata" title="Permalink to this definition">¶</a></dt>
-<dd><p>Class for handling collections of metadata. Data are organized similar
-to a Python dict, however different values must all have the same length
-and be of uniform type.</p>
-<p>Data are accessed either by field name (returning the entire series for
-that field) for by index (returning the value within eather field at that
-index).</p>
-<dl class="method">
-<dt id="karta.vector.metadata.Metadata.getfield">
-<tt class="descname">getfield</tt><big>(</big><em>name</em><big>)</big><a class="reference internal" href="_modules/karta/vector/metadata.html#Metadata.getfield"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#karta.vector.metadata.Metadata.getfield" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return all values from field <em>name</em>.</p>
+<span class="target" id="module-karta.vector.metadata"></span><p>Metadata tables for vector data</p>
+<dl class="function">
+<dt id="karta.vector.metadata.tupleinsert">
+<tt class="descclassname">karta.vector.metadata.</tt><tt class="descname">tupleinsert</tt><big>(</big><em>tpl</em>, <em>val</em>, <em>idx</em><big>)</big><a class="reference internal" href="_modules/karta/vector/metadata.html#tupleinsert"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#karta.vector.metadata.tupleinsert" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a tuple with <em>val</em> inserted into position <em>idx</em></p>
 </dd></dl>
 
-<dl class="method">
-<dt id="karta.vector.metadata.Metadata.keys">
-<tt class="descname">keys</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/karta/vector/metadata.html#Metadata.keys"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#karta.vector.metadata.Metadata.keys" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return internal dictionary keys.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="karta.vector.metadata.Metadata.sub">
-<tt class="descname">sub</tt><big>(</big><em>idxs</em><big>)</big><a class="reference internal" href="_modules/karta/vector/metadata.html#Metadata.sub"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#karta.vector.metadata.Metadata.sub" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return a Metadata instance with values from idxs.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="karta.vector.metadata.Metadata.update">
-<tt class="descname">update</tt><big>(</big><em>other</em><big>)</big><a class="reference internal" href="_modules/karta/vector/metadata.html#Metadata.update"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#karta.vector.metadata.Metadata.update" title="Permalink to this definition">¶</a></dt>
-<dd><p>Extend collection in-place.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="karta.vector.metadata.Metadata.values">
-<tt class="descname">values</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/karta/vector/metadata.html#Metadata.values"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#karta.vector.metadata.Metadata.values" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return internal dictionary values.</p>
-</dd></dl>
-
+<dl class="function">
+<dt id="karta.vector.metadata.tuplemut">
+<tt class="descclassname">karta.vector.metadata.</tt><tt class="descname">tuplemut</tt><big>(</big><em>tpl</em>, <em>val</em>, <em>idx</em><big>)</big><a class="reference internal" href="_modules/karta/vector/metadata.html#tuplemut"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#karta.vector.metadata.tuplemut" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a tuple with <em>idx</em> changed to <em>val</em></p>
 </dd></dl>
 
 <div class="section" id="module-karta.vector.read">
@@ -1076,7 +1089,7 @@ dictionary of the file objects.</p>
 
 <dl class="function">
 <dt id="karta.vector.read.read_shapefile">
-<tt class="descclassname">karta.vector.read.</tt><tt class="descname">read_shapefile</tt><big>(</big><em>name</em>, <em>crs=&lt;karta.crs.GeographicalCRS object at 0x2b0faf23d320&gt;</em><big>)</big><a class="reference internal" href="_modules/karta/vector/read.html#read_shapefile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#karta.vector.read.read_shapefile" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">karta.vector.read.</tt><tt class="descname">read_shapefile</tt><big>(</big><em>name</em>, <em>crs=&lt;karta.crs.GeographicalCRS object at 0x2b84ec310320&gt;</em><big>)</big><a class="reference internal" href="_modules/karta/vector/read.html#read_shapefile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#karta.vector.read.read_shapefile" title="Permalink to this definition">¶</a></dt>
 <dd><p>Read a shapefile given <cite>name</cite>, which may include or exclude the .shp
 extension. The CRS must be specified, otherwise it is assumed to be
 cartesian.</p>
@@ -1366,6 +1379,18 @@ FeatureCollection string.</p>
 
 <span class="target" id="module-karta.vector.shp"></span><p>Provides functions for reading and writing ESRI shapefiles and returning a
 geometry object.</p>
+<dl class="function">
+<dt id="karta.vector.shp.addfields">
+<tt class="descclassname">karta.vector.shp.</tt><tt class="descname">addfields</tt><big>(</big><em>writer</em>, <em>properties</em><big>)</big><a class="reference internal" href="_modules/karta/vector/shp.html#addfields"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#karta.vector.shp.addfields" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add geometry properties <em>properties</em> to shapefile writer <em>writer</em>.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="karta.vector.shp.addfields_points">
+<tt class="descclassname">karta.vector.shp.</tt><tt class="descname">addfields_points</tt><big>(</big><em>writer</em>, <em>points</em><big>)</big><a class="reference internal" href="_modules/karta/vector/shp.html#addfields_points"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#karta.vector.shp.addfields_points" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add <em>points</em> data to shapefile writer <em>writer</em>.</p>
+</dd></dl>
+
 <dl class="function">
 <dt id="karta.vector.shp.property_field_type">
 <tt class="descclassname">karta.vector.shp.</tt><tt class="descname">property_field_type</tt><big>(</big><em>value</em><big>)</big><a class="reference internal" href="_modules/karta/vector/shp.html#property_field_type"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#karta.vector.shp.property_field_type" title="Permalink to this definition">¶</a></dt>
@@ -1835,85 +1860,6 @@ obtained with AAIGrid.hdr.</p>
 
 </dd></dl>
 
-<span class="target" id="module-karta.raster.raster"></span><p>2D raster functions</p>
-<dl class="function">
-<dt id="karta.raster.raster.aspect">
-<tt class="descclassname">karta.raster.raster.</tt><tt class="descname">aspect</tt><big>(</big><em>D</em>, <em>res=(30.0</em>, <em>30.0)</em><big>)</big><a class="reference internal" href="_modules/karta/raster/raster.html#aspect"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#karta.raster.raster.aspect" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return the slope aspect for each pixel.
-<a class="reference external" href="http://webhelp.esri.com/arcgisdesktop/9.2/index.cfm?TopicName=How%20Aspect%20works">http://webhelp.esri.com/arcgisdesktop/9.2/index.cfm?TopicName=How%20Aspect%20works</a></p>
-</dd></dl>
-
-<dl class="function">
-<dt id="karta.raster.raster.div">
-<tt class="descclassname">karta.raster.raster.</tt><tt class="descname">div</tt><big>(</big><em>U</em>, <em>V</em>, <em>res=(30.0</em>, <em>30.0)</em><big>)</big><a class="reference internal" href="_modules/karta/raster/raster.html#div"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#karta.raster.raster.div" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calculate the divergence of a vector field.</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="karta.raster.raster.grad">
-<tt class="descclassname">karta.raster.raster.</tt><tt class="descname">grad</tt><big>(</big><em>D</em>, <em>res=(30.0</em>, <em>30.0)</em><big>)</big><a class="reference internal" href="_modules/karta/raster/raster.html#grad"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#karta.raster.raster.grad" title="Permalink to this definition">¶</a></dt>
-<dd><p>Computes the gradient of potential D. Return a tuple (dx, dy).</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="karta.raster.raster.hillshade">
-<tt class="descclassname">karta.raster.raster.</tt><tt class="descname">hillshade</tt><big>(</big><em>D</em>, <em>res=(30.0</em>, <em>30.0)</em>, <em>bearing=330.0</em>, <em>azimuth=60.0</em><big>)</big><a class="reference internal" href="_modules/karta/raster/raster.html#hillshade"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#karta.raster.raster.hillshade" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return a hillshade raster for field D. Testing version.</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="karta.raster.raster.normed_vector_field">
-<tt class="descclassname">karta.raster.raster.</tt><tt class="descname">normed_vector_field</tt><big>(</big><em>D</em><big>)</big><a class="reference internal" href="_modules/karta/raster/raster.html#normed_vector_field"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#karta.raster.raster.normed_vector_field" title="Permalink to this definition">¶</a></dt>
-<dd><p>Computes a U,V vector field of potential D. Scalar components of
-U,V are normalized to max(<a href="#id7"><span class="problematic" id="id8">|U, V|</span></a>).</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="karta.raster.raster.pad">
-<tt class="descclassname">karta.raster.raster.</tt><tt class="descname">pad</tt><big>(</big><em>A</em>, <em>width=1</em>, <em>edges='all'</em>, <em>value=0.0</em><big>)</big><a class="reference internal" href="_modules/karta/raster/raster.html#pad"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#karta.raster.raster.pad" title="Permalink to this definition">¶</a></dt>
-<dd><p>Apply padding to a 2D array.
-<em>A</em>         :   array to pad
-<em>width</em>     :   thickness of padding
-<em>edges</em>     :   &#8220;all&#8221;, &#8220;left&#8221;, &#8220;right&#8221;, &#8220;top&#8221;, &#8220;bottom&#8221;
-<a href="#id5"><span class="problematic" id="id6">*</span></a>value&#8221;     :   0.0, value to pad with</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="karta.raster.raster.peaks">
-<tt class="descclassname">karta.raster.raster.</tt><tt class="descname">peaks</tt><big>(</big><em>n=49</em><big>)</big><a class="reference internal" href="_modules/karta/raster/raster.html#peaks"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#karta.raster.raster.peaks" title="Permalink to this definition">¶</a></dt>
-<dd><p>2d peaks function of MATLAB logo fame.</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="karta.raster.raster.slope">
-<tt class="descclassname">karta.raster.raster.</tt><tt class="descname">slope</tt><big>(</big><em>D</em>, <em>res=(30.0</em>, <em>30.0)</em><big>)</big><a class="reference internal" href="_modules/karta/raster/raster.html#slope"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#karta.raster.raster.slope" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return the scalar slope at each pixel. Use the neighbourhood
-method.
-<a class="reference external" href="http://webhelp.esri.com/arcgisdesktop/9.2/index.cfm?TopicName=How%20Slope%20works">http://webhelp.esri.com/arcgisdesktop/9.2/index.cfm?TopicName=How%20Slope%20works</a></p>
-</dd></dl>
-
-<dl class="function">
-<dt id="karta.raster.raster.viewshed">
-<tt class="descclassname">karta.raster.raster.</tt><tt class="descname">viewshed</tt><big>(</big><em>D</em>, <em>i</em>, <em>j</em>, <em>r=-1</em><big>)</big><a class="reference internal" href="_modules/karta/raster/raster.html#viewshed"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#karta.raster.raster.viewshed" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return the viewshed on <em>D</em> at (i,j).</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="karta.raster.raster.witch_of_agnesi">
-<tt class="descclassname">karta.raster.raster.</tt><tt class="descname">witch_of_agnesi</tt><big>(</big><em>nx=100</em>, <em>ny=100</em>, <em>a=4.0</em><big>)</big><a class="reference internal" href="_modules/karta/raster/raster.html#witch_of_agnesi"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#karta.raster.raster.witch_of_agnesi" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="docutils">
-<dt>Return a raster field defined by the equation</dt>
-<dd><blockquote class="first">
-<div>8 a^3</div></blockquote>
-<dl class="last docutils">
-<dt>Z = &#8212;&#8212;&#8212;&#8212;&#8211;</dt>
-<dd>d^2 + 4 a*2</dd>
-</dl>
-</dd>
-</dl>
-<p>where d is the distance from the center.</p>
-</dd></dl>
-
 </div>
 </div>
 
@@ -1966,7 +1912,7 @@ method.
       
       |
       Powered by <a href="http://sphinx-doc.org/">Sphinx 1.2.3</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.6.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.1</a>
       
       |
       <a href="_sources/reference.txt"
