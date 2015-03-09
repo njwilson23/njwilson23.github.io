@@ -1,21 +1,28 @@
-@font-face {
-    font-family: 'Roboto';
-    font-style: normal;
-    font-weight: 400;
-    src: local('Roboto'),url(http://brick.a.ssl.fastly.net/fonts/roboto/400.woff) format('woff');
-}
-
-@font-face {
-    font-family: 'Roboto';
-    font-style: normal;
-    font-weight: 700;
-    src: local('Roboto Bold'),url(http://brick.a.ssl.fastly.net/fonts/roboto/700.woff) format('woff');
-}
-
 body {
   padding:2em;
   color:#000;
   font-weight:400;
+  background-color: #FFFFFF;
+  background-image: none;
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto'),url(http://brick.a.ssl.fastly.net/fonts/roboto/400.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Roboto Bold'),url(http://brick.a.ssl.fastly.net/fonts/roboto/700.woff) format('woff');
+}
+
+code, pre {
+  font-family:Monaco, Bitstream Vera Sans Mono, Lucida Console, Terminal;
+  font-size:12px;
 }
 
 h1, h2, h3 {
@@ -40,11 +47,6 @@ blockquote {
   margin:0;
   padding:0 0 0 20px;
   font-style:italic;
-}
-
-code, pre {
-  font-family:Monaco, Bitstream Vera Sans Mono, Lucida Console, Terminal;
-  font-size:12px;
 }
 
 pre {
