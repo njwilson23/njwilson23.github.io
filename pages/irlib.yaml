@@ -1,0 +1,4 @@
+template: ../templates/main-template.html
+title-raw: Radar tools (irlib)
+header: karta/header.html
+body: irlib/body.html
