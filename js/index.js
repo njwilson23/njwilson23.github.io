@@ -1,15 +1,14 @@
+
+// Set the initial backgorund size
+$("body").css("background-size", (window.innerWidth + 100) + "px");
+
+// Shift the background as the page scrolls
 $(window).scroll(function() {
   if (window.innerWidth > 600) {
     var dy = $(window).scrollTop();
-    $("#top-jumbotron").css("background-position", "center " + 0.5*dy + "px");
-    var yshift = Math.min(0.2*dy, 400);
-    $("#bottom-jumbotron").css("background-position", "center " + yshift + "px");
+    var shift = - Math.min(0.5*dy, 100);
+    $("body").css("background-position", shift + "px " + dy + "px");
+    $("body").css("background-size", window.innerWidth + 100 + "px auto");
   }
-});
-
-$("#chevron,.img-header").click(function() {
-  $('html, body').animate({
-    scrollTop: $("#content").offset().top - 70
-  }, 1000);
 });
 
