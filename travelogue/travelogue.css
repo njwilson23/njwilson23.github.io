@@ -7,7 +7,7 @@
 }
 
 body {
-  background: #222222;
+  background: #282828;
 }
 
 h1 {
@@ -36,6 +36,8 @@ div.row {
 
 img {
   width: 80%;
+  box-shadow: 4px 4px 10px 5px #181818;
+  margin-bottom: 20px;
   /*opacity: 0.8;*/
 }
 
