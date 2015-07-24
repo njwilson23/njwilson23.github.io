@@ -1,0 +1,34 @@
+
+body {
+  background: #222222;
+}
+
+p, h1 {
+  font-family: sans-serif;
+  color: #EAEAEA;
+  font-size: 24;
+}
+
+p {
+  font-size: 16;
+}
+
+div.row {
+}
+
+.center {
+  text-align: center;
+}
+
+.centered {
+  margin: auto;
+}
+
+img {
+  width: 80%;
+  opacity: 0.8;
+}
+
+img:hover {
+  opacity: 1.0;
+}
