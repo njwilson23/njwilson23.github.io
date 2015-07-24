@@ -36,6 +36,7 @@ div.row {
 
 img {
   width: 80%;
+  max-width: 50em;
   box-shadow: 4px 4px 10px 5px #181818;
   margin-bottom: 20px;
   /*opacity: 0.8;*/
