@@ -1,16 +1,26 @@
 
+@font-face{
+  font-family:'Bitter';
+  font-style:normal;
+  font-weight:700;
+  src:local('Bitter Bold'),url(http://brick.a.ssl.fastly.net/fonts/bitter/700.woff) format('woff')
+}
+
 body {
   background: #222222;
 }
 
-p, h1 {
-  font-family: sans-serif;
-  color: #EAEAEA;
-  font-size: 24;
+h1 {
+  font-family: Bitter, sans-serif;
+  font-size: 26;
 }
 
 p {
   font-size: 16;
+}
+
+p, h1 {
+  color: #EAEAEA;
 }
 
 div.row {
@@ -26,9 +36,9 @@ div.row {
 
 img {
   width: 80%;
-  opacity: 0.8;
+  /*opacity: 0.8;*/
 }
 
 img:hover {
-  opacity: 1.0;
+  /*opacity: 1.0;*/
 }
