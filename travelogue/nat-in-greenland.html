@@ -5,18 +5,41 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <link rel="stylesheet" href="travelogue.css" />
+
+  <link rel="stylesheet" type="text/css" href="coverflow.css" />
+  <script src="jquery-2.1.4.min.js"></script>
   <title>Nat's adventures in Alaska, Greenland, and Massachusetts</title>
 </head>
 
 <body>
 
-  <h1 class="center">Nat's adventures in Alaska, Greenland, and Massachusetts</h1>
+  <h1 class="center">Nat's adventures in Alaska, Greenland, England, and Massachusetts</h1>
 
   <p class="center">Check back soon!</p>
 
   <div class="center">
-    <img src="train.jpg" alt="509 in Jasper, AB" />
+    <img src="map.png" id="map" alt="travel map" />
   </div>
+
+  <h2>Alaska</h2>
+
+  <div class="coverflow_wrapper centered">
+    <div id="coverflow_ak">
+      <img src="eastchester_r.jpg" class="cf_img" alt="Eastchester Lagoon" />
+      <img src="chester_creek_trail_r.jpg" class="cf_img" alt="Hidden trail beside Chester Creek" />
+    </div>
+  </div>
+
+  <script src="coverflow.min.js"></script>
+  <script>
+      $(function() {
+        var $coverflow_ak = $('#coverflow_ak').coverflow({
+          active: 0,
+        });
+
+        $coverflow_ak.coverflow();
+      });
+  </script>
 
 </body>
 
