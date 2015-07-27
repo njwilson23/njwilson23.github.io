@@ -34,7 +34,7 @@ p, h1, h2, h3 {
 div.coverflow_wrapper {
   width: 80%;
   position: relative;
-  height: 35em;
+  height: 33em;
 /*   display:flex; */
 /*   justify-content:center; */
 /*   align-items:center; */
@@ -49,9 +49,8 @@ img#map {
 
 img.cf_img {
   width: 80%;
-  max-width: 40em;
+  max-width: 45em;
   box-shadow: 0px 0px 20px 1px #000000;
-  vertical-align: middle;
 }
 
 .center {
@@ -60,5 +59,16 @@ img.cf_img {
 
 .centered {
   margin: auto;
+}
+
+div.button {
+  text-align: center;
+  width: 6em;
+  height: 3em;
+  background-color: #303030;
+}
+
+div.button:active {
+  background-color: #505050;
 }
 
