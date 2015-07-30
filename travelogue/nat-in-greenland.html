@@ -23,10 +23,10 @@
 
     var travelPath = new google.maps.Polyline({
       path: [
-             { lat: 49.25, lng: -132.1 },     // Vancouver
+             { lat: 49.25, lng: -123.1 },     // Vancouver
              { lat: 47.61, lng: -122.33 },    // Seattle
              { lat: 61.217, lng: -149.9 },    // Anchorage
-             { lat: 47.61, lng: -122.33 },    // Seattle
+             { lat: 47.62, lng: -122.3 },    // Seattle
              //{ lat: 42.358, lng: -71.064 },   // Boston
             ],
       geodesic: true,
@@ -68,6 +68,7 @@
 
   <div class="center" id="map-canvas">
   </div>
+  <p class="center"><span style="color: red;">Red - past,</span> <span style="color: blue;">blue - future</span></p>
 
   <h2>Alaska</h2>
 
