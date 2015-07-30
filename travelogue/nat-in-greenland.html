@@ -26,8 +26,8 @@
              { lat: 49.25, lng: -123.1 },     // Vancouver
              { lat: 47.61, lng: -122.33 },    // Seattle
              { lat: 61.217, lng: -149.9 },    // Anchorage
-             { lat: 47.62, lng: -122.3 },    // Seattle
-             //{ lat: 42.358, lng: -71.064 },   // Boston
+             { lat: 47.61, lng: -122.33 },    // Seattle
+             { lat: 42.358, lng: -71.064 },   // Boston
             ],
       geodesic: true,
       strokeColor: '#ff0000',
@@ -37,7 +37,6 @@
 
     var futureTravelPath = new google.maps.Polyline({
       path: [
-             { lat: 47.61, lng: -122.33 },    // Seattle
              { lat: 42.358, lng: -71.064 },   // Boston
              { lat: 40.713, lng: -74.006 },   // New York
              { lat: 64.13, lng: -21.93 },   // Reykjavik
@@ -52,8 +51,21 @@
       strokeWeight: 2
     });
 
+    var homeMarker = new google.maps.Marker({
+      position = { { lat: 49.25, lng: -123.1 } },
+      title = 'Last location'
+    };
+
+    var lastMarker = new google.maps.Marker({
+      position = { { lat: 42.358, lng: -71.064 } },
+      title = 'Last location'
+    };
+
     travelPath.setMap(map);
     futureTravelPath.setMap(map);
+    homeMarker.setMap(map);
+    lastMarker.setMap(map);
+
   }
   google.maps.event.addDomListener(window, 'load', initialize);
   </script>
