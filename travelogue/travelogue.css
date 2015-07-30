@@ -83,3 +83,10 @@ div.button:active {
   background-color: #505050;
 }
 
+#map-canvas {
+  height: 20em;
+  margin: 0;
+  padding: 0;
+}
+
+

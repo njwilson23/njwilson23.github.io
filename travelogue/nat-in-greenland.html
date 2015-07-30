@@ -7,6 +7,57 @@
   <link rel="stylesheet" href="travelogue.css" />
 
   <link rel="stylesheet" type="text/css" href="coverflow.css" />
+
+  <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAQwbDVFAHWjK4PS5YemuBq3b81Vdoph0A"></script>
+  <script type="text/javascript">
+  function initialize() {
+    var mapOptions = {
+      center: { lat: 60.0, lng: -80.0 },
+      zoom: 2,
+      disableDefaultUI: true,
+      panControl: true,
+      zoomControl: true,
+      mapTypeId: google.maps.MapTypeId.SATELLITE
+    };
+    var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+
+    var travelPath = new google.maps.Polyline({
+      path: [
+             { lat: 49.25, lng: -132.1 },     // Vancouver
+             { lat: 47.61, lng: -122.33 },    // Seattle
+             { lat: 61.217, lng: -149.9 },    // Anchorage
+             { lat: 47.61, lng: -122.33 },    // Seattle
+             //{ lat: 42.358, lng: -71.064 },   // Boston
+            ],
+      geodesic: true,
+      strokeColor: '#ff0000',
+      strokeOpacity: 1.0,
+      strokeWeight: 2
+    });
+
+    var futureTravelPath = new google.maps.Polyline({
+      path: [
+             { lat: 47.61, lng: -122.33 },    // Seattle
+             { lat: 42.358, lng: -71.064 },   // Boston
+             { lat: 40.713, lng: -74.006 },   // New York
+             { lat: 64.13, lng: -21.93 },   // Reykjavik
+             { lat: 65.58, lng: -37.18 },   // Kulusuk
+             { lat: 65.61, lng: -37.57 },   // Tasiilaq 
+             //{ lat: 52.52, lng: 13.38 },   // Berlin
+             //{ lat: 52.205, lng: 0.119 },   // London
+            ],
+      geodesic: true,
+      strokeColor: '#0000ff',
+      strokeOpacity: 0.5,
+      strokeWeight: 2
+    });
+
+    travelPath.setMap(map);
+    futureTravelPath.setMap(map);
+  }
+  google.maps.event.addDomListener(window, 'load', initialize);
+  </script>
+
   <script src="jquery-2.1.4.min.js"></script>
   <title>Nat's adventures in Alaska, Greenland, and Massachusetts</title>
 </head>
@@ -15,8 +66,7 @@
 
   <h1 class="center">Nat's adventures in Alaska, Greenland, England, and Massachusetts</h1>
 
-  <div class="center">
-    <img src="map.png" id="map" alt="travel map" />
+  <div class="center" id="map-canvas">
   </div>
 
   <h2>Alaska</h2>
