@@ -28,6 +28,8 @@
              { lat: 61.217, lng: -149.9 },    // Anchorage
              { lat: 47.61, lng: -122.33 },    // Seattle
              { lat: 42.358, lng: -71.064 },   // Boston
+             { lat: 40.713, lng: -74.006 },   // New York
+             { lat: 64.13, lng: -21.93 },   // Reykjavik
             ],
       geodesic: true,
       strokeColor: '#ff0000',
@@ -37,13 +39,13 @@
 
     var futureTravelPath = new google.maps.Polyline({
       path: [
-             { lat: 42.358, lng: -71.064 },   // Boston
-             { lat: 40.713, lng: -74.006 },   // New York
              { lat: 64.13, lng: -21.93 },   // Reykjavik
              { lat: 65.58, lng: -37.18 },   // Kulusuk
              { lat: 65.6125, lng: -37.62 },   // Tasiilaq
-             //{ lat: 52.52, lng: 13.38 },   // Berlin
-             //{ lat: 52.205, lng: 0.119 },   // London
+             { lat: 65.58, lng: -37.18 },   // Kulusuk
+             { lat: 64.13, lng: -21.93 },   // Reykjavik
+             { lat: 52.52, lng: 13.38 },   // Berlin
+             { lat: 52.205, lng: 0.119 },   // London
             ],
       geodesic: true,
       strokeColor: '#0000ff',
@@ -58,7 +60,7 @@
     });
 
     var lastMarker = new google.maps.Marker({
-      position: { lat: 42.358, lng: -71.064 },
+      position: { lat: 64.13, lng: -21.93 },
       title: 'Last location',
       icon: 'head.png'
     });
