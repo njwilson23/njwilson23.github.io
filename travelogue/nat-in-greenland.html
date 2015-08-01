@@ -30,6 +30,8 @@
              { lat: 42.358, lng: -71.064 },   // Boston
              { lat: 40.713, lng: -74.006 },   // New York
              { lat: 64.13, lng: -21.93 },   // Reykjavik
+             { lat: 65.58, lng: -37.18 },   // Kulusuk
+             { lat: 65.6125, lng: -37.62 },   // Tasiilaq
             ],
       geodesic: true,
       strokeColor: '#ff0000',
@@ -39,13 +41,13 @@
 
     var futureTravelPath = new google.maps.Polyline({
       path: [
-             { lat: 64.13, lng: -21.93 },   // Reykjavik
-             { lat: 65.58, lng: -37.18 },   // Kulusuk
              { lat: 65.6125, lng: -37.62 },   // Tasiilaq
              { lat: 65.58, lng: -37.18 },   // Kulusuk
              { lat: 64.13, lng: -21.93 },   // Reykjavik
              { lat: 52.52, lng: 13.38 },   // Berlin
              { lat: 52.205, lng: 0.119 },   // London
+             { lat: 42.358, lng: -71.064 },   // Boston
+             { lat: 49.25, lng: -123.1 },     // Vancouver
             ],
       geodesic: true,
       strokeColor: '#0000ff',
@@ -60,7 +62,7 @@
     });
 
     var lastMarker = new google.maps.Marker({
-      position: { lat: 64.13, lng: -21.93 },
+      position: { lat: 65.6125, lng: -37.62 },
       title: 'Last location',
       icon: 'head.png'
     });
@@ -110,9 +112,51 @@
     </div>
   </div>
 
+  <h2>Iceland</h2>
+
+  <div class="coverflow_wrapper centered">
+    <div id="coverflow_is">
+    </div>
+  </div>
+
+  <div class="button_wrapper center">
+    <div class="button" style="float: left;" onclick="$('#coverflow_is').coverflow( 'prev' );">
+      <p>Prev</p>
+    </div>
+    <div class="button" style="float: right;" onclick="$('#coverflow_is').coverflow( 'next' );">
+      <p>Next</p>
+    </div>
+  </div>
 
   <h2>Greenland</h2>
-  <p class="center">Check back soon!</p>
+
+  <div class="coverflow_wrapper centered">
+    <div id="coverflow_gl">
+      <img src="photos/P8016618_r.JPG" class="cf_image" alt="">
+      <img src="photos/P8016624_r.JPG" class="cf_image" alt="">
+      <img src="photos/P8016629_r.JPG" class="cf_image" alt="">
+      <img src="photos/P8016630_r.JPG" class="cf_image" alt="">
+      <img src="photos/P8016632_r.JPG" class="cf_image" alt="">
+      <img src="photos/P8016637_r.JPG" class="cf_image" alt="">
+      <img src="photos/P8016644_r.JPG" class="cf_image" alt="">
+      <img src="photos/P8016651_r.JPG" class="cf_image" alt="">
+      <img src="photos/P8016659_r.JPG" class="cf_image" alt="">
+      <img src="photos/P8016660_r.JPG" class="cf_image" alt="">
+      <img src="photos/P8016661_r.JPG" class="cf_image" alt="">
+      <img src="photos/P8016664_r.JPG" class="cf_image" alt="">
+      <img src="photos/P8016665_r.JPG" class="cf_image" alt="">
+      <img src="photos/P8016669_r.JPG" class="cf_image" alt="">
+    </div>
+  </div>
+
+  <div class="button_wrapper center">
+    <div class="button" style="float: left;" onclick="$('#coverflow_gl').coverflow( 'prev' );">
+      <p>Prev</p>
+    </div>
+    <div class="button" style="float: right;" onclick="$('#coverflow_gl').coverflow( 'next' );">
+      <p>Next</p>
+    </div>
+  </div>
 
   <h2>England</h2>
   <p class="center">Check back soon!</p>
@@ -128,6 +172,18 @@
         });
 
         $coverflow_ak.coverflow();
+
+        var $coverflow_is = $('#coverflow_is').coverflow({
+          active: 0,
+        });
+
+        $coverflow_is.coverflow();
+
+        var $coverflow_gl = $('#coverflow_gl').coverflow({
+          active: 0,
+        });
+
+        $coverflow_gl.coverflow();
       });
   </script>
 
