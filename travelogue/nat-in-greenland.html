@@ -37,6 +37,7 @@
              { lat: 65.58, lng: -37.18 },   // Kulusuk
              { lat: 64.13, lng: -21.93 },   // Reykjavik
              { lat: 52.52, lng: 13.38 },   // Berlin
+             { lat: 52.205, lng: 0.119 },   // London
             ],
       geodesic: true,
       strokeColor: '#ff0000',
@@ -46,7 +47,6 @@
 
     var futureTravelPath = new google.maps.Polyline({
       path: [
-             { lat: 52.52, lng: 13.38 },   // Berlin
              { lat: 52.205, lng: 0.119 },   // London
              { lat: 42.358, lng: -71.064 },   // Boston
              { lat: 49.25, lng: -123.1 },     // Vancouver
@@ -64,7 +64,7 @@
     });
 
     var lastMarker = new google.maps.Marker({
-      position: { lat: 52.52, lng: 13.38 },
+      position: { lat: 52.205, lng: 0.119 },
       title: 'Last location',
       icon: 'head.png'
     });
