@@ -70,20 +70,22 @@
 }
 .galleria-theme-travelogue .galleria-info-text {
     background-color: #000;
+    opacity: 0.7;
     padding: 12px;
     display: none;
     /* IE7 */ zoom:1;
 }
 .galleria-theme-travelogue .galleria-info-title {
-    font: bold 12px/1.1 arial,sans-serif;
+    font: bold 16px/1.1 arial,sans-serif;
     margin: 0;
     color: #fff;
     margin-bottom: 7px;
 }
 .galleria-theme-travelogue .galleria-info-description {
-    font: italic 12px/1.4 georgia,serif;
+    font: italic 14px/1.4 arial,sans-serif;
     margin: 0;
-    color: #bbb;
+    color: #ddd;
+    opacity: 1.0;
 }
 .galleria-theme-travelogue .galleria-info-close {
     width: 9px;
@@ -114,6 +116,7 @@
     height: 20px;
     cursor: pointer;
     background-color: #000;
+    opacity: 0.7;
 }
 .galleria-theme-travelogue.notouch .galleria-info-link:hover {
     opacity: 1;
