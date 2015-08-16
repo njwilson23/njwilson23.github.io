@@ -35,15 +35,6 @@ p, h1, h2, h3 {
   color: #EAEAEA;
 }
 
-div.coverflow_wrapper {
-  width: 80%;
-  position: relative;
-  height: 33em;
-/*   display:flex; */
-/*   justify-content:center; */
-/*   align-items:center; */
-}
-
 img#map {
   width: 90%;
   max-width: 60em;
@@ -89,4 +80,9 @@ div.button:active {
   padding: 0;
 }
 
-
+.galleria {
+  width: 80%;
+  /*position: relative;*/
+  height: 33em;
+  background: #000;
+}
