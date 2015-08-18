@@ -1,8 +1,8 @@
 @font-face{
-  font-family:'Bitter';
+  font-family:'Open Sans';
   font-style:normal;
-  font-weight:700;
-  src:local('Bitter Bold'),url(http://brick.a.ssl.fastly.net/fonts/bitter/700.woff) format('woff')
+  font-weight:400;
+  src:local('Open Sans'),url(http://brick.a.ssl.fastly.net/fonts/opensans/400.woff) format('woff')
 }
 
 html, body {
@@ -31,7 +31,7 @@ p {
 }
 
 p, h1, h2, h3 {
-  font-family: Bitter, sans-serif;
+  font-family: "Open Sans", sans-serif;
   color: #EAEAEA;
 }
 
