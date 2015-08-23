@@ -5,7 +5,9 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <link rel="stylesheet" href="travelogue.css" />
-
+  <script src="jquery-2.1.4.min.js"></script>
+  <script src="galleria/galleria-1.4.2.min.js"></script>
+  <script src="galleria/plugins/flickr/galleria.flickr.min.js"></script>
   <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAQwbDVFAHWjK4PS5YemuBq3b81Vdoph0A"></script>
   <script type="text/javascript">
   function initialize() {
@@ -76,9 +78,6 @@
   google.maps.event.addDomListener(window, 'load', initialize);
   </script>
 
-  <script src="jquery-2.1.4.min.js"></script>
-  <script src="galleria/galleria-1.4.2.min.js"></script>
-  <script src="galleria/plugins/flickr/galleria.flickr.min.js"></script>
   <title>Nat's adventure</title>
 </head>
 
@@ -120,7 +119,7 @@
   <div class="galleria centered">
   </div>
 
-  <script type="text/javascript">
+  <script>
     var flickr = new Galleria.Flickr();
     flickr.set("72157654989999744", function (data) {
       Galleria.get(2).load(data);
