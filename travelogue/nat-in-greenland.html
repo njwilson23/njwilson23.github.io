@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lag="en">
+<html lang="en">
 <head>
   <meta name="robots" content="noindex,follow" />
   <meta charset="utf-8">
@@ -78,6 +78,7 @@
 
   <script src="jquery-2.1.4.min.js"></script>
   <script src="galleria/galleria-1.4.2.min.js"></script>
+  <script src="galleria/plugins/flickr/galleria.flickr.min.js"></script>
   <title>Nat's adventure</title>
 </head>
 
@@ -117,27 +118,14 @@
   <h2>Greenland</h2>
 
   <div class="galleria centered">
-    <img src="photos/P8016630.JPG" alt="Helicopter flight from Kulusuk to Tasiilaq"/>
-    <img src="photos/P8016651.JPG" alt="Helicopter flight from Kulusuk to Tasiilaq"/>
-    <img src="photos/P8016659.JPG" alt="Tasiilaq"/>
-    <img src="photos/P8016660.JPG" alt="Tasiilaq"/>
-    <img src="photos/P8016661.JPG" alt="Lake near Tasiilaq"/>
-    <img src="photos/P8016664.JPG" alt="Lake near Tasiilaq"/>
-    <img src="photos/P8016665.JPG" alt="Tasiilaq"/>
-    <img src="photos/P8016669.JPG" alt="Old ski lift ear Tasiilaq"/>
-    <img src="photos/IMG_20150803_184749_modified_01.jpg" alt="Iceberg"/>
-    <img src="photos/IMG_20150803_204508_modified_01.jpg" alt="Sermilik fjord"/>
-    <img src="photos/IMG_20150804_141147_modified_01.jpg" alt="Contrails over Sermilik fjord"/>
-    <img src="photos/IMG_20150804_183858.jpg" alt="Sermilik fjord"/>
-    <img src="photos/IMG_20150804_195754.jpg" alt="Ship's reflection on an iceberg in Sermilik fjord"/>
-    <img src="photos/P8026681_modified_01.jpg" alt="Arch iceberg"/>
-    <img src="photos/P8026689.JPG" alt="Sunset in Sermilik fjord"/>
-    <img src="photos/P8036696.JPG" alt="CTD rosette"/>
-    <img src="photos/P8046705.JPG" alt="Locals from Tiniteqilaaq"/>
-    <img src="photos/P8046712.JPG" alt="Semilik fjord"/>
-    <img src="photos/P8086759_modified.jpg" alt="Semilik fjord"/>
-    <img src="photos/P8086765.JPG" alt="Semilik fjord"/>
   </div>
+
+  <script type="text/javascript">
+    var flickr = new Galleria.Flickr();
+    flickr.set("72157654989999744", function (data) {
+      Galleria.get(2).load(data);
+    });
+  </script>
 
   <div class="center" style="margin-top: 1em;">
     <iframe src="https://player.vimeo.com/video/136398618?title=0&byline=0&portrait=0" width="800" height="450" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
