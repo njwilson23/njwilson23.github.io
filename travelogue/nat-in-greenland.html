@@ -116,8 +116,13 @@
 
   <h2>Greenland</h2>
 
-  <div class="galleria centered">
-  </div>
+  <!-- Tasiilaq -->
+  <h3>Tasiileq, Ammassalik Island</h3>
+  <div class="galleria centered"></div>
+
+  <!-- Sermileq -->
+  <h3>Sermileq fjord</h3>
+  <div class="galleria centered"></div>
 
   <div class="center" style="margin-top: 1em;">
     <iframe src="https://player.vimeo.com/video/136398618?title=0&byline=0&portrait=0" width="800" height="450" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
@@ -143,14 +148,20 @@
   <p class="center">Check back soon!</p>
 
   <script>
-    Galleria.loadTheme('galleria/themes/travelogue/galleria.travelogue.js');
     Galleria.run('.galleria');
 
-    var flickr = new Galleria.Flickr();
-    flickr.set("72157654989999744", function (data) {
+    var flickr_tasiilaq = new Galleria.Flickr();
+    flickr_tasiilaq.set('72157654990575454', function (data) {
       Galleria.get(2).load(data);
     });
 
+    var flickr_sermileq= new Galleria.Flickr();
+    flickr_sermileq.set('72157654989999744', function (data) {
+      Galleria.get(3).load(data);
+    });
+
+    // Workaround for load failure?
+    Galleria.loadTheme('galleria/themes/travelogue/galleria.travelogue.js');
   </script>
 
 </body>
