@@ -8,6 +8,7 @@
   <script src="jquery-2.1.4.min.js"></script>
   <script src="galleria/galleria-1.4.2.min.js"></script>
   <script src="galleria/plugins/flickr/galleria.flickr.min.js"></script>
+  <script src="galleria/plugins/picasa/galleria.picasa.min.js"></script>
   <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAQwbDVFAHWjK4PS5YemuBq3b81Vdoph0A"></script>
   <script type="text/javascript">
   function initialize() {
@@ -65,7 +66,7 @@
     });
 
     var lastMarker = new google.maps.Marker({
-      position: cambridgePt,
+      position: londonPt,
       title: 'Last location',
       icon: 'head.png'
     });
@@ -130,26 +131,7 @@
   </div>
 
   <h2>England</h2>
-
-  <div class="galleria centered">
-    <img src="photos/london_to_cambridge_out/2015-08-15 14.25.03.jpg" alt="Paddington Station"/>
-    <img src="photos/london_to_cambridge_out/2015-08-15 14.27.18.jpg" alt="Food truck"/>
-    <img src="photos/london_to_cambridge_out/2015-08-15 15.09.50.jpg" alt="Finchley Central"/>
-    <img src="photos/london_to_cambridge_out/2015-08-15 16.34.58.jpg" alt="View from train to Cambridge"/>
-    <img src="photos/cambridge_out/2015-08-16 13.48.08.jpg" alt="Punters on the River Cam"/>
-    <img src="photos/cambridge_out/2015-08-16 14.09.17.jpg" alt="Bridge Cycles"/>
-
-    <img src="photos/cambridge_out/2015-08-21 16.01.05.jpg" alt="Churchill Field"/>
-    <img src="photos/cambridge_out/2015-08-21 18.23.37.jpg" alt="Issac Newton pub"/>
-    <img src="photos/cambridge_out/2015-08-21 19.45.36.jpg" alt="Punting fleet"/>
-    <img src="photos/cambridge_out/2015-08-21 20.19.00.jpg" alt="Corner"/>
-    <img src="photos/cambridge_out/2015-08-23 10.38.40.jpg" alt="Chimneys"/>
-    <img src="photos/cambridge_out/2015-08-23 10.44.01.jpg" alt="Coffee and bikes - my favourite things"/>
-    <img src="photos/cambridge_out/2015-08-24 09.13.55.jpg" alt="Church"/>
-    <img src="photos/cambridge_out/2015-08-25 11.31.24.jpg" alt="Replica of Shackleton's escape boat"/>
-    <img src="photos/cambridge_out/2015-08-25 12.06.27.jpg" alt="The Arctic on the ceiling of SPRI"/>
-    <img src="photos/cambridge_out/2015-08-25 12.06.40.jpg" alt="The Antarctic on the ceiling of SPRI"/>
-  </div>
+  <div class="galleria centered"></div>
 
   <h2>Cape Cod</h2>
   <p class="center">Check back soon!</p>
@@ -165,6 +147,11 @@
     var flickr_sermileq= new Galleria.Flickr();
     flickr_sermileq.set('72157654989999744', function (data) {
       Galleria.get(3).load(data);
+    });
+
+    var picasa_england = new Galleria.Picasa();
+    picasa_england.useralbum('njwilson23', 'England2015', function (data) {
+      Galleria.get(4).load(data);
     });
 
     // Workaround for load failure?
