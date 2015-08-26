@@ -105,16 +105,7 @@
   </div>
 
   <h2>Iceland</h2>
-
-  <div class="galleria centered">
-    <img src="photos/IMG_20150801_060557_r.jpg" class="cf_image" alt="Lake near Ráðhús"/>
-    <img src="photos/IMG_20150801_070008_r.jpg" class="cf_image" alt="Empty streets"/>
-    <img src="photos/IMG_20150801_070934_r.jpg" class="cf_image" alt="Lake again"/>
-    <img src="photos/P7316596_r.JPG" class="cf_image" alt="View from the bus from the airport to the city (1)"/>
-    <img src="photos/P7316599_r.JPG" class="cf_image" alt="View from the bus from the airport to the city (2)"/>
-    <img src="photos/P7316603_r.JPG" class="cf_image" alt="View from the bus from the airport to the city (3)"/>
-    <img src="photos/P7316609_r.JPG" class="cf_image" alt="View from the bus from the airport to the city (4)"/>
-  </div>
+  <div class="galleria centered"></div>
 
   <h2>Greenland</h2>
 
@@ -138,6 +129,11 @@
 
   <script>
     Galleria.run('.galleria');
+
+    var picasa_iceland = new Galleria.Picasa();
+    picasa_iceland.useralbum('njwilson23', 'Iceland2015', function (data) {
+      Galleria.get(1).load(data);
+    });
 
     var flickr_tasiilaq = new Galleria.Flickr();
     flickr_tasiilaq.set('72157654990575454', function (data) {
