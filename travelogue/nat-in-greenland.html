@@ -41,7 +41,8 @@
              vancouverPt, seattlePt, anchoragePt, seattlePt,
              bostonPt, newtorkPt, reykjavikPt, kulusukPt,
              tasiilaqPt, sermilikPt, tasiilaqPt, kulusukPt,
-             reykjavikPt, berlinPt, londonPt, cambridgePt, londonPt
+             reykjavikPt, berlinPt, londonPt, cambridgePt, londonPt,
+             cambridgePt, chicagoPt, vancouverPt
             ],
       geodesic: true,
       strokeColor: '#ff0000',
@@ -51,7 +52,6 @@
 
     var futureTravelPath = new google.maps.Polyline({
       path: [
-             londonPt, bostonPt, chicagoPt, vancouverPt
             ],
       geodesic: true,
       strokeColor: '#0000ff',
@@ -66,7 +66,7 @@
     });
 
     var lastMarker = new google.maps.Marker({
-      position: londonPt,
+      position: vancouverPt,
       title: 'Last location',
       icon: 'head.png'
     });
