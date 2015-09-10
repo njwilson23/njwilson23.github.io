@@ -35,6 +35,7 @@
       londonPt = { lat: 51.528888, lng: -0.122928 },
       cambridgePt = {lat: 52.212407, lng: 0.102720};
       chicagoPt = {lat: 41.8369, lng: -87.6847};
+      woodsholePt = {lat: 41.526667, lng: -70.663056};
 
     var travelPath = new google.maps.Polyline({
       path: [
@@ -42,7 +43,7 @@
              bostonPt, newtorkPt, reykjavikPt, kulusukPt,
              tasiilaqPt, sermilikPt, tasiilaqPt, kulusukPt,
              reykjavikPt, berlinPt, londonPt, cambridgePt, londonPt,
-             cambridgePt, chicagoPt, vancouverPt
+             cambridgePt, chicagoPt, vancouverPt, bostonPt, woodsholePt
             ],
       geodesic: true,
       strokeColor: '#ff0000',
@@ -66,7 +67,7 @@
     });
 
     var lastMarker = new google.maps.Marker({
-      position: vancouverPt,
+      position: woodsholePt,
       title: 'Last location',
       icon: 'head.png'
     });
