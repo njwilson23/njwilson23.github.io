@@ -7,85 +7,57 @@
 </style>
 
 <section>
-  <h1>Narwhal</h1>
-  <h2>Python Toolkit for Oceanography</h2>
 
-  <img src="images/narwhal.png">
-
-  <p>Narwhal is an experimental Python library built on <a href="http://pandas.pydata.org/">pandas</a> and <a href="http://matplotlib.org/">matplotlib</a> for manipulating and visualizing oceanographic survey data.</p>
-  
-  <img src="https://rawgit.com/njwilson23/narwhal/gh-pages/ts-demo.png" alt="P17N T-S diagram" class="right-float">
-  
-  <p><code>Cast</code> and <code>CastCollection</code> classes organize data in a
-  way that is easy to manipulate and build analyses upon. For example, the
-  <code>Cast</code> class has built-in methods for (incomplete list)
-  <ul>
-    <li>interpolation</li>
-    <li>density and depth calculation</li>
-    <li>buoyancy frequency calculation</li>
-    <li>baroclinic mode analysis</li>
-    <li>linear water mass analysis</li>
-  </ul>
-  More specialized techniques can be added by subclassing the generic
-  <code>Cast</code> type, as in the built-in <code>XBTCast</code> and
-  <code>LADCP</code> classes.</p>
-  
-  <p><code>Cast</code> and <code>CastCollection</code> data serializes itself
-  as version-controllable JSON objects for data storage and sharing.
-  Alternative formats  may also be read (currently limited to WOCE CTD casts in
-  NetCDF format).</p>
-  
-  <p>The <code>narwhal.plotting</code> submodule contains convenience methods for
-  creating attractive T-S diagrams, cast plots, and section plots. The data to the
-  right and below is from the <a href="http://cchdo.ucsd.edu/cruise/325021_1">
-  WOCE P17N line,</a> collected on a cruise by the Thomas G. Thomson.</p>
-  
-  <p class="image"><img
-  src="https://rawgit.com/njwilson23/narwhal/gh-pages/section-demo.png" alt="P17N
-  section diagram"></p>
-  
-  <p>Narwhal provides a wrapper for the <a
-    href="http://www.teos-10.org/pubs/gsw/html/gsw_contents.html">Gibbs Seawater
-  Toolbox</a> in the <code>narwhal.gsw</code> submodule, making things like the
-  following possible:</p>
-  <pre><code>
-density = narwhal.gsw.rho(cast["abssal"], cast["constemp"], cast["pres"])
-  </code></pre>
-  
-  <h2 id="installation">INSTALLATION</h2>
-  
-  <pre><code>
-git clone https://github.com/njwilson23/narwhal.git
+<h1 id="narwhal">Narwhal</h1>
+<img src="images/narwhal.png">
+<h2 id="oceanographic-data-analysis-in-python">Oceanographic data analysis in Python</h2>
+<p>Narwhal is a Python module built on <a href="http://pandas.pydata.org/">pandas</a> and <a href="http://matplotlib.org/">matplotlib</a>. Narwhal is designed for manipulating and visualizing oceanographic data.</p>
+<p>Data are organized into self-describing <code>Cast</code> and <code>CastCollection</code> data structures. Analysis functions are included for</p>
+<ul>
+<li>interpolation</li>
+<li>density and depth calculation</li>
+<li>buoyancy frequency estimation</li>
+<li>baroclinic mode analysis</li>
+<li>water type fraction inversion</li>
+</ul>
+<h3 id="quickly-visualize-results">Quickly visualize results</h3>
+<p>The <code>narwhal.plotting</code> submodule contains convenience methods for creating T-S diagrams, cast plots, and section plots. Here's some data from the <a href="http://cchdo.ucsd.edu/cruise/325021_1">WOCE P17N line</a>, collected on a cruise by the Thomas G. Thomson.</p>
+<div class="figure">
+<img src="https://rawgit.com/njwilson23/narwhal/gh-pages/ts-demo.png" alt="P17N T-S diagram" />
+<p class="caption">P17N T-S diagram</p>
+</div>
+<div class="figure">
+<img src="https://rawgit.com/njwilson23/narwhal/gh-pages/section-demo.png" alt="P17N section diagram" />
+<p class="caption">P17N section diagram</p>
+</div>
+<h3 id="python-wrapper-for-the-thermodynamic-equation-of-state">Python wrapper for the thermodynamic equation of state</h3>
+<p>Narwhal provides a <em>ctypes</em> wrapper for the <a href="http://www.teos-10.org/pubs/gsw/html/gsw_contents.html">Gibbs Seawater Toolbox</a> in the <code>narwhal.gsw</code> submodule, making things like the following possible:</p>
+<pre><code>density = narwhal.gsw.rho(cast[&quot;sa&quot;], cast[&quot;ct&quot;], cast[&quot;p&quot;])</code></pre>
+<p>Currently, GSW 3.05 is included.</p>
+<h3 id="data-should-not-be-tied-to-software">Data should not be tied to software</h3>
+<p>For storage, data is serialized to JSON or HDF files. These common formats are open and easily imported into other analysis packages (such as MATLAB), or browser-based visualization libraries (such as D3).</p>
+<p>Parsers are also included for WOCE CTD casts in NetCDF format and Arctic Switchyard CTD casts in ASCII table format.</p>
+<h2 id="installation">Installation</h2>
+<pre><code>git clone https://github.com/njwilson23/narwhal.git
 pip install -r narwhal/requirements.txt
-pip install narwhal
-  </code></pre>
+pip install narwhal</code></pre>
+<h3 id="dependencies">Dependencies</h3>
+<ul>
+<li>Python 2.7+ or Python 3.3+</li>
+<li>pandas</li>
+<li>matplotlib</li>
+<li>scipy</li>
+<li>h5py (optional, required for HDF read/write)</li>
+<li>requests</li>
+<li>dateutil</li>
+<li>six</li>
+<li>C-compiler (for GSW)</li>
+</ul>
+<p>If <a href="https://github.com/njwilson23/karta">karta</a> is installed, it will be used to provide the geographical back-end.</p>
+<p>Narwhal is experimental. See also <a href="https://github.com/ocefpaf/python-oceans">python-oceans</a> and <a href="https://github.com/dankelley/oce">oce</a> (R).</p>
+
   
-  <h2 id="dependencies">DEPENDENCIES</h2>
-  
-  <ul>
-    <li>Python 2.7+ or Python 3.3+</li>
-    <li>pandas</li>
-    <li>numpy</li>
-    <li>scipy</li>
-    <li><a href="http://www.ironicmtn.com/karta">karta</a></li>
-    <li>requests</li>
-    <li>dateutil</li>
-    <li>six</li>
-    <li>matplotlib (optional; for plotting)</li>
-    <li>C-compiler (optional; for GSW)</li>
-  </ul>
-  
-  <!--<h2 id="documentation">DOCUMENTATION</h2>-->
-  
-  <h2 id="testing">TESTING</h2>
-  <p>To run all unit tests, execute</p>
-  <pre><code>python tests/runtests.py</code></pre>
-  
-  <p>Narwhal is experimental. Also consider
-  <a href="https://github.com/ocefpaf/python-oceans">python-oceans</a> and
-  <a href="https://github.com/dankelley/oce">oce</a> (R).</p>
-  
-  <h2 id="license">LICENSE</h2>
+  <h2 id="license">License</h2>
   
   <p>This software is provided under the MIT license.</p>
   <h3 id="mit-license">MIT License:</h3>
