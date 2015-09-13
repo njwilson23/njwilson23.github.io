@@ -1,0 +1,91 @@
+    <div class="site-wrapper">
+
+      <div class="site-wrapper-inner">
+
+        <div class="cover-container">
+
+          <div class="masthead clearfix">
+            <div class="inner">
+              <h3 class="masthead-brand">Narwhal Package</h3>
+              <nav>
+                <ul class="nav masthead-nav">
+                  <li><a href="narwhal.html">Home</a></li>
+                  <li class="active"><a href="#">Features</a></li>
+                  <li><a href="https://github.com/njwilson23/narwhal">Github</a></li>
+                </ul>
+              </nav>
+            </div>
+          </div>
+
+          <div class="row">
+
+              <div class="col-md-6 text-left">
+
+                <h3>Oceanographic data analysis</h3>
+
+                <p>Profile data are organized into self-describing <code>Cast</code> and <code>CastCollection</code> data structures. Functions are included for</p>
+                <ul>
+                <li>interpolation</li>
+                <li>density and depth calculation</li>
+                <li>buoyancy frequency estimation</li>
+                <li>baroclinic mode analysis</li>
+                <li>water type fraction inversion</li>
+                </ul>
+
+              </div>
+
+              <div class="col-md-6 text-left">
+
+                    <h3>GSW integration</h3>
+                    <p>Narwhal provides a <em>ctypes</em> wrapper for the <a href="http://www.teos-10.org/pubs/gsw/html/gsw_contents.html">Gibbs Seawater Toolbox</a> in the <code>narwhal.gsw</code> submodule. It can be used with or without the rest of Narwhal, as in:</p>
+                    <pre><code>density = narwhal.gsw.rho(cast[&quot;sa&quot;], cast[&quot;ct&quot;], cast[&quot;p&quot;])</code></pre>
+                    <p>Currently, GSW 3.05 is included.</p>
+
+              </div>
+
+          </div>
+
+          <div class="row">
+
+              <div class="col-md-6 text-left">
+
+                    <h3>Visualize results</h3>
+                    <p>The <code>narwhal.plotting</code> submodule contains convenience methods for creating T-S diagrams, cast plots, and section plots.</p>
+                    <p><strong>Examples:</strong></p>
+                    <ul>
+                        <li><a href="#">T-S plot</a></li>
+                        <li><a href="#">Section plot</a></li>
+                    </ul>
+
+              </div>
+
+
+              <div class="col-md-6 text-left">
+
+                    <h3>Data should not be tied to software</h3>
+                    <p>For storage, data is serialized to JSON or HDF files. These common formats are open and easily imported into other analysis packages (such as MATLAB), or browser-based visualization libraries (such as D3).</p>
+                    <p>Parsers are also included for WOCE CTD casts in NetCDF format and Arctic Switchyard CTD casts in ASCII table format.</p>
+
+              </div>
+
+        </div>  <!-- row-->
+
+        <div class="mastfoot">
+            <div class="inner">
+              <p>Cover template for <a href="http://getbootstrap.com">Bootstrap</a>, by <a href="https://twitter.com/mdo">@mdo</a>.</p>
+            </div>
+        </div>
+
+          </div> <!-- cover-container-->
+
+        </div> <!-- site-wrapper-inner-->
+
+    </div> <!--site-wrapper-->
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="assets/js/ie10-viewport-bug-workaround.js"></script>

@@ -1,0 +1,3 @@
+template: ../templates/narwhal-template.html
+body: narwhal/features.html
+output-html: ../narwhal/features.html

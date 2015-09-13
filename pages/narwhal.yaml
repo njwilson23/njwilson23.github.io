@@ -1,4 +1,3 @@
-template: ../templates/main-template.html
-title-raw: Narwhal
-header: karta/header.html
+template: ../templates/narwhal-template.html
 body: narwhal/body.html
+output-html: ../narwhal/narwhal.html
