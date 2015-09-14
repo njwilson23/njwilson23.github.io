@@ -135,7 +135,8 @@ body {
  * Affix and center
  */
 
-@media (min-width: 768px) {
+/* Changed from original min-width 768px to avoid header overlap */
+@media (min-width: 990px) {
   /* Pull out the header and footer */
   .masthead {
     position: fixed;
