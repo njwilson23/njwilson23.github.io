@@ -158,6 +158,10 @@ body {
   .cover-container {
     width: 100%; /* Must be percentage or pixels for horizontal alignment */
   }
+  .cover-container {
+    padding-left: 0%;
+    padding-right: 0%;
+  }
 }
 
 @media (min-width: 992px) {
