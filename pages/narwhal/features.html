@@ -23,11 +23,11 @@
                 <p>Profile data are organized into self-describing <code>Cast</code> and <code>CastCollection</code> data structures. Functions are included for</p>
                 <ul>
                     <li>interpolation</li>
-                    <li>density and depth calculation</li>
                     <li>buoyancy frequency estimation</li>
                     <li>baroclinic mode analysis</li>
                     <li>water type fraction inversion</li>
                     <li>geodetic calculations</li>
+                    <li>density and depth calculation</li>
                 </ul>
 
               </div>
@@ -37,7 +37,6 @@
                 <h3>GSW integration</h3>
                 <p>Narwhal provides a <em>ctypes</em> wrapper for the <a href="http://www.teos-10.org/pubs/gsw/html/gsw_contents.html">Gibbs Seawater Toolbox</a> in the <code>narwhal.gsw</code> submodule. It can be used with or without the rest of Narwhal, as in:</p>
                 <pre><code>density = narwhal.gsw.rho(cast[&quot;sa&quot;], cast[&quot;ct&quot;], cast[&quot;p&quot;])</code></pre>
-                <p>Currently, GSW 3.05 is included.</p>
 
               </div>
 
@@ -48,19 +47,19 @@
               <div class="col-md-6 text-left">
 
                 <h3>Visualize results</h3>
-                <p>The <code>narwhal.plotting</code> submodule contains functions for creating T-S diagrams, cast plots, and section plots.</p>
+                <p>The <code>narwhal.plotting</code> submodule contains functions for creating property diagrams, cast profiles, and section plots.</p>
                 <p><strong>Examples:</strong></p>
                 <ul>
-                    <li><a href="#">T-S plot</a></li>
-                    <li><a href="#">Section plot</a></li>
+                    <li class="lead"><a href="#">T-S plot</a></li>
+                    <li class="lead"><a href="#">Section plot</a></li>
                 </ul>
 
               </div>
 
               <div class="col-md-6 text-left">
 
-                <h3>Data should not be tied to software</h3>
-                <p>For storage, data is serialized to JSON or HDF files. These common formats are open and easily imported into other analysis packages (such as MATLAB), or browser-based visualization libraries (such as D3).</p>
+                <h3>Storage and data sharing</h3>
+                <p>Data should not be tied to software. Therefore, data are serialized to JSON or HDF files. These common formats are open and easily imported into other analysis packages (such as MATLAB), or browser-based visualization libraries (such as D3).</p>
                 <p>Parsers are included for WOCE CTD casts in NetCDF format and Arctic Switchyard CTD casts in ASCII table format.</p>
 
               </div>
