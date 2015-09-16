@@ -1,4 +1,4 @@
-template: ../templates/main-template.html
+template: ../templates/cover-template.html
 title-raw: ironicmtn
 header: index/header.html
 body: index/body.html
