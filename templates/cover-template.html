@@ -16,6 +16,8 @@
     <!-- Custom styles for this template -->
     <link href="stylesheets/cover.css" rel="stylesheet">
 
+{{.Header}}
+
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -31,25 +33,7 @@
 
         <div class="cover-container">
 
-          <div class="masthead clearfix">
-            <div class="inner">
-
-              {{.Header}}
-
-            </div>
-          </div>
-
-          <div class="inner cover">
-
-            {{.Body}}
-
-          </div>
-
-          <div class="mastfoot">
-            <div class="inner">
-              <!-- <p>Cover template for <a href="http://getbootstrap.com/">Bootstrap</a>, by <a href="https://twitter.com/mdo">@mdo</a>.</p> -->
-            </div>
-          </div>
+{{.Body}}
 
         </div>
 
