@@ -62,7 +62,7 @@ video#bgvid {
   z-index: -100;
   -webkit-transform: translateX(-50%) translateY(-50%);
   transform: translateX(-50%) translateY(-50%);
-  background: url("images/ravendance.jpg") no-repeat;
+  background: url("../images/ravendance.jpg") no-repeat;
   background-size: cover;
 }
 
@@ -200,7 +200,7 @@ img.masthead-brand {
 /* Disable video on mobile */
 @media screen and (max-device-width: 800px) {
   body {
-    background-image: url("images/ravendance.jpg")
+    background-image: url("../images/ravendance.jpg")
   }
   #bgvid {
     display: none;
