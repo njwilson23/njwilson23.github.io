@@ -1,6 +1,5 @@
 template: ../templates/cover-template.html
 title-raw: ironicmtn
-#header: index/header.html
+header-raw: <link href="stylesheets/videobg.css" rel="stylesheet">
 nav: index/nav.html
 body: index/body.html
-#footer: index/footer.html

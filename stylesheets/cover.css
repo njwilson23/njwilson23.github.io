@@ -27,7 +27,7 @@ a:hover {
 html,
 body {
   height: 100%;
-  background-color: transparent;
+  background-color: #444;
   background-size: cover;
   background-attachment: fixed;
 }
@@ -35,34 +35,6 @@ body {
   color: #fff;
   text-align: center;
   text-shadow: 0 1px 3px rgba(0,0,0,.5);
-}
-/* div.choice {
-  height: 20em;
-  border-style: solid;
-  border-color: "white";
-  border-width: 3px;
-  border-radius: 7px;
-  -webkit-box-shadow: 0 0 3px rgba(0,0,0,.5);
-          box-shadow: 0 0 3px rgba(0,0,0,.5);
-
-  background-color: transparent;
-
-  margin-bottom: 1em;
-  padding-bottom: 1em;
-} */
-video#bgvid {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  min-width: 100%;
-  min-height: 100%;
-  width: auto;
-  height: auto;
-  z-index: -100;
-  -webkit-transform: translateX(-50%) translateY(-50%);
-  transform: translateX(-50%) translateY(-50%);
-  background: url("../images/frame1.jpg") no-repeat;
-  background-size: cover;
 }
 
 /* Extra markup and styles for table-esque vertical and horizontal centering */
