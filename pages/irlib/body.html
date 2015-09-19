@@ -115,6 +115,19 @@
 
           </div>
 
+          <script type="text/javascript">
+            /* TODO: Should only look in the nav element */
+            var lis = document.getElementsByTagName("li");
+            for (var i = 0; i != lis.length; i++) {
+              if (lis[i].innerHTML.contains("irlib")) {
+                lis[i].className = "active";
+                break
+              }
+            }
+          </script>
+
+
+
           <div class="mastfoot">
             <div class="inner">
               <!-- <p>Cover template for <a href="http://getbootstrap.com/">Bootstrap</a>, by <a href="https://twitter.com/mdo">@mdo</a>.</p> -->

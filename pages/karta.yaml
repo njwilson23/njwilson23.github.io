@@ -2,5 +2,5 @@ template: ../templates/cover-template.html
 title-raw: Karta
 #header: karta/header.html
 header-raw: <link href="stylesheets/cover-manpage.css" rel="stylesheet">
-nav: karta/nav.html
+nav: index/nav.html
 body: karta/body.html

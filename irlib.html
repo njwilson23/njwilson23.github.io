@@ -38,11 +38,11 @@
                   <li><a href="index.html">IronicMtn</a></li>
 
                   <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Projects<span class="caret"></span></a>
+                    <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Projects<span class="caret"></span></a>
                     <ul class="dropdown-menu">
                       <li><a href="karta.html">Karta</a></li>
                       <li><a href="narwhal/narwhal.html">Narwhal</a></li>
-                      <li class="active"><a href="#">irlib</a></li>
+                      <li><a href="irlib.html">irlib</a></li>
                     </ul>
                   </li>
 
@@ -179,6 +179,19 @@
 
 
           </div>
+
+          <script type="text/javascript">
+            /* TODO: Should only look in the nav element */
+            var lis = document.getElementsByTagName("li");
+            for (var i = 0; i != lis.length; i++) {
+              if (lis[i].innerHTML.contains("irlib")) {
+                lis[i].className = "active";
+                break
+              }
+            }
+          </script>
+
+
 
           <div class="mastfoot">
             <div class="inner">
