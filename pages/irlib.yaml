@@ -1,4 +1,6 @@
-template: ../templates/main-template.html
+template: ../templates/cover-template.html
 title-raw: Radar tools (irlib)
-header: karta/header.html
+#header: karta/header.html
+header-raw: <link href="stylesheets/cover-manpage.css" rel="stylesheet">
+nav: irlib/nav.html
 body: irlib/body.html
