@@ -4,3 +4,4 @@ title-raw: Karta
 header-raw: <link href="stylesheets/cover-manpage.css" rel="stylesheet">
 nav: index/nav.html
 body: karta/body.html
+output: ../karta.html
