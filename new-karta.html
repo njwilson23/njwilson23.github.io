@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Karta - lightweight geospatial analysis in Python</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="stylesheets/bootstrap.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Custom styles for this template -->
+    <link href="stylesheets/carousel.css" rel="stylesheet">
+    <link href="stylesheets/cover.css" rel="stylesheet">
+  </head>
+<!-- NAVBAR
+================================================== -->
+  <body>
+
+    <style>
+      .featurette-heading {
+        margin-top: 20px;
+      }
+      .featurette-image {
+        box-shadow: -1px 1px 7px #222;
+      }
+    </style>
+
+    <div class="navbar-wrapper">
+      <div class="cover-container">
+
+          <div class="masthead clearfix">
+            <div class="inner">
+              <img class="masthead-brand" src="images/mustache_mtn_bw_small_inverted.png" alt="logo">
+              <nav>
+                <ul class="nav masthead-nav">
+                  <li><a href="index.html">IronicMtn</a></li>
+
+                  <li><a href="http://web.mit.edu/njwilson/www">Research</a></li>
+
+                  <li class="dropdown">
+                    <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                      Projects<span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                      <li><a href="karta.html">Karta</a></li>
+                      <li><a href="narwhal/narwhal.html">Narwhal</a></li>
+                      <li><a href="irlib.html">irlib</a></li>
+                    </ul>
+                  </li>
+
+                  <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                      Social<span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                      <li><a href="https://twitter.com/njwilson23">Twitter</a></li>
+                      <li><a href="https://www.flickr.com/photos/24946690@N03/">Flickr</a></li>
+                      <li><a href="http://www.github.com/njwilson23">Github</a></li>
+                    </ul>
+                  </li>
+                </ul>
+              </nav>
+
+            </div>
+          </div>
+
+      </div>
+    </div>
+
+
+
+    <div class="container marketing">
+
+      <div class="row" style="margin-top: 250px;">
+        <div class="col-lg-12">
+          <h1>Karta is for...</h1>
+        </div>
+      </div>
+
+      <div class="row">
+
+        <div class="col-md-4">
+          <img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" height="140" width="140">
+          <h2>Vector Data</h2>
+          <p>Vector data includes geometries such as points, lines, and polygons. Karta computes properties and relationships between geographical vector geometries.</p>
+        </div><!-- /.col-md-4 -->
+
+        <div class="col-md-4">
+          <img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" height="140" width="140">
+          <h2>Raster Data</h2>
+          <p>Digital elevation models, satellite imagery, and land classification maps are all examples of raster data. When these fit within memory, Karta handles these with <code>karta.Grid</code> classes backed by Numpy arrays.</p>
+        </div><!-- /.col-md-4 -->
+
+        <div class="col-md-4">
+          <img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" height="140" width="140">
+          <h2>Geodesy</h2>
+          <p>As an important part of processing geographical data, Karta is coordinate-system aware and performs forward and inverse geodetic calculations, either internally or by leveraging <a href="http://jswhit.github.io/pyproj/">pyproj</a>.</p>
+        </div><!-- /.col-md-4 -->
+
+      </div><!-- /.row -->
+      <div class="row">
+        <div class="col-md-12">
+          <h4>Karta is a Pythonic toolkit for small-to-medium sized geospatial data tasks</h4><br>
+          <p><a class="btn btn-default" href="#geod" role="button">Install</a>
+             <a class="btn btn-default" href="#geod" role="button">Documentation</a>
+             <a class="btn btn-default" href="#geod" role="button">Source code</a>
+          </p>
+        </div>
+      </div>
+
+
+      <!-- START THE FEATURETTES -->
+
+      <hr class="featurette-divider">
+
+      <div class="row featurette"><a name="vector"></a>
+        <div class="col-md-7">
+          <h2 class="featurette-heading">Vector geometries</h2>
+          <h3 class="text-muted">Bounding boxes, distances and lengths, intersection calculations, convex hulls.</h3>
+          <p class="lead text-left">
+          <code>karta.Point</code>, <code>karta.Multipoint</code>, <code>karta.Line</code> and <code>karta.Polygon</code> are all subclasses of <code>karta.Geometry</code>. All geometry objects can contain singlepart and multipart metadata, as well as a reference to a coordinate reference system object. Methods of geometry objects handle basic queries about geometry properties and relationships.</p>
+
+          <p class="lead text-left">GeoJSON I/O is handled natively, while bindings to <a href="https://github.com/GeospatialPython/pyshp">pyshp</a> give access to ESRI shapefiles. Geometries implement the <code>__geo_interface__</code> attribute, permitting interchange with other libraries such as <a href="http://toblerity.org/shapely/">Shapely</a>.</p>
+        </div>
+        <div class="col-md-5">
+            <pre class="text-left">
+point = Point((-130.0, 52.0), crs=LonLatWGS84)
+
+line = read_geojson("linedata.json")
+
+polygon = Polygon([(-515005.78, -1301130.53),
+                   (-579174.89, -1282271.94),
+                   (-542977.83, -1221147.82),
+                   (-437864.05, -1251641.55),
+                   (-438160.72, -1252421.48),
+                   (-437961.28, -1285314.00)],
+                   crs=NSIDCNorth)
+
+polygon.to_shapefile("outline.shp") </pre>
+        </div>
+      </div>
+
+      <hr class="featurette-divider">
+
+      <div class="row featurette"><a name="raster"></a>
+        <div class="col-md-7 col-md-push-5">
+          <h2 class="featurette-heading">Raster grid</h2>
+          <h3 class="text-muted">Grid statistics, resizing, resampling, and profile extraction</h3>
+          <p class="lead text-left">Regularly-spaced grids are represented by <code>karta.RegularGrid</code>. Grids with arbitrary spacing can be represented by the somewhat-experimental <code>karta.WarpedGrid</code> class. Grids can be clipped, resampled, queried at geographical points, and read or written to ESRI ASCII files or to GeoTiff via GDAL.</p>
+
+          <pre class="text-left">
+grid = read_gtiff("glacier_landsat.tif")
+grid = grid.resample(100, 100)
+plt.imshow(grid.values, extent=grid.get_extent(), origin="bottom") </pre>
+        </div>
+        <div class="col-md-5 col-md-pull-7">
+          <!-- place an image here -->
+          <img class="featurette-image img-responsive center-block" src="images/raster.jpg">
+        </div>
+      </div>
+
+      <hr class="featurette-divider">
+
+      <div class="row featurette"><a name="geod"></a>
+        <div class="col-md-7">
+          <h2 class="featurette-heading">Coordinate reference systems and geodesy</h2>
+          <h3 class="text-muted">Karta is like a baby GIS in your pocket</h3>
+          <p class="lead text-left">Donec ullamcorper nulla non metus auctor 
+fringilla. Vestibulum id ligula porta felis euismod semper. Praesent 
+commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, 
+tellus ac cursus commodo.</p>
+        </div>
+        <div class="col-md-5">
+          <!--<img class="featurette-image img-responsive center-block" data-src="holder.js/500x500/auto" alt="Generic placeholder image">-->
+        </div>
+      </div>
+
+      <hr class="featurette-divider">
+
+      <div class="row featurette">
+        <div class="col-md-12">
+          <h2 class="text-muted">Karta is open source and under development. Pull requests are welcome!</h2>
+        </div>
+      </div>
+
+      <!-- /END THE FEATURETTES -->
+
+
+      <!-- FOOTER -->
+      <footer>
+        <p class="pull-right"><a href="#">Back to top</a></p>
+        <p class="pull-left"><a href=https://github.com/njwilson23/karta">Github</a></p>
+      </footer>
+
+    </div><!-- /.container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="js/external/jquery.js"></script>
+    <script src="js/external/bootstrap.js"></script>
+    <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
+    <script src="ideas/Carousel%20Template%20for%20Bootstrap_files/holder.html"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="js/external/ie10-viewport-bug-workaround.js"></script>
+
+
+</body></html>
+
