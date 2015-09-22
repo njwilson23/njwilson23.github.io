@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Karta tutorial &mdash; karta 0.4.3 documentation</title>
+    <title>Karta tutorial &mdash; karta 0.5.0 documentation</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.4.3',
+        VERSION:     '0.5.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,8 +23,8 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="karta 0.4.3 documentation" href="index.html" />
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="karta 0.5.0 documentation" href="karta-manual.html" />
     <link rel="next" title="Package reference" href="reference.html" />
     <link rel="prev" title="Installation" href="installation.html" />
    
@@ -32,30 +32,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
 
   </head>
-  <body>
-    <div class="related">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="reference.html" title="Package reference"
-             accesskey="N">next</a> |</li>
-        <li class="right" >
-          <a href="installation.html" title="Installation"
-             accesskey="P">previous</a> |</li>
-        <li><a href="karta-manual.html">karta 0.4.3 documentation</a> &raquo;</li> 
-      </ul>
-    </div>  
+  <body role="document">  
 
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <p><a class="reference external" href="../karta-manual.html">Back to manual</a></p>
 <div class="section" id="karta-tutorial">
@@ -104,7 +86,7 @@ accomplish in the future.</li>
 <div class="code python highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">karta.vector</span> <span class="kn">import</span> <span class="n">Point</span><span class="p">,</span> <span class="n">Multipoint</span><span class="p">,</span> <span class="n">Line</span><span class="p">,</span> <span class="n">Polygon</span>
 </pre></div>
 </div>
-<p>The <tt class="docutils literal"><span class="pre">Point</span></tt>, <tt class="docutils literal"><span class="pre">Multipoint</span></tt>, <tt class="docutils literal"><span class="pre">Line</span></tt>, and <tt class="docutils literal"><span class="pre">Polygon</span></tt> classes can all
+<p>The <code class="docutils literal"><span class="pre">Point</span></code>, <code class="docutils literal"><span class="pre">Multipoint</span></code>, <code class="docutils literal"><span class="pre">Line</span></code>, and <code class="docutils literal"><span class="pre">Polygon</span></code> classes can all
 be instantiated by providing vertices, and optionally, associated data
 and metadata.</p>
 <div class="code python highlight-python"><div class="highlight"><pre><span class="n">pt</span> <span class="o">=</span> <span class="n">Point</span><span class="p">((</span><span class="o">-</span><span class="mf">123.1</span><span class="p">,</span> <span class="mf">49.25</span><span class="p">))</span>
@@ -190,7 +172,7 @@ sliced:</p>
 <div class="highlight-python"><div class="highlight"><pre>&lt;class &#39;karta.vector.geometry.Line&#39;([(-25.41, 67.03), (-24.83, 62.92)])&gt;
 </pre></div>
 </div>
-<p>Points have a <tt class="docutils literal"><span class="pre">distance</span></tt> that calculates the distance to another
+<p>Points have a <code class="docutils literal"><span class="pre">distance</span></code> that calculates the distance to another
 point. However, if we do</p>
 <div class="code python highlight-python"><div class="highlight"><pre><span class="n">pt</span> <span class="o">=</span> <span class="n">Point</span><span class="p">((</span><span class="o">-</span><span class="mf">123.1</span><span class="p">,</span> <span class="mf">49.25</span><span class="p">))</span>
 <span class="n">pt2</span> <span class="o">=</span> <span class="n">Point</span><span class="p">((</span><span class="o">-</span><span class="mf">70.66</span><span class="p">,</span> <span class="mf">41.52</span><span class="p">))</span>
@@ -202,7 +184,7 @@ point. However, if we do</p>
 </div>
 <p>this probably isn&#8217;t what we wanted. Be default, geometries in Karta use
 a planar cartesian coordinate system. If our positions are meant to be
-geographical coordinates, then we can provide the <tt class="docutils literal"><span class="pre">crs</span></tt> argument to
+geographical coordinates, then we can provide the <code class="docutils literal"><span class="pre">crs</span></code> argument to
 each geometry at creation, as in</p>
 <div class="code python highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">karta</span> <span class="kn">import</span> <span class="n">crs</span>
 
@@ -358,12 +340,12 @@ Austin, Texas, United States
 </pre></div>
 </div>
 <p>All of the above calculations are performed on a geoid. The
-<tt class="docutils literal"><span class="pre">crs.LonLatWGS84</span></tt> coordinate system means to use geographical
+<code class="docutils literal"><span class="pre">crs.LonLatWGS84</span></code> coordinate system means to use geographical
 (longitude and latitude) coordinates on the WGS 84 ellipsoid.</p>
 <p><strong>TODO: describe other geometries</strong></p>
 <div class="section" id="associated-data">
 <h3>Associated data<a class="headerlink" href="#associated-data" title="Permalink to this headline">¶</a></h3>
-<p>By using the <tt class="docutils literal"><span class="pre">data</span></tt> keyword argument, additional data can be
+<p>By using the <code class="docutils literal"><span class="pre">data</span></code> keyword argument, additional data can be
 associated with a vector geometry.</p>
 <div class="code python highlight-python"><div class="highlight"><pre><span class="n">mp</span> <span class="o">=</span> <span class="n">Multipoint</span><span class="p">([(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)],</span>
                 <span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="s">&quot;species&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s">&quot;T. officianale&quot;</span><span class="p">,</span> <span class="s">&quot;C. tectorum&quot;</span><span class="p">,</span>
@@ -383,7 +365,7 @@ through subsequent operations.</p>
 </pre></div>
 </div>
 <p>Metadata at the geometry level rather than the point level can be
-provided using the <tt class="docutils literal"><span class="pre">properties</span></tt> keyword argument, which accepts a
+provided using the <code class="docutils literal"><span class="pre">properties</span></code> keyword argument, which accepts a
 dictionary. Derived geometries carry the properties of their parent
 geometry.</p>
 <div class="code python highlight-python"><div class="highlight"><pre><span class="n">poly</span> <span class="o">=</span> <span class="n">Polygon</span><span class="p">([(</span><span class="o">-</span><span class="mf">25.41</span><span class="p">,</span> <span class="mf">67.03</span><span class="p">),</span>
@@ -402,7 +384,7 @@ geometry.</p>
 </div>
 <div class="section" id="visualizing-and-importing-exporting-data">
 <h3>Visualizing and importing/exporting data<a class="headerlink" href="#visualizing-and-importing-exporting-data" title="Permalink to this headline">¶</a></h3>
-<p>The <tt class="docutils literal"><span class="pre">get_coordinate_lists</span></tt> method provides lists of coordinates, which
+<p>The <code class="docutils literal"><span class="pre">get_coordinate_lists</span></code> method provides lists of coordinates, which
 make is easy to visualize a geometry.</p>
 <div class="code python highlight-python"><div class="highlight"><pre>import matplotlib.pyplot as plt
 %matplotlib qt
@@ -412,7 +394,7 @@ plt.plot(*line.coordinates)
 <p>Data can be read from several common formats, including ESRI shapefiles
 (through bindings to the <em>pyshp</em> module), GeoJSON, GPX, and comma
 separated value tables. Convenience functions are kept in the
-<tt class="docutils literal"><span class="pre">karta.vector.read</span></tt> namespace.</p>
+<code class="docutils literal"><span class="pre">karta.vector.read</span></code> namespace.</p>
 <p>Each geometry has appropriate methods to save data:</p>
 <div class="code python highlight-python"><div class="highlight"><pre><span class="n">mp</span><span class="o">.</span><span class="n">to_vtk</span><span class="p">(</span><span class="s">&quot;my_vtk.vtk&quot;</span><span class="p">)</span>
 <span class="n">line</span><span class="o">.</span><span class="n">to_shapefile</span><span class="p">(</span><span class="s">&quot;my_shapefile&quot;</span><span class="p">)</span>
@@ -439,7 +421,7 @@ returning CRS name instead
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar">
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
   <h3><a href="karta-manual.html">Table Of Contents</a></h3>
   <ul>
@@ -455,19 +437,23 @@ returning CRS name instead
 </ul>
 </li>
 </ul>
-
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="installation.html"
-                        title="previous chapter">Installation</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="reference.html"
-                        title="next chapter">Package reference</a></p>
-  <h3>This Page</h3>
-  <ul class="this-page-menu">
-    <li><a href="_sources/tutorial.txt"
-           rel="nofollow">Show Source</a></li>
-  </ul>
-<div id="searchbox" style="display: none">
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="karta-manual.html">Documentation overview</a><ul>
+      <li>Previous: <a href="installation.html" title="previous chapter">Installation</a></li>
+      <li>Next: <a href="reference.html" title="next chapter">Package reference</a></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/tutorial.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="search.html" method="get">
       <input type="text" name="q" />
@@ -488,12 +474,12 @@ returning CRS name instead
       &copy;2015, Nat Wilson.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.2.3</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.1</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.6</a>
       
       |
       <a href="_sources/tutorial.txt"
-          rel="nofollow">Page source</a></li>
+          rel="nofollow">Page source</a>
     </div>
 
     

@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>karta.crs &mdash; karta 0.4.3 documentation</title>
+    <title>karta.crs &mdash; karta 0.5.0 documentation</title>
     
     <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '0.4.3',
+        VERSION:     '0.5.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,33 +23,20 @@
     <script type="text/javascript" src="../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
-    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="karta 0.4.3 documentation" href="../../index.html" />
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="karta 0.5.0 documentation" href="../../karta-manual.html" />
     <link rel="up" title="Module code" href="../index.html" />
    
   
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
 
   </head>
-  <body>
-    <div class="related">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../../genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li><a href="../../karta-manual.html">karta 0.4.3 documentation</a> &raquo;</li>
-          <li><a href="../index.html" accesskey="U">Module code</a> &raquo;</li> 
-      </ul>
-    </div>  
+  <body role="document">  
 
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <h1>Source code for karta.crs</h1><div class="highlight"><pre>
 <span class="c"># -*- coding: utf-8 -*-</span>
@@ -57,49 +44,101 @@
 
 <span class="sd">Implements CRS classes for different kinds of spatial reference systems:</span>
 
-<span class="sd">    - Cartesian</span>
+<span class="sd">    - CartesianCRS</span>
 <span class="sd">    - GeographicalCRS</span>
-<span class="sd">    - Spherical</span>
+<span class="sd">    - SphericalCRS</span>
+<span class="sd">    - EllipsoidalCRS</span>
 <span class="sd">    - Proj4CRS</span>
+
+<span class="sd">Coordinate reference system (CRS) objects represent mappings geographical</span>
+<span class="sd">positions to an x, y representation, and contain both projection and geodetic</span>
+<span class="sd">information. CRS objects should be treated is immutable. It is possible for</span>
+<span class="sd">multiple CRS objects to implement the same system, and tests for equality may</span>
+<span class="sd">fail.</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">pyproj</span>
 <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">geodesy</span>
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">errors</span>
 
-<span class="c"># A CRS class needs to have pyproj Proj and Geod instances. Exceptions are</span>
-<span class="c"># `Cartesian` and `Spherical` which are implemented specially.</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">osgeo.osr</span>
+    <span class="n">osgeo</span><span class="o">.</span><span class="n">osr</span><span class="o">.</span><span class="n">UseExceptions</span><span class="p">()</span>
+    <span class="n">HASOSR</span> <span class="o">=</span> <span class="bp">True</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="n">HASOSR</span> <span class="o">=</span> <span class="bp">False</span>
 
 <div class="viewcode-block" id="CRS"><a class="viewcode-back" href="../../reference.html#karta.crs.CRS">[docs]</a><span class="k">class</span> <span class="nc">CRS</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Base class for coordinate system instances</span>
-<span class="sd">    </span>
-<span class="sd">    Subclasses should at a minimum define a *name* attribute. Providing</span>
-<span class="sd">    *project* *forward* and *inverse* methods permits a geometry associated with</span>
-<span class="sd">    a CRS subclass to be used in analyses.</span>
+    <span class="sd">&quot;&quot;&quot; Base class for coordinate system instances.</span>
+
+<span class="sd">    Subclasses should define:</span>
+
+<span class="sd">    - name attribute</span>
+<span class="sd">    - project(x, y) method</span>
+<span class="sd">    - forward(x, y, azimuth, distance) method</span>
+<span class="sd">    - inverse(x0, y0, x1, y1) method</span>
 
 <span class="sd">    *project* transforms between world and projected coordinates, and takes the</span>
 <span class="sd">    optional boolean parameter *inverse* (default `False`)</span>
 
-<span class="sd">    *forward* takes world coordinates, an azimuth, and a distance, and returns</span>
-<span class="sd">    world coordinates</span>
+<span class="sd">    *forward* performs a forward geodetic calculation and returns world</span>
+<span class="sd">    coordinates</span>
 
-<span class="sd">    *inverse* takes two pairs of world coordinates and returns an azimuth, a</span>
-<span class="sd">    back azimuth, and a distance</span>
+<span class="sd">    *inverse* performs an inverse geodetic calculation and returns an azimuth,</span>
+<span class="sd">    a back azimuth, and a distance</span>
+
+<span class="sd">    A CRS subclass may optionally also provide string attributes:</span>
+
+<span class="sd">    - ref_proj4</span>
+<span class="sd">    - ref_wkt</span>
+
+<span class="sd">    which are used to provide interoperability with other systems.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="s">&quot;&lt;CRS {0}&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">get_proj4</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s">&quot;ref_proj4&quot;</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">ref_proj4</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">HASOSR</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">errors</span><span class="o">.</span><span class="n">CRSError</span><span class="p">(</span><span class="s">&quot;no ref_proj4 attribute and no conversion possible (osgeo.osr not installed)&quot;</span><span class="p">)</span>
+            <span class="n">srs</span> <span class="o">=</span> <span class="n">osgeo</span><span class="o">.</span><span class="n">osr</span><span class="o">.</span><span class="n">SpatialReference</span><span class="p">()</span>
+            <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s">&quot;ref_wkt&quot;</span><span class="p">):</span>
+                <span class="n">srs</span><span class="o">.</span><span class="n">ImportFromWkt</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ref_wkt</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="s">&quot;incomplete CRS definition (missing ref_proj4, ref_wkt attributes)&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">srs</span><span class="o">.</span><span class="n">ExportToProj4</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">get_wkt</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s">&quot;ref_wkt&quot;</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">ref_proj4</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">HASOSR</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">errors</span><span class="o">.</span><span class="n">CRSError</span><span class="p">(</span><span class="s">&quot;no ref_wkt attribute and no conversion possible (osgeo.osr not installed)&quot;</span><span class="p">)</span>
+            <span class="n">srs</span> <span class="o">=</span> <span class="n">osgeo</span><span class="o">.</span><span class="n">osr</span><span class="o">.</span><span class="n">SpatialReference</span><span class="p">()</span>
+            <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s">&quot;ref_proj4&quot;</span><span class="p">):</span>
+                <span class="n">srs</span><span class="o">.</span><span class="n">ImportFromProj4</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ref_proj4</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot;lon&quot;</span><span class="p">,</span> <span class="s">&quot;long&quot;</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="s">&quot;incomplete CRS definition (missing ref_proj4, ref_wkt attributes)&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">srs</span><span class="o">.</span><span class="n">ExportToWkt</span><span class="p">()</span>
 </div>
-<div class="viewcode-block" id="Cartesian"><a class="viewcode-back" href="../../reference.html#karta.crs.Cartesian">[docs]</a><span class="k">class</span> <span class="nc">Cartesian</span><span class="p">(</span><span class="n">CRS</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Cartiesian (flat-earth) reference systems with (x, y) coordinates &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="CartesianCRS"><a class="viewcode-back" href="../../reference.html#karta.crs.CartesianCRS">[docs]</a><span class="k">class</span> <span class="nc">CartesianCRS</span><span class="p">(</span><span class="n">CRS</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Cartesian (flat-earth) reference systems with (x, y) coordinates &quot;&quot;&quot;</span>
     <span class="n">name</span> <span class="o">=</span> <span class="s">&quot;Cartesian&quot;</span>
+
+    <span class="n">ref_proj4</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
+    <span class="n">ref_wkt</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
 
     <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">project</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">inverse</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="c"># Projection on a cartesian coordinate system is the identity</span>
         <span class="k">return</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span>
 
     <span class="nd">@staticmethod</span>
-<div class="viewcode-block" id="Cartesian.forward"><a class="viewcode-back" href="../../reference.html#karta.crs.Cartesian.forward">[docs]</a>    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">az</span><span class="p">,</span> <span class="n">dist</span><span class="p">,</span> <span class="n">radians</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Returns x, y, and back azimuths &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="CartesianCRS.forward"><a class="viewcode-back" href="../../reference.html#karta.crs.CartesianCRS.forward">[docs]</a>    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">az</span><span class="p">,</span> <span class="n">dist</span><span class="p">,</span> <span class="n">radians</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Forward geodetic problem from a point &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">radians</span><span class="p">:</span>
             <span class="n">az</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">az</span><span class="p">)</span> <span class="o">/</span> <span class="mi">180</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span>
 
@@ -112,8 +151,8 @@
         <span class="k">return</span> <span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="n">baz</span>
 </div>
     <span class="nd">@staticmethod</span>
-<div class="viewcode-block" id="Cartesian.inverse"><a class="viewcode-back" href="../../reference.html#karta.crs.Cartesian.inverse">[docs]</a>    <span class="k">def</span> <span class="nf">inverse</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="n">radians</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Returns forward and back azimuths and distances &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="CartesianCRS.inverse"><a class="viewcode-back" href="../../reference.html#karta.crs.CartesianCRS.inverse">[docs]</a>    <span class="k">def</span> <span class="nf">inverse</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="n">radians</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Inverse geodetic problem to find the geodesic between points &quot;&quot;&quot;</span>
         <span class="n">dist</span> <span class="o">=</span> <span class="n">geodesy</span><span class="o">.</span><span class="n">plane_distance</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">)</span>
         <span class="n">az</span> <span class="o">=</span> <span class="n">geodesy</span><span class="o">.</span><span class="n">plane_azimuth</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">)</span>
         <span class="n">baz</span> <span class="o">=</span> <span class="n">geodesy</span><span class="o">.</span><span class="n">unroll_angle</span><span class="p">(</span><span class="n">az</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span>
@@ -124,43 +163,59 @@
         <span class="k">return</span> <span class="n">az</span><span class="p">,</span> <span class="n">baz</span><span class="p">,</span> <span class="n">dist</span>
 </div></div>
 <div class="viewcode-block" id="GeographicalCRS"><a class="viewcode-back" href="../../reference.html#karta.crs.GeographicalCRS">[docs]</a><span class="k">class</span> <span class="nc">GeographicalCRS</span><span class="p">(</span><span class="n">CRS</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Reference systems with longitude-latitude (θ, φ) coordinates &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot; Reference systems with longitude-latitude (θ, φ) coordinates.</span>
+
+<span class="sd">    `spheroid` refers to a proj.4 spheroid identifier, e.g. &quot;+ellps=WGS84&quot;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">spheroid</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_geod</span> <span class="o">=</span> <span class="n">pyproj</span><span class="o">.</span><span class="n">Geod</span><span class="p">(</span><span class="n">spheroid</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ref_proj4</span> <span class="o">=</span> <span class="s">&quot;+proj=lonlat </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">_geod</span><span class="o">.</span><span class="n">initstring</span>
         <span class="k">return</span>
 
     <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">project</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">inverse</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">radians</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="c"># Projection on a geographical coordinate system is the identity</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">radians</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">/</span><span class="mi">180</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="o">/</span><span class="mi">180</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span>
 
-    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="GeographicalCRS.forward"><a class="viewcode-back" href="../../reference.html#karta.crs.GeographicalCRS.forward">[docs]</a>    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Forward geodetic problem from a point &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_geod</span><span class="o">.</span><span class="n">fwd</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">inverse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_geod</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-
 </div>
-<div class="viewcode-block" id="Spherical"><a class="viewcode-back" href="../../reference.html#karta.crs.Spherical">[docs]</a><span class="k">class</span> <span class="nc">Spherical</span><span class="p">(</span><span class="n">GeographicalCRS</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Spherical (θ, φ) coordinate system. &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="GeographicalCRS.inverse"><a class="viewcode-back" href="../../reference.html#karta.crs.GeographicalCRS.inverse">[docs]</a>    <span class="k">def</span> <span class="nf">inverse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Inverse geodetic problem to find the geodesic between points &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_geod</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</div></div>
+<div class="viewcode-block" id="SphericalCRS"><a class="viewcode-back" href="../../reference.html#karta.crs.SphericalCRS">[docs]</a><span class="k">class</span> <span class="nc">SphericalCRS</span><span class="p">(</span><span class="n">GeographicalCRS</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Spherical geographic coordinate system defined by a radius. &quot;&quot;&quot;</span>
     <span class="n">name</span> <span class="o">=</span> <span class="s">&quot;Spherical&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">radius</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">radius</span> <span class="o">=</span> <span class="n">radius</span>
+        <span class="k">return</span>
 
-<div class="viewcode-block" id="Spherical.forward"><a class="viewcode-back" href="../../reference.html#karta.crs.Spherical.forward">[docs]</a>    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lons</span><span class="p">,</span> <span class="n">lats</span><span class="p">,</span> <span class="n">az</span><span class="p">,</span> <span class="n">dist</span><span class="p">,</span> <span class="n">radians</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Returns lons, lats, and back azimuths &quot;&quot;&quot;</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">ref_proj4</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s">&quot;+proj=lonlat +a=</span><span class="si">%f</span><span class="s"> +b=</span><span class="si">%f</span><span class="s"> +no_defs&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">radius</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">ref_wkt</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">(</span><span class="s">&#39;GEOGCS[&quot;unnamed ellipse&quot;,DATUM[&quot;unknown&quot;,&#39;</span>
+                <span class="s">&#39;SPHEROID[&quot;unnamed&quot;,</span><span class="si">%f</span><span class="s">,0]],PRIMEM[&quot;Greenwich&quot;,0],&#39;</span>
+                <span class="s">&#39;UNIT[&quot;degree&quot;,0.0174532925199433]]&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span><span class="p">)</span>
+
+<div class="viewcode-block" id="SphericalCRS.forward"><a class="viewcode-back" href="../../reference.html#karta.crs.SphericalCRS.forward">[docs]</a>    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lons</span><span class="p">,</span> <span class="n">lats</span><span class="p">,</span> <span class="n">az</span><span class="p">,</span> <span class="n">dist</span><span class="p">,</span> <span class="n">radians</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Forward geodetic problem from a point &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">radians</span><span class="p">:</span>
             <span class="n">lons</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">lons</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mf">180.0</span>
             <span class="n">lats</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">lats</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mf">180.0</span>
             <span class="n">az</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">az</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mf">180.0</span>
 
-
         <span class="n">d_</span> <span class="o">=</span> <span class="n">dist</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span>
-        <span class="n">lats2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arcsin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">lats</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">d_</span><span class="p">)</span> <span class="o">+</span> 
+        <span class="n">lats2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arcsin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">lats</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">d_</span><span class="p">)</span> <span class="o">+</span>
                     <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">lats</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">d_</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">az</span><span class="p">))</span>
         <span class="n">dlons</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arccos</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">d_</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">lats2</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">lats</span><span class="p">))</span> <span class="o">/</span>
                           <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">lats</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">lats2</span><span class="p">)))</span>
@@ -182,8 +237,8 @@
             <span class="n">baz</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">baz</span><span class="p">)</span> <span class="o">*</span> <span class="mi">180</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span>
         <span class="k">return</span> <span class="n">lons2</span><span class="p">,</span> <span class="n">lats2</span><span class="p">,</span> <span class="n">baz</span>
 </div>
-<div class="viewcode-block" id="Spherical.inverse"><a class="viewcode-back" href="../../reference.html#karta.crs.Spherical.inverse">[docs]</a>    <span class="k">def</span> <span class="nf">inverse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lons1</span><span class="p">,</span> <span class="n">lats1</span><span class="p">,</span> <span class="n">lons2</span><span class="p">,</span> <span class="n">lats2</span><span class="p">,</span> <span class="n">radians</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Returns forward and back azimuths and distances &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="SphericalCRS.inverse"><a class="viewcode-back" href="../../reference.html#karta.crs.SphericalCRS.inverse">[docs]</a>    <span class="k">def</span> <span class="nf">inverse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lons1</span><span class="p">,</span> <span class="n">lats1</span><span class="p">,</span> <span class="n">lons2</span><span class="p">,</span> <span class="n">lats2</span><span class="p">,</span> <span class="n">radians</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Inverse geodetic problem to find the geodesic between points &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">radians</span><span class="p">:</span>
             <span class="n">lons1</span> <span class="o">=</span> <span class="n">lons1</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mf">180.0</span>
             <span class="n">lons2</span> <span class="o">=</span> <span class="n">lons2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mf">180.0</span>
@@ -199,13 +254,102 @@
             <span class="n">baz</span> <span class="o">=</span> <span class="n">baz</span> <span class="o">*</span> <span class="mi">180</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span>
         <span class="k">return</span> <span class="n">az</span><span class="p">,</span> <span class="n">baz</span><span class="p">,</span> <span class="n">dist</span>
 </div></div>
+<div class="viewcode-block" id="EllipsoidalCRS"><a class="viewcode-back" href="../../reference.html#karta.crs.EllipsoidalCRS">[docs]</a><span class="k">class</span> <span class="nc">EllipsoidalCRS</span><span class="p">(</span><span class="n">GeographicalCRS</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Ellipsoidal geographic coordinate system defined by equatorial and</span>
+<span class="sd">    polar radii.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s">&quot;Ellipsoidal&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Define a geographical coordinate system on an ellipse. *a* is the</span>
+<span class="sd">        equatorial radius, and *b* is the polar radius. &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">a</span> <span class="o">=</span> <span class="n">a</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">b</span> <span class="o">=</span> <span class="n">b</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ref_proj4</span> <span class="o">=</span> <span class="s">&quot;+proj=lonlat +units=m +a=</span><span class="si">%f</span><span class="s"> +b=</span><span class="si">%f</span><span class="s"> +no_defs&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+        <span class="k">return</span>
+
+    <span class="k">def</span> <span class="nf">get_proj4</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">ref_proj4</span>
+
+    <span class="k">def</span> <span class="nf">project</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
+        <span class="c"># Projection on a geographical coordinate system is the identity</span>
+        <span class="k">return</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span>
+
+<div class="viewcode-block" id="EllipsoidalCRS.forward"><a class="viewcode-back" href="../../reference.html#karta.crs.EllipsoidalCRS.forward">[docs]</a>    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">azimuth</span><span class="p">,</span> <span class="n">distance</span><span class="p">,</span> <span class="n">radians</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Forward geodetic problem from a point &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">radians</span><span class="p">:</span>
+            <span class="n">x</span> <span class="o">*=</span> <span class="mf">180.0</span><span class="o">/</span><span class="n">pi</span>
+            <span class="n">y</span> <span class="o">*=</span> <span class="mf">180.0</span><span class="o">/</span><span class="n">pi</span>
+            <span class="n">azimuth</span> <span class="o">*=</span> <span class="mf">180.0</span><span class="o">/</span><span class="n">pi</span>
+
+        <span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="n">baz</span> <span class="o">=</span> <span class="n">geodesy</span><span class="o">.</span><span class="n">ellipsoidal_forward</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">azimuth</span><span class="p">,</span> <span class="n">distance</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">radians</span><span class="p">:</span>
+            <span class="n">x2</span> <span class="o">*=</span> <span class="n">pi</span><span class="o">/</span><span class="mf">180.0</span>
+            <span class="n">y2</span> <span class="o">*=</span> <span class="n">pi</span><span class="o">/</span><span class="mf">180.0</span>
+            <span class="n">baz</span> <span class="o">*=</span> <span class="n">pi</span><span class="o">/</span><span class="mf">180.0</span>
+
+        <span class="k">return</span> <span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="n">baz</span>
+</div>
+<div class="viewcode-block" id="EllipsoidalCRS.inverse"><a class="viewcode-back" href="../../reference.html#karta.crs.EllipsoidalCRS.inverse">[docs]</a>    <span class="k">def</span> <span class="nf">inverse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="n">radians</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Inverse geodetic problem to find the geodesic between points &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">radians</span><span class="p">:</span>
+            <span class="n">x1</span> <span class="o">*=</span> <span class="mf">180.0</span><span class="o">/</span><span class="n">pi</span>
+            <span class="n">y1</span> <span class="o">*=</span> <span class="mf">180.0</span><span class="o">/</span><span class="n">pi</span>
+            <span class="n">x2</span> <span class="o">*=</span> <span class="mf">180.0</span><span class="o">/</span><span class="n">pi</span>
+            <span class="n">y2</span> <span class="o">*=</span> <span class="mf">180.0</span><span class="o">/</span><span class="n">pi</span>
+
+        <span class="n">az</span><span class="p">,</span> <span class="n">baz</span><span class="p">,</span> <span class="n">dist</span> <span class="o">=</span> <span class="n">geodesy</span><span class="o">.</span><span class="n">ellipsoidal_inverse</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">,</span> <span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">radians</span><span class="p">:</span>
+            <span class="n">az</span> <span class="o">*=</span> <span class="n">pi</span><span class="o">/</span><span class="mf">180.0</span>
+            <span class="n">baz</span> <span class="o">*=</span> <span class="n">pi</span><span class="o">/</span><span class="mf">180.0</span>
+
+        <span class="k">return</span> <span class="n">az</span><span class="p">,</span> <span class="n">baz</span><span class="p">,</span> <span class="n">dist</span>
+</div></div>
 <div class="viewcode-block" id="Proj4CRS"><a class="viewcode-back" href="../../reference.html#karta.crs.Proj4CRS">[docs]</a><span class="k">class</span> <span class="nc">Proj4CRS</span><span class="p">(</span><span class="n">CRS</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; Custom reference systems, which may be backed by a *pypoj.Proj* instance</span>
-<span class="sd">    or a custom projection function &quot;&quot;&quot;</span>
+<span class="sd">    or a custom projection function.</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">proj</span><span class="p">,</span> <span class="n">spheroid</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+<span class="sd">    `proj` is a dictionary used to define an instance of `pyproj.Proj`</span>
+
+<span class="sd">    `spheroid` refers to a proj.4 spheroid identifier, e.g. &quot;+ellps=WGS84&quot;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">proj</span><span class="p">,</span> <span class="n">spheroid</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">spheroid</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="c"># Extract the spheroid from the +ellps, +datum, or +a,+b parameters</span>
+            <span class="c"># if present</span>
+            <span class="k">if</span> <span class="s">&quot;+ellps&quot;</span> <span class="ow">in</span> <span class="n">proj</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">kv</span> <span class="ow">in</span> <span class="n">proj</span><span class="o">.</span><span class="n">split</span><span class="p">():</span>
+                    <span class="k">if</span> <span class="s">&quot;+ellps&quot;</span> <span class="ow">in</span> <span class="n">kv</span><span class="p">:</span>
+                        <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="o">=</span> <span class="n">kv</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&quot;=&quot;</span><span class="p">)</span>
+                        <span class="n">spheroid</span> <span class="o">=</span> <span class="s">&quot;+ellps=</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">v</span>
+                        <span class="k">break</span>
+            <span class="k">elif</span> <span class="s">&quot;+datum&quot;</span> <span class="ow">in</span> <span class="n">proj</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">kv</span> <span class="ow">in</span> <span class="n">proj</span><span class="o">.</span><span class="n">split</span><span class="p">():</span>
+                    <span class="k">if</span> <span class="s">&quot;+datum&quot;</span> <span class="ow">in</span> <span class="n">kv</span><span class="p">:</span>
+                        <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="o">=</span> <span class="n">kv</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&quot;=&quot;</span><span class="p">)</span>
+                        <span class="n">spheroid</span> <span class="o">=</span> <span class="s">&quot;+ellps=</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">v</span>
+                        <span class="k">break</span>
+            <span class="k">elif</span> <span class="p">(</span><span class="s">&quot;+a&quot;</span> <span class="ow">in</span> <span class="n">proj</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="s">&quot;+b&quot;</span> <span class="ow">in</span> <span class="n">proj</span><span class="p">):</span>
+                <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span>
+                <span class="k">for</span> <span class="n">kv</span> <span class="ow">in</span> <span class="n">proj</span><span class="o">.</span><span class="n">split</span><span class="p">():</span>
+                    <span class="k">if</span> <span class="s">&quot;+a&quot;</span> <span class="ow">in</span> <span class="n">kv</span><span class="p">:</span>
+                        <span class="n">_</span><span class="p">,</span><span class="n">a</span> <span class="o">=</span> <span class="n">kv</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&quot;=&quot;</span><span class="p">)</span>
+                    <span class="k">elif</span> <span class="s">&quot;+b&quot;</span> <span class="ow">in</span> <span class="n">kv</span><span class="p">:</span>
+                        <span class="n">_</span><span class="p">,</span><span class="n">b</span> <span class="o">=</span> <span class="n">kv</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&quot;=&quot;</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="bp">None</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">):</span>
+                        <span class="n">spheroid</span> <span class="o">=</span> <span class="s">&quot;+a=</span><span class="si">%s</span><span class="s"> +b=</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+                        <span class="k">break</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">errors</span><span class="o">.</span><span class="n">CRSError</span><span class="p">(</span><span class="s">&quot;Spheroid must be provided: </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">proj</span><span class="p">)</span>
+
         <span class="bp">self</span><span class="o">.</span><span class="n">project</span> <span class="o">=</span> <span class="n">pyproj</span><span class="o">.</span><span class="n">Proj</span><span class="p">(</span><span class="n">proj</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_geod</span> <span class="o">=</span> <span class="n">pyproj</span><span class="o">.</span><span class="n">Geod</span><span class="p">(</span><span class="n">spheroid</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">initstring_proj</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">project</span><span class="o">.</span><span class="n">srs</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">initstring_geod</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_geod</span><span class="o">.</span><span class="n">initstring</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ref_proj4</span> <span class="o">=</span> <span class="s">&quot;</span><span class="si">%s</span><span class="s"> </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">project</span><span class="o">.</span><span class="n">srs</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_geod</span><span class="o">.</span><span class="n">initstring</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">name</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
@@ -223,34 +367,40 @@
     <span class="k">def</span> <span class="nf">__ne__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
         <span class="k">return</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">__eq__</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
 
-    <span class="nd">@property</span>
-<div class="viewcode-block" id="Proj4CRS.initstring_proj"><a class="viewcode-back" href="../../reference.html#karta.crs.Proj4CRS.initstring_proj">[docs]</a>    <span class="k">def</span> <span class="nf">initstring_proj</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Return the proj.4 init string defining the projection. &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_proj</span><span class="o">.</span><span class="n">srs</span>
-</div>
-    <span class="nd">@property</span>
-<div class="viewcode-block" id="Proj4CRS.initstring_geod"><a class="viewcode-back" href="../../reference.html#karta.crs.Proj4CRS.initstring_geod">[docs]</a>    <span class="k">def</span> <span class="nf">initstring_geod</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Return the proj.4 init string defining the geoid. &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_geod</span><span class="o">.</span><span class="n">initstring</span>
-</div>
-    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="Proj4CRS.forward"><a class="viewcode-back" href="../../reference.html#karta.crs.Proj4CRS.forward">[docs]</a>    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Forward geodetic problem from a point &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_geod</span><span class="o">.</span><span class="n">fwd</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">inverse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_geod</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 </div>
-<div class="viewcode-block" id="CRSError"><a class="viewcode-back" href="../../reference.html#karta.crs.CRSError">[docs]</a><span class="k">class</span> <span class="nc">CRSError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Exception to raise for invalid geodetic operations. &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="s">&#39;&#39;</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">message</span> <span class="o">=</span> <span class="n">message</span>
+<div class="viewcode-block" id="Proj4CRS.inverse"><a class="viewcode-back" href="../../reference.html#karta.crs.Proj4CRS.inverse">[docs]</a>    <span class="k">def</span> <span class="nf">inverse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Inverse geodetic problem to find the geodesic between points &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_geod</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</div></div>
+<span class="k">def</span> <span class="nf">crs_from_wkt</span><span class="p">(</span><span class="n">wkt</span><span class="p">):</span>
+    <span class="n">srs</span> <span class="o">=</span> <span class="n">osgeo</span><span class="o">.</span><span class="n">osr</span><span class="o">.</span><span class="n">SpatialReference</span><span class="p">(</span><span class="n">wkt</span><span class="p">)</span>
+    <span class="n">srs</span><span class="o">.</span><span class="n">MorphFromESRI</span><span class="p">()</span>     <span class="c"># munge parameters for proj.4 export</span>
+    <span class="k">if</span> <span class="n">srs</span><span class="o">.</span><span class="n">IsGeographic</span><span class="p">():</span>
+        <span class="n">proj4</span> <span class="o">=</span> <span class="n">srs</span><span class="o">.</span><span class="n">ExportToProj4</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">proj4</span><span class="o">.</span><span class="n">split</span><span class="p">():</span>
+            <span class="k">if</span> <span class="s">&quot;+ellps&quot;</span> <span class="ow">in</span> <span class="n">arg</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">GeographicalCRS</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="s">&quot;unnamed&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="s">&quot;+datum&quot;</span> <span class="ow">in</span> <span class="n">arg</span><span class="p">:</span>
+                <span class="n">_</span><span class="p">,</span><span class="n">v</span> <span class="o">=</span> <span class="n">arg</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&quot;=&quot;</span><span class="p">)</span>
+                <span class="k">return</span> <span class="n">GeographicalCRS</span><span class="p">(</span><span class="s">&quot;+ellps=</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">v</span><span class="p">,</span> <span class="s">&quot;unnamed&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">errors</span><span class="o">.</span><span class="n">CRSError</span><span class="p">(</span><span class="s">&quot;Could not interpret </span><span class="si">%s</span><span class="s"> as geographical CRS&quot;</span> <span class="o">%</span> <span class="n">proj4</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">Proj4CRS</span><span class="p">(</span><span class="n">srs</span><span class="o">.</span><span class="n">ExportToProj4</span><span class="p">())</span>
 
 <span class="c">############ Predefined CRS instances ############</span>
 
-</div>
-<span class="n">SphericalEarth</span> <span class="o">=</span> <span class="n">Spherical</span><span class="p">(</span><span class="mf">6371.0</span><span class="p">)</span>
-<span class="n">LonLatWGS84</span> <span class="o">=</span> <span class="n">GeographicalCRS</span><span class="p">(</span><span class="s">&quot;+ellps=WGS84&quot;</span><span class="p">,</span> <span class="s">&quot;WGS84 (Geographical)&quot;</span><span class="p">)</span>
-<span class="n">LonLatNAD27</span> <span class="o">=</span> <span class="n">GeographicalCRS</span><span class="p">(</span><span class="s">&quot;+ellps=clrk66&quot;</span><span class="p">,</span> <span class="s">&quot;NAD27 (Geographical)&quot;</span><span class="p">)</span>
-<span class="n">LonLatNAD83</span> <span class="o">=</span> <span class="n">GeographicalCRS</span><span class="p">(</span><span class="s">&quot;+ellps=GRS80&quot;</span><span class="p">,</span> <span class="s">&quot;NAD83 (Geographical)&quot;</span><span class="p">)</span>
+<span class="n">Cartesian</span> <span class="o">=</span> <span class="n">CartesianCRS</span><span class="p">()</span>
+<span class="n">SphericalEarth</span> <span class="o">=</span> <span class="n">SphericalCRS</span><span class="p">(</span><span class="mf">6371009.0</span><span class="p">)</span>
+<span class="n">LonLatWGS84</span> <span class="o">=</span> <span class="n">EllipsoidalCRS</span><span class="p">(</span><span class="mf">6378137.0</span><span class="p">,</span> <span class="mf">6356752.314245</span><span class="p">)</span>
+<span class="n">LonLatNAD83</span> <span class="o">=</span> <span class="n">EllipsoidalCRS</span><span class="p">(</span><span class="mf">6378137.0</span><span class="p">,</span> <span class="mf">6356752.314140</span><span class="p">)</span>
+<span class="n">LonLatNAD27</span> <span class="o">=</span> <span class="n">EllipsoidalCRS</span><span class="p">(</span><span class="mf">6378206.4</span><span class="p">,</span> <span class="mf">6356583.8</span><span class="p">)</span>
+
+<span class="n">LonLatWGS84_proj4</span> <span class="o">=</span> <span class="n">GeographicalCRS</span><span class="p">(</span><span class="s">&quot;+ellps=WGS84&quot;</span><span class="p">,</span> <span class="s">&quot;WGS84 (Geographical)&quot;</span><span class="p">)</span>
+<span class="n">LonLatNAD27_proj4</span> <span class="o">=</span> <span class="n">GeographicalCRS</span><span class="p">(</span><span class="s">&quot;+ellps=clrk66&quot;</span><span class="p">,</span> <span class="s">&quot;NAD27 (Geographical)&quot;</span><span class="p">)</span>
+<span class="n">LonLatNAD83_proj4</span> <span class="o">=</span> <span class="n">GeographicalCRS</span><span class="p">(</span><span class="s">&quot;+ellps=GRS80&quot;</span><span class="p">,</span> <span class="s">&quot;NAD83 (Geographical)&quot;</span><span class="p">)</span>
 
 <span class="n">UPSNorth</span> <span class="o">=</span> <span class="n">Proj4CRS</span><span class="p">(</span><span class="n">proj</span><span class="o">=</span><span class="s">&quot;+proj=stere +lat_0=90 +lat_ts=90 +lon_0=0 +k=0.994 +x_0=2000000 +y_0=2000000 +units=m +datum=WGS84 +no_defs&quot;</span><span class="p">,</span>
         <span class="n">spheroid</span><span class="o">=</span><span class="s">&quot;+ellps=WGS84&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s">&quot;Universal Polar Stereographic (North)&quot;</span><span class="p">)</span>
@@ -263,14 +413,34 @@
 
 <span class="n">NSIDCSouth</span> <span class="o">=</span> <span class="n">Proj4CRS</span><span class="p">(</span><span class="n">proj</span><span class="o">=</span><span class="s">&quot;+proj=stere +lat_0=-90 +lat_ts=-70 +lon_0=0 +k=1 +x_0=0 +y_0=0 +units=m +datum=WGS84 +no_defs&quot;</span><span class="p">,</span>
         <span class="n">spheroid</span><span class="o">=</span><span class="s">&quot;+ellps=WGS84&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s">&quot;NSIDC (South)&quot;</span><span class="p">)</span>
+
+<span class="n">LambertEqualArea</span> <span class="o">=</span> <span class="n">Proj4CRS</span><span class="p">(</span><span class="n">proj</span><span class="o">=</span><span class="s">&quot;+proj=laea +lat_0=0 +lon_0=0 +x_0=0 +y_0=0&quot;</span><span class="p">,</span>
+        <span class="n">spheroid</span><span class="o">=</span><span class="s">&quot;+ellps=WGS84&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s">&quot;Lambert Equal Area&quot;</span><span class="p">)</span>
+
+<span class="n">GallPetersEqualArea</span> <span class="o">=</span> <span class="n">Proj4CRS</span><span class="p">(</span><span class="s">&quot;+proj=cea +lon_0=0 +lat_ts=45 +x_0=0 +y_0=0 &quot;</span>
+                               <span class="s">&quot;+ellps=WGS84 +units=m +no_defs&quot;</span><span class="p">,</span>
+        <span class="n">spheroid</span><span class="o">=</span><span class="s">&quot;+ellps=WGS84&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s">&quot;Gall Peters Equal Area&quot;</span><span class="p">)</span>
+
+<span class="n">WebMercator</span> <span class="o">=</span> <span class="n">Proj4CRS</span><span class="p">(</span><span class="s">&quot;+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 &quot;</span>
+                       <span class="s">&quot;+lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m &quot;</span>
+                       <span class="s">&quot;+nadgrids=@null +wktext +no_defs&quot;</span><span class="p">,</span>
+        <span class="n">spheroid</span><span class="o">=</span><span class="s">&quot;+a=6378137 +b=6378137&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s">&quot;Web Mercator&quot;</span><span class="p">)</span>
 </pre></div>
 
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar">
-        <div class="sphinxsidebarwrapper">
-<div id="searchbox" style="display: none">
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../karta-manual.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../../search.html" method="get">
       <input type="text" name="q" />
@@ -291,8 +461,8 @@
       &copy;2015, Nat Wilson.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.2.3</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.1</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.6</a>
       
     </div>
 

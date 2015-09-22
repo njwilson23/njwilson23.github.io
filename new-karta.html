@@ -88,12 +88,12 @@
         </div>
       </div>
 
-      <div class="row">
+      <div class="row" id="top-feature">
 
         <div class="col-md-4">
           <img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" height="140" width="140">
           <h2>Vector Data</h2>
-          <p>Vector data includes geometries such as points, lines, and polygons. Karta computes properties and relationships between geographical vector geometries.</p>
+          <p>Vector data includes geometries such as points, lines, and polygons. Karta can computes properties and relationships between geometries.</p>
         </div><!-- /.col-md-4 -->
 
         <div class="col-md-4">
@@ -131,7 +131,7 @@
           <p class="lead text-left">
           <code>karta.Point</code>, <code>karta.Multipoint</code>, <code>karta.Line</code> and <code>karta.Polygon</code> are all subclasses of <code>karta.Geometry</code>. All geometry objects can contain singlepart and multipart metadata, as well as a reference to a coordinate reference system object. Methods of geometry objects handle basic queries about geometry properties and relationships.</p>
 
-          <p class="lead text-left">GeoJSON I/O is handled natively, while bindings to <a href="https://github.com/GeospatialPython/pyshp">pyshp</a> give access to ESRI shapefiles. Geometries implement the <code>__geo_interface__</code> attribute, permitting interchange with other libraries such as <a href="http://toblerity.org/shapely/">Shapely</a>.</p>
+          <p class="lead text-left">GeoJSON I/O is handled natively while ESRI shapefile access is thanks to <a href="https://github.com/GeospatialPython/pyshp">pyshp</a>. Geometries implement the <code>__geo_interface__</code> attribute, permitting interchange with other libraries such as <a href="http://toblerity.org/shapely/">Shapely</a>.</p>
         </div>
         <div class="col-md-5">
             <pre class="text-left">
@@ -176,10 +176,7 @@ plt.imshow(grid.values, extent=grid.get_extent(), origin="bottom") </pre>
         <div class="col-md-7">
           <h2 class="featurette-heading">Coordinate reference systems and geodesy</h2>
           <h3 class="text-muted">Karta is like a baby GIS in your pocket</h3>
-          <p class="lead text-left">Donec ullamcorper nulla non metus auctor 
-fringilla. Vestibulum id ligula porta felis euismod semper. Praesent 
-commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, 
-tellus ac cursus commodo.</p>
+          <p class="lead text-left">Geometries and Grids are referenced to coordinate reference system objects (<code>karta.crs.CRS</code>) that provide information about the geographical projection and geodetic relationships between positions. Distances and areas on planes, spheres, and ellipsoids are handled in Karta, while generic proj.4 projections are handled by <code>Proj4CRS</code> with help from <a href="http://jswhit.github.io/pyproj/">pyproj</a>.</p>
         </div>
         <div class="col-md-5">
           <!--<img class="featurette-image img-responsive center-block" data-src="holder.js/500x500/auto" alt="Generic placeholder image">-->
@@ -190,7 +187,7 @@ tellus ac cursus commodo.</p>
 
       <div class="row featurette">
         <div class="col-md-12">
-          <h2 class="text-muted">Karta is open source and under development. Pull requests are welcome!</h2>
+          <h2 class="text-muted">Karta is open source. Pull requests are welcome!</h2>
         </div>
       </div>
 
@@ -200,7 +197,7 @@ tellus ac cursus commodo.</p>
       <!-- FOOTER -->
       <footer>
         <p class="pull-right"><a href="#">Back to top</a></p>
-        <p class="pull-left"><a href=https://github.com/njwilson23/karta">Github</a></p>
+        <p class="pull-left"><a href="https://github.com/njwilson23/karta">Github</a></p>
       </footer>
 
     </div><!-- /.container -->
@@ -216,6 +213,15 @@ tellus ac cursus commodo.</p>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="js/external/ie10-viewport-bug-workaround.js"></script>
 
+    <script type="text/javascript">
+    $(".masthead").css("background-color", "rgba(255, 255, 255, 0)");
+    $(document).scroll(function () {
+      if ($(window).scrollTop() > $("#top-feature").offset().top + $("#top-feature").height()) {
+        $(".masthead").css("visibility", "hidden");
+      } else {
+        $(".masthead").css("visibility", "visible");
+      }
+    });
+    </script>
 
 </body></html>
-
