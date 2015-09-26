@@ -2,7 +2,7 @@ body {
   background-image: url("../images/adolfjensen-desktop.jpg");
 }
 
-.col-md-5 {
+.col-md-6 {
   background-color: rgba(255, 255, 255, 0.9);
   line-height: 1.5;
 
@@ -20,23 +20,28 @@ img#icon{
 
 .row {
   padding-top: 3em;
+  margin-left: 1em;
+  margin-right: 1em;
 }
 
-.col-md-5, .listitem {
+.col-md-6, .listitem {
   color: rgba(0,0,0,1);
   text-shadow: 0 1px 3px rgba(0,0,0,0);
 }
 
-.listitem {
-  font-weight: 700;
+a, .listitem {
   transition-property: color;
-  transition-duration: 0.2s;
+  transition-duration: 0.4s;
   color: #1251a7;
 }
 
-.listitem:hover {
+.listitem {
+  font-weight: 700;
+}
+
+a:hover, .listitem:hover {
   transition-property: color;
-  transition-duration: 0.4s;
+  transition-duration: 0.6s;
   color: #102746;
 }
 
@@ -52,7 +57,8 @@ img#icon{
 
   p#landscape-note {
     font-style: oblique;
-    font-size: small;
+    font-size: x-small;
+    text-align: left;
   }
 }
 
