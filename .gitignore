@@ -1,4 +1,7 @@
 *.swp
-travelogue/photos/*jpg
-travelogue/photos/*JPG
+*.zip
+*.mp4
+*.webm
+travelogue/*
+narwhal/bootstrap-3.3.5-dist/*
 

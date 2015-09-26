@@ -1,7 +1,7 @@
-template: ../templates/cover-template.html
+template: ../templates/karta-template.html
 title-raw: Karta
 #header: karta/header.html
-header-raw: <link href="stylesheets/cover-manpage.css" rel="stylesheet">
+#header-raw: <link href="stylesheets/cover-manpage.css" rel="stylesheet">
 nav: index/nav.html
 body: karta/body.html
 output: ../karta.html

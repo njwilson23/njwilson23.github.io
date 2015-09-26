@@ -1,126 +1,136 @@
+    <div class="container marketing" id="top-container" style="margin-bottom: 20px;">
 
-          <div class="inner cover">
+      <div class="row options" style="padding-top: 250px;" id="banner">
+        <div class="col-lg-12">
+          <h1>Karta is for...</h1>
+        </div>
+      </div>
 
-            <h1>Karta</h1>
+      <div class="row options" id="top-feature">
 
-            <h2>Python package for geospatial computation</h2>
+        <div class="col-md-4">
+          <a href="#vector">
+            <img class="img-circle" src="images/vector-icon.png" alt="Vector icon" height="140" width="140">
+          </a>
+          <h2>Vector data</h2>
+          <p>Karta computes properties and relationships between vector geometries such as points, lines, and polygons. Performance relies on Cython-accelerated methods.</p>
+        </div><!-- /.col-md-4 -->
 
-            <img src="images/map_small.png" align="right" width=33%>
+        <div class="col-md-4">
+          <a href="#raster">
+            <img class="img-circle" src="images/raster-icon.jpg" alt="Raster icon" height="140" width="140">
+          </a>
+          <h2>Raster data</h2>
+          <p>Karta simplifies management of in-memory digital elevation models, satellite imagery, and land classification maps and enables simple sampling and transformation operations.</p>
+        </div><!-- /.col-md-4 -->
 
-            <div class="text-left">
-              <p><em>Karta</em> is a Python/Python3 package for geospatial data structures. <em>Karta</em> serves as a Leatherman for geographic analyses. It provides simple and clean vector and raster data types, a selection of geographical analysis methods, and the ability to read and write several formats, including GeoJSON, shapefiles, and ESRI ASCII.</p>
+        <div class="col-md-4">
+          <a href="#geod">
+            <img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="CRS icon" height="140" width="140">
+          </a>
+          <h2>Geodesy</h2>
+          <p>Karta is coordinate-system aware and performs forward and inverse geodetic calculations either internally or by leveraging <a href="http://jswhit.github.io/pyproj/">pyproj</a>.</p>
+        </div><!-- /.col-md-4 -->
 
-              <p>The goals of <em>Karta</em> is to expose a simple and fast framework for spatial analysis.</p>
+      </div><!-- /.row -->
+      <div class="row options">
+        <div class="col-md-12">
+          <h4>Karta is a Pythonic toolkit for small- and medium-sized geospatial data tasks</h4><br>
+          <p>
+             <a class="btn btn-default" href="kartadocs/karta-manual.html" role="button">Documentation</a>
+             <a class="btn btn-default" href="https://pypi.python.org/pypi/karta/" role="button">PyPI</a>
+             <a class="btn btn-default" href="https://github.com/njwilson23/karta" role="button">Github</a>
+          </p>
+        </div>
+      </div>
+    </div>
 
-              <p>Suggestions, bug reports, testcases, and pull requests are welcome, particularly to improve format support and test coverage.</p>
+    <!-- START THE FEATURETTES -->
+    <div class="container marketing">
 
-              <h2 id="installation">INSTALLATION</h2>
-              <p>The easiest way to install is to use <code>pip</code>. Installation requires a version of <code>setuptools&gt;=0.7.0</code>.</p>
-              <pre><code>pip install -U setuptools</code></pre>
-              <p>To install the latest stable release from PyPI, run</p>
-              <pre><code>pip install karta</code></pre>
+      <div class="row featurette"><a name="vector"></a>
+        <div class="col-md-7">
+          <h2 class="featurette-heading">Vector geometries</h2>
+          <h3 class="text-muted">Bounding boxes, distances and lengths, intersection calculations, convex hulls</h3>
+          <p class="lead text-left">
+          <code>karta.Point</code>, <code>karta.Multipoint</code>, <code>karta.Line</code> and <code>karta.Polygon</code> are all subclasses of <code>karta.Geometry</code>. All geometry objects can contain singlepart and multipart metadata, as well as a reference to a coordinate reference system object. Methods of geometry objects handle basic queries about geometry properties and relationships.</p>
 
-              <p>Alternatively, download <em>Karta</em> as a <a href="https://github.com/njwilson23/karta/zipball/master">zip file</a>, a <a href="https://github.com/njwilson23/karta/tarball/master">tarball</a>, or view the <a href="https://github.com/njwilson23/karta">development page on Github</a>.
+          <p class="lead text-left">GeoJSON I/O is handled natively while ESRI shapefile access is thanks to <a href="https://github.com/GeospatialPython/pyshp">pyshp</a>. Geometries implement the <code>__geo_interface__</code> attribute, permitting interchange with other libraries such as <a href="http://toblerity.org/shapely/">Shapely</a>.</p>
+        </div>
+        <div class="col-md-5">
+            <pre class="text-left">
+point = Point((-130.0, 52.0), crs=LonLatWGS84)
 
-              <p>To build from source,</p>
-              <pre><code>pip install -r karta/requirements.txt
-            pip install karta/</code></pre>
+line = read_geojson("linedata.json")
 
-              <h2 id="dependencies">DEPENDENCIES</h2>
-              <h3 id="required">Required</h3>
-              <ul>
-              <li>Python 2.7+ or Python 3.3+</li>
-              <li>numpy</li>
-              <li>pyshp</li>
-              <li>pyproj (for geodetic calculations)</li>
-              </ul>
-              <h3 id="recommended">Recommended</h3>
-              <ul>
-              <li>cython</li>
-              <li>gdal (for geotiff I/O)</li>
-              <li>scipy</li>
-              </ul>
-              <p>When installing from PyPI, Cython-compiled C source code is provided and will be automatically compiled to improve performance if a suitable C compiler is available.</p>
+polygon = Polygon([(-515005.78, -1301130.53),
+                   (-579174.89, -1282271.94),
+                   (-542977.83, -1221147.82),
+                   (-437864.05, -1251641.55),
+                   (-438160.72, -1252421.48),
+                   (-437961.28, -1285314.00)],
+                   crs=NSIDCNorth)
 
-              <h2 id="documentation">DOCUMENTATION</h2>
+polygon.to_shapefile("outline.shp") </pre>
+        </div>
+      </div>
 
-              <p>Documentation is available in the form of an <a href="kartadocs/karta-manual.html">online manual</a>.</p>
+    </div>
 
-              <p>The manual can also be built offline using Sphinx by running <code>make</code> from the <code>doc/</code> directory. The documentation is built from source code docstrings and information in the <a href="https://github.com/njwilson23/karta/wiki/Tutorial">Wiki</a>.</p>
+    <hr class="featurette-divider">
 
-              <h2 id="contents-at-a-glance">PACKAGE OVERVIEW</h2>
-              <ul>
-              <li>vector
-              <ul>
-              <li>guppy: Vector geometry classes (e.g. <code>Point</code>, <code>Multipoint</code>, <code>Line</code>, <code>Polygon</code>) supporting the <a href="https://gist.github.com/sgillies/2217756">Python __geo_interface__</a></li>
-              <li>gpx: GPX class for parsing and constructing GPX eXchange files</li>
-              <li>geojson: Classes and functions for reading and writing GeoJSON</li>
-              <li>shp_funcs: Shapefile-to-guppy conversions through <em>pyshp</em> interface</li>
-              <li>xyfile: ASCII table functions</li>
-              <li>quadtree: QuadTree implementation</li>
-              <li>stats: Geostatistical functions (experimental)</li>
-              </ul></li>
-              <li>raster
-              <ul>
-              <li>grid: Basic Grid types, including <code>RegularGrid</code> and <code>WarpedGrid</code></li>
-              <li>raster: General purpose raster functions</li>
-              <li>aaigrid: Grid subclass specifically for reading and writing ESRI ASCII grids</li>
-              <li>streamline: Streamline calculation</li>
-              <li>flow: Stream flow functions (experimental)</li>
-              </ul></li>
-              <li><p>crs : <code>CRS</code> and <code>CRSRegister</code> classes used throughout <em>Karta</em></p></li>
-              <li><p>tests : unit tests</p></li>
-              </ul>
-              <h2 id="formats">FORMATS</h2>
-              <p><em>Karta</em> provides a basic working interface to several of common file formats. Currently partially-supported are:</p>
-              <ul>
-              <li>vector
-              <ul>
-              <li>GeoJSON (r,w)</li>
-              <li>ESRI Shapefiles via pyshp (r,w)</li>
-              <li>GPS eXchange (GPX) (r,w)</li>
-              <li>ASCII tables (XYZ) (r,w)</li>
-              </ul></li>
-              <li>raster
-              <ul>
-              <li>ESRI ASCII Grid (r,w)</li>
-              <li>GeoTiff through GDAL (r)</li>
-              <li>USGS DEM (WIP)</li>
-              </ul></li>
-              </ul>
+    <div class="container marketing">
 
-              <h2 id="testing">TESTING</h2>
-              <p>To run all unit tests, execute</p>
-              <pre><code>python tests/runtests.py</code></pre>
+      <div class="row featurette"><a name="raster"></a>
+        <div class="col-md-7 col-md-push-5">
+          <h2 class="featurette-heading">Raster grids</h2>
+          <h3 class="text-muted">Grid statistics, resizing, resampling, and profile extraction</h3>
+          <p class="lead text-left">Regularly-spaced grids are represented by <code>karta.RegularGrid</code>, with data backed by numpy arrays. Grids with arbitrary spacing can be represented by the somewhat-experimental <code>karta.WarpedGrid</code> class. Grids can be clipped, resampled, queried at geographical points, and read or written to ESRI ASCII files or to GeoTiff via GDAL.</p>
 
-              <h2 id="license">LICENSE</h2>
-              <p>This software is provided under the MIT license.</p>
-              <h3 id="mit-license">MIT License:</h3>
-              <p>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the &quot;Software&quot;), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</p>
-              <p>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</p>
-              <p>THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p>
+          <pre class="text-left">
+grid = read_gtiff("glacier_landsat.tif")
+grid = grid.resample(100, 100)
+plt.imshow(grid.values, extent=grid.get_extent(), origin="bottom") </pre>
+        </div>
+        <div class="col-md-5 col-md-pull-7">
+          <!-- place an image here -->
+          <img class="featurette-image img-responsive center-block" src="images/raster.jpg">
+        </div>
+      </div>
 
-            </div>    <!--text-left-->
+    </div>
 
+    <hr class="featurette-divider">
 
-          </div>
+    <div class="container marketing">
 
-          <script type="text/javascript">
-            /* TODO: Should only look in the nav element */
-            var lis = document.getElementsByTagName("li");
-            for (var i = 0; i != lis.length; i++) {
-              if (lis[i].innerHTML.contains("Karta")) {
-                lis[i].className = "active";
-                console.log("found karta <li>")
-                break
-              }
-            }
-          </script>
+      <div class="row featurette"><a name="geod"></a>
+        <div class="col-md-7">
+          <h2 class="featurette-heading">Coordinate reference systems and geodesy</h2>
+          <h3 class="text-muted">Placing data on Earth</h3>
+          <p class="lead text-left">Geometries and Grids are referenced to coordinate reference system objects (<code>karta.crs.CRS</code>) that provide information about the geographical projection and geodetic relationships between positions. Distances and areas on planes, spheres, and ellipsoids are handled in Karta, while coordinate projection relies on <a href="http://jswhit.github.io/pyproj/">pyproj</a> via the <code>Proj4CRS</code> subclass.</p>
+        </div>
+        <div class="col-md-5">
+          <!--<img class="featurette-image img-responsive center-block" data-src="holder.js/500x500/auto" alt="Generic placeholder image">-->
+        </div>
+      </div>
+
+      <hr class="featurette-divider">
+
+      <div class="row featurette">
+        <div class="col-md-12">
+          <h2 class="text-muted">Karta is open source. Pull requests are welcome!</h2>
+        </div>
+      </div>
+
+      <!-- /END THE FEATURETTES -->
 
 
-          <div class="mastfoot">
-            <div class="inner">
-              <!-- <p>Cover template for <a href="http://getbootstrap.com/">Bootstrap</a>, by <a href="https://twitter.com/mdo">@mdo</a>.</p> -->
-            </div>
-          </div>
+      <!-- FOOTER -->
+      <footer>
+        <p class="pull-right"><a href="#">Back to top</a></p>
+        <p class="pull-left"><a href="https://github.com/njwilson23/karta">Github</a></p>
+      </footer>
+
+    </div><!-- /.container -->
 

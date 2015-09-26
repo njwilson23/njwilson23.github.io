@@ -1,0 +1,22 @@
+#top-container {
+  margin-left: 0;
+  margin-right: 0;
+  width: 100%;
+}
+
+#top-container {
+  background-image: url('../images/sky_pilot_banner.jpg');
+  background-size: cover;
+}
+
+.options {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.featurette-heading {
+margin-top: 20px;
+}
+
+.featurette-image {
+box-shadow: -1px 1px 7px #222;
+}

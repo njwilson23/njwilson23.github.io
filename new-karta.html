@@ -5,12 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="description" content="Homepage for the Karta package">
+    <meta name="author" content="Nat Wilson">
 
     <title>Karta - lightweight geospatial analysis in Python</title>
-
-    <!-- Bootstrap core CSS -->
     <link href="stylesheets/bootstrap.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -19,9 +17,9 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-    <!-- Custom styles for this template -->
     <link href="stylesheets/carousel.css" rel="stylesheet">
     <link href="stylesheets/cover.css" rel="stylesheet">
+    <link href="stylesheets/karta.css" rel="stylesheet">
   </head>
 <!-- NAVBAR
 ================================================== -->
@@ -79,50 +77,55 @@
     </div>
 
 
+    <div class="container marketing" id="top-container" style="margin-bottom: 20px;">
 
-    <div class="container marketing">
-
-      <div class="row" style="margin-top: 250px;">
+      <div class="row options" style="padding-top: 250px;" id="banner">
         <div class="col-lg-12">
           <h1>Karta is for...</h1>
         </div>
       </div>
 
-      <div class="row" id="top-feature">
+      <div class="row options" id="top-feature">
 
         <div class="col-md-4">
-          <img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" height="140" width="140">
-          <h2>Vector Data</h2>
-          <p>Vector data includes geometries such as points, lines, and polygons. Karta can computes properties and relationships between geometries.</p>
+          <a href="#vector">
+            <img class="img-circle" src="images/vector-icon.png" alt="Vector icon" height="140" width="140">
+          </a>
+          <h2>Vector data</h2>
+          <p>Karta computes properties and relationships between vector geometries such as points, lines, and polygons. Performance relies on Cython-accelerated methods.</p>
         </div><!-- /.col-md-4 -->
 
         <div class="col-md-4">
-          <img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" height="140" width="140">
-          <h2>Raster Data</h2>
-          <p>Digital elevation models, satellite imagery, and land classification maps are all examples of raster data. When these fit within memory, Karta handles these with <code>karta.Grid</code> classes backed by Numpy arrays.</p>
+          <a href="#raster">
+            <img class="img-circle" src="images/raster-icon.png" alt="Raster icon" height="140" width="140">
+          </a>
+          <h2>Raster data</h2>
+          <p>Karta simplifies management of in-memory digital elevation models, satellite imagery, and land classification maps and enables simple sampling and transformation operations.</p>
         </div><!-- /.col-md-4 -->
 
         <div class="col-md-4">
-          <img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" height="140" width="140">
+          <a href="#geod">
+            <img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="CRS icon" height="140" width="140">
+          </a>
           <h2>Geodesy</h2>
-          <p>As an important part of processing geographical data, Karta is coordinate-system aware and performs forward and inverse geodetic calculations, either internally or by leveraging <a href="http://jswhit.github.io/pyproj/">pyproj</a>.</p>
+          <p>Karta is coordinate-system aware and performs forward and inverse geodetic calculations either internally or by leveraging <a href="http://jswhit.github.io/pyproj/">pyproj</a>.</p>
         </div><!-- /.col-md-4 -->
 
       </div><!-- /.row -->
-      <div class="row">
+      <div class="row options">
         <div class="col-md-12">
-          <h4>Karta is a Pythonic toolkit for small-to-medium sized geospatial data tasks</h4><br>
-          <p><a class="btn btn-default" href="#geod" role="button">Install</a>
-             <a class="btn btn-default" href="#geod" role="button">Documentation</a>
-             <a class="btn btn-default" href="#geod" role="button">Source code</a>
+          <h4>Karta is a Pythonic toolkit for small- and medium-sized geospatial data tasks</h4><br>
+          <p>
+             <a class="btn btn-default" href="kartadocs/karta-manual.html" role="button">Documentation</a>
+             <a class="btn btn-default" href="https://pypi.python.org/" role="button">PyPI</a>
+             <a class="btn btn-default" href=https://github.com/njwilson23/karta" role="button">Github</a>
           </p>
         </div>
       </div>
+    </div>
 
-
-      <!-- START THE FEATURETTES -->
-
-      <hr class="featurette-divider">
+    <!-- START THE FEATURETTES -->
+    <div class="container marketing">
 
       <div class="row featurette"><a name="vector"></a>
         <div class="col-md-7">
@@ -151,13 +154,17 @@ polygon.to_shapefile("outline.shp") </pre>
         </div>
       </div>
 
-      <hr class="featurette-divider">
+    </div>
+
+    <hr class="featurette-divider">
+
+    <div class="container marketing">
 
       <div class="row featurette"><a name="raster"></a>
         <div class="col-md-7 col-md-push-5">
-          <h2 class="featurette-heading">Raster grid</h2>
+          <h2 class="featurette-heading">Raster grids</h2>
           <h3 class="text-muted">Grid statistics, resizing, resampling, and profile extraction</h3>
-          <p class="lead text-left">Regularly-spaced grids are represented by <code>karta.RegularGrid</code>. Grids with arbitrary spacing can be represented by the somewhat-experimental <code>karta.WarpedGrid</code> class. Grids can be clipped, resampled, queried at geographical points, and read or written to ESRI ASCII files or to GeoTiff via GDAL.</p>
+          <p class="lead text-left">Regularly-spaced grids are represented by <code>karta.RegularGrid</code>, with data backed by numpy arrays. Grids with arbitrary spacing can be represented by the somewhat-experimental <code>karta.WarpedGrid</code> class. Grids can be clipped, resampled, queried at geographical points, and read or written to ESRI ASCII files or to GeoTiff via GDAL.</p>
 
           <pre class="text-left">
 grid = read_gtiff("glacier_landsat.tif")
@@ -170,13 +177,17 @@ plt.imshow(grid.values, extent=grid.get_extent(), origin="bottom") </pre>
         </div>
       </div>
 
-      <hr class="featurette-divider">
+    </div>
+
+    <hr class="featurette-divider">
+
+    <div class="container marketing">
 
       <div class="row featurette"><a name="geod"></a>
         <div class="col-md-7">
           <h2 class="featurette-heading">Coordinate reference systems and geodesy</h2>
           <h3 class="text-muted">Karta is like a baby GIS in your pocket</h3>
-          <p class="lead text-left">Geometries and Grids are referenced to coordinate reference system objects (<code>karta.crs.CRS</code>) that provide information about the geographical projection and geodetic relationships between positions. Distances and areas on planes, spheres, and ellipsoids are handled in Karta, while generic proj.4 projections are handled by <code>Proj4CRS</code> with help from <a href="http://jswhit.github.io/pyproj/">pyproj</a>.</p>
+          <p class="lead text-left">Geometries and Grids are referenced to coordinate reference system objects (<code>karta.crs.CRS</code>) that provide information about the geographical projection and geodetic relationships between positions. Distances and areas on planes, spheres, and ellipsoids are handled in Karta, while coordinate projection relies on <a href="http://jswhit.github.io/pyproj/">pyproj</a> via the <code>Proj4CRS</code> subclass.</p>
         </div>
         <div class="col-md-5">
           <!--<img class="featurette-image img-responsive center-block" data-src="holder.js/500x500/auto" alt="Generic placeholder image">-->
@@ -217,9 +228,11 @@ plt.imshow(grid.values, extent=grid.get_extent(), origin="bottom") </pre>
     $(".masthead").css("background-color", "rgba(255, 255, 255, 0)");
     $(document).scroll(function () {
       if ($(window).scrollTop() > $("#top-feature").offset().top + $("#top-feature").height()) {
-        $(".masthead").css("visibility", "hidden");
+        //$(".masthead").css("visibility", "hidden");
+        $(".masthead").fadeOut()
       } else {
-        $(".masthead").css("visibility", "visible");
+        //$(".masthead").css("visibility", "visible");
+        $(".masthead").fadeIn()
       }
     });
     </script>
