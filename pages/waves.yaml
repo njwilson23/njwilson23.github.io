@@ -1,5 +1,3 @@
-template: ../templates/main-template.html
-title-raw: Waves
-header: waves/header.html
-body: waves/body.html
+template: ../templates/none.html
+body: waves/fullpage.html
 

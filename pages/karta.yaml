@@ -1,7 +1,6 @@
 template: ../templates/karta-template.html
 title-raw: Karta
-#header: karta/header.html
-#header-raw: <link href="stylesheets/cover-manpage.css" rel="stylesheet">
-nav: index/nav.html
+header: header-tracking.html
+nav: nav-global.html
 body: karta/body.html
 output: ../karta.html
