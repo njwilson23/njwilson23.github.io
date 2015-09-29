@@ -34,9 +34,6 @@
 
   <body>
 
-    <style>
-    </style>
-
     <div class="navbar-wrapper">
       <div class="cover-container">
 
@@ -170,7 +167,7 @@ polygon.to_shapefile("outline.shp") </pre>
           <p class="lead text-left">Regularly-spaced grids are represented by <code>karta.RegularGrid</code>, with data backed by numpy arrays. Grids with arbitrary spacing can be represented by the somewhat-experimental <code>karta.WarpedGrid</code> class. Grids can be clipped, resampled, queried at geographical points, and read or written to ESRI ASCII files or to GeoTiff via GDAL.</p>
 
           <pre class="text-left">
-grid = read_gtiff("glacier_landsat.tif")
+grid = read_gtiff("LC80360272015200.tif")
 grid = grid.resample(100, 100)
 plt.imshow(grid.values, extent=grid.get_extent(), origin="bottom") </pre>
         </div>
@@ -228,16 +225,18 @@ plt.imshow(grid.values, extent=grid.get_extent(), origin="bottom") </pre>
     <script src="js/external/ie10-viewport-bug-workaround.js"></script>
 
     <script type="text/javascript">
-    $(".masthead").css("background-color", "rgba(255, 255, 255, 0)");
-    $(document).scroll(function () {
-      if ($(window).scrollTop() > $("#top-feature").offset().top + $("#top-feature").height()) {
-        
-        $(".masthead").fadeOut()
-      } else {
-        
-        $(".masthead").fadeIn()
-      }
-    });
+
+    var media_wide = window.matchMedia("all and (min-width: 768px)");
+    if (media_wide.matches) {
+      $(document).scroll(function () {
+        if ($(window).scrollTop() > $("#top-feature").offset().top + $("#top-feature").height()) {
+          $(".masthead").fadeOut()
+        } else {
+          $(".masthead").fadeIn()
+        }
+      });
+    };
+
     </script>
 
 </body></html>

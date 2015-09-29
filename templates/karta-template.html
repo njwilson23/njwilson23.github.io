@@ -28,9 +28,6 @@
 ================================================== -->
   <body>
 
-    <style>
-    </style>
-
     <div class="navbar-wrapper">
       <div class="cover-container">
 
@@ -53,16 +50,18 @@
     <script src="js/external/ie10-viewport-bug-workaround.js"></script>
 
     <script type="text/javascript">
-    $(".masthead").css("background-color", "rgba(255, 255, 255, 0)");
-    $(document).scroll(function () {
-      if ($(window).scrollTop() > $("#top-feature").offset().top + $("#top-feature").height()) {
-        //$(".masthead").css("visibility", "hidden");
-        $(".masthead").fadeOut()
-      } else {
-        //$(".masthead").css("visibility", "visible");
-        $(".masthead").fadeIn()
-      }
-    });
+
+    var media_wide = window.matchMedia("all and (min-width: 768px)");
+    if (media_wide.matches) {
+      $(document).scroll(function () {
+        if ($(window).scrollTop() > $("#top-feature").offset().top + $("#top-feature").height()) {
+          $(".masthead").fadeOut()
+        } else {
+          $(".masthead").fadeIn()
+        }
+      });
+    };
+
     </script>
 
 </body></html>

@@ -87,7 +87,7 @@ polygon.to_shapefile("outline.shp") </pre>
           <p class="lead text-left">Regularly-spaced grids are represented by <code>karta.RegularGrid</code>, with data backed by numpy arrays. Grids with arbitrary spacing can be represented by the somewhat-experimental <code>karta.WarpedGrid</code> class. Grids can be clipped, resampled, queried at geographical points, and read or written to ESRI ASCII files or to GeoTiff via GDAL.</p>
 
           <pre class="text-left">
-grid = read_gtiff("glacier_landsat.tif")
+grid = read_gtiff("LC80360272015200.tif")
 grid = grid.resample(100, 100)
 plt.imshow(grid.values, extent=grid.get_extent(), origin="bottom") </pre>
         </div>
