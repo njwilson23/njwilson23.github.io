@@ -21,14 +21,14 @@ video#bgvid {
 }
 
 /* Disable video on mobile */
-@media screen and (max-device-width: 800px) {
+/*@media screen and (max-device-width: 800px) {
   body {
     background-image: url("../images/ravendance.jpg")
   }
   #bgvid {
     display: none;
   }
-}
+}*/
 
 /* div.choice {
   height: 20em;
