@@ -2,4 +2,4 @@ template: ../templates/narwhal-template.html
 title-raw: Narwhal - Oceanographic Data Analysis in Python
 header: header-tracking.html
 body: narwhal/body.html
-output-html: ../narwhal/narwhal.html
+output-html: ../narwhal.html
