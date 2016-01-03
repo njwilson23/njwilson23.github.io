@@ -54,7 +54,7 @@
     var media_wide = window.matchMedia("all and (min-width: 768px)");
     if (media_wide.matches) {
       $(document).scroll(function () {
-        if ($(window).scrollTop() > $("#top-feature").offset().top + $("#top-feature").height()) {
+        if ($(window).scrollTop() > $("#top-feature").offset().top) {
           $(".masthead").fadeOut()
         } else {
           $(".masthead").fadeIn()

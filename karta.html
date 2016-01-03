@@ -80,7 +80,7 @@
 
     <div class="container marketing" id="top-container" style="margin-bottom: 20px;">
 
-      <div class="row options" style="padding-top: 250px; padding-bottom: 50px;" id="banner">
+      <div class="row options" style="padding-top: 260px; padding-bottom: 50px;" id="banner">
         <div class="col-lg-12">
           <h2>Karta is a Pythonic toolkit for small- and medium-sized geospatial data tasks</h2>
         </div>
@@ -116,7 +116,7 @@
       <div class="row options">
         <div class="col-md-12">
           <p>
-             <a class="btn btn-default" href="kartadocs/karta-manual.html" role="button">Documentation</a>
+             <a class="btn btn-default" href="kartadocs/karta-manual.html" role="button">API Docs</a>
              <a class="btn btn-default" href="https://pypi.python.org/pypi/karta/" role="button">PyPI</a>
              <a class="btn btn-default" href="https://github.com/njwilson23/karta" role="button">Github</a>
           </p>
@@ -226,7 +226,7 @@ plt.imshow(grid.values, extent=grid.get_extent(), origin="bottom") </pre>
     var media_wide = window.matchMedia("all and (min-width: 768px)");
     if (media_wide.matches) {
       $(document).scroll(function () {
-        if ($(window).scrollTop() > $("#top-feature").offset().top + $("#top-feature").height()) {
+        if ($(window).scrollTop() > $("#top-feature").offset().top) {
           $(".masthead").fadeOut()
         } else {
           $(".masthead").fadeIn()
