@@ -96,7 +96,7 @@
             /* TODO: Should only look in the nav element */
             var lis = document.getElementsByTagName("li");
             for (var i = 0; i != lis.length; i++) {
-              if (lis[i].innerHTML.contains("IronicMtn")) {
+              if (lis[i].innerHTML.indexOf("IronicMtn") != -1) {
                 lis[i].className += "active";
                 break
               }
