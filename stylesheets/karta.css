@@ -5,12 +5,8 @@
 }
 
 #top-container {
-  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 96%,  rgba(140, 140, 140, 1)), url('../images/sky_pilot_banner.jpg');
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.5) 96%,  rgba(68, 68, 68, 1)), url('../images/sky_pilot_banner.jpg');
   background-size: cover;
-}
-
-.options {
-  background-color: rgba(0, 0, 0, 0.5);
 }
 
 .featurette-heading {

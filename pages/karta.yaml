@@ -3,4 +3,5 @@ oro-output: ../karta.html
 raw-title: Karta
 html-header: header-tracking.html
 html-nav: nav-global.html
-html-body: karta/body.html
+html-topcontainer: karta/topcontainer.html
+html-body: karta/features.html
