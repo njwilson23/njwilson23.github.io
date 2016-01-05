@@ -1,5 +1,5 @@
-template: ../templates/cover-template.html
-title-raw: ironicmtn
-header: index/header.html
-nav: nav-global.html
-body: index/body.html
+oro-template: ../templates/cover-template.html
+raw-title: ironicmtn
+html-header: index/header.html
+html-nav: nav-global.html
+html-body: index/body.html

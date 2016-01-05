@@ -1,6 +1,6 @@
-template: ../templates/cover-template.html
-title-raw: Radar tools (irlib)
-#header: karta/header.html
-header-raw: <link href="stylesheets/cover-manpage.css" rel="stylesheet">
-nav: index/nav.html
-body: irlib/body.html
+oro-template: ../templates/cover-template.html
+raw-title: Radar tools (irlib)
+#html-header: karta/header.html
+raw-header: <link href="stylesheets/cover-manpage.css" rel="stylesheet">
+html-nav: index/nav.html
+html-body: irlib/body.html

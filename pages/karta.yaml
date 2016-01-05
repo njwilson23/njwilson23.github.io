@@ -1,6 +1,6 @@
-template: ../templates/karta-template.html
-title-raw: Karta
-header: header-tracking.html
-nav: nav-global.html
-body: karta/body.html
-output: ../karta.html
+oro-template: ../templates/karta-template.html
+oro-output: ../karta.html
+raw-title: Karta
+html-header: header-tracking.html
+html-nav: nav-global.html
+html-body: karta/body.html

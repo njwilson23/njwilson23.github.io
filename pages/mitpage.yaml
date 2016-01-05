@@ -1,6 +1,6 @@
-template: ../templates/cover-template.html
-title-raw: njw MIT/WHOI
-header: mitpage/header.html
-nav: index/nav.html
-body: mitpage/body.html
-footer: mitpage/footer.html
+oro-template: ../templates/cover-template.html
+raw-title: njw MIT/WHOI
+html-header: mitpage/header.html
+html-nav: index/nav.html
+html-body: mitpage/body.html
+html-footer: mitpage/footer.html

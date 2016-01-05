@@ -1,5 +1,5 @@
-template: ../templates/narwhal-template.html
-title-raw: Narwhal - Oceanographic Data Analysis in Python
-header: header-tracking.html
-body: narwhal/features.html
-output-html: ../narwhal-features.html
+oro-template: ../templates/narwhal-template.html
+raw-title: Narwhal - Oceanographic Data Analysis in Python
+html-header: header-tracking.html
+html-body: narwhal/features.html
+oro-output: ../narwhal-features.html
