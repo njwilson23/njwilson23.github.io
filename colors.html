@@ -597,17 +597,20 @@
 
     <script>
       function componentToHex(c) {
-          var hex = c.toString(16).toUpperCase();
-          return hex.length == 1 ? "0" + hex : hex;
+        // convert an integer to hexadecimal
+        var hex = c.toString(16).toUpperCase();
+        return hex.length == 1 ? "0" + hex : hex;
       }
 
       function rgbToHex(r, g, b) {
-          return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
+        // convert rgb values to a hexadecimal string
+        return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
       }
 
       function stringToRgb(s) {
+        // convert a string like "rgb(255, 255, 255)" to and RGB triplet
         var a = s.slice(4, s.length-1).split(",");
-        return a.map(parseInt);
+        return a.map(parseFloat);
       }
 
       var swatches = document.getElementsByClassName("swatch");
@@ -615,6 +618,7 @@
         var div = swatches[i]
         div.addEventListener("mouseenter", function( ev ) {
           var sty = window.getComputedStyle(ev.target);
+          console.log(sty.getPropertyValue("background-color"))
           var rgb = stringToRgb(sty.getPropertyValue("background-color"));
           var hex = rgbToHex(rgb[0], rgb[1], rgb[2]);
           ev.target
