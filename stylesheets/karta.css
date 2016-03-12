@@ -6,11 +6,8 @@ body {
   font-size: 16pt;
 }
 
-section {
+#title {
   width: 100%;
-}
-
-section#title {
   height: 100vh;
   display: table;
   background-size: cover;
@@ -42,10 +39,11 @@ h2 {
   font-family: 'Source Code Pro', monospace;
   font-weight: 700;
   text-align: right;
+  padding-right: 1em;
 }
 
 .subtitle {
-  margin: 1em 0em;
+  margin: 1em 0.5em;
 }
 
 div.container {
@@ -69,29 +67,34 @@ a.button {
   text-decoration: none;
 }
 
+a.button:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  transition-duration: 0.2s;
+}
+
 footer {
   text-align: center;
   margin: 0px auto;
   padding: 2em 2em;
-  background-size: contain;
   background-color: rgba(30, 30, 30, 1.0);
 }
 
+section, footer {
+  overflow: hidden;
+  margin-left: -15px;
+  margin-right: -15px;
+  padding: 2em;
+}
+
 section#raster {
-  display: table;
-  background-size: cover;
   background-color: rgba(100,100,100,0.5);
 }
 
 section#vector {
-  display: table;
-  background-size: cover;
   background-color: rgba(100,100,100,0.3);
 }
 
 section#geodesy {
-  display: table;
-  background-size: cover;
   background-color: rgba(100,100,100,0.5);
 }
 
