@@ -1,43 +1,143 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>Karta tutorial &mdash; karta 0.5.0 documentation</title>
-    
-    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    './',
-        VERSION:     '0.5.0',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
-      };
-    </script>
-    <script type="text/javascript" src="_static/jquery.js"></script>
-    <script type="text/javascript" src="_static/underscore.js"></script>
-    <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="karta 0.5.0 documentation" href="karta-manual.html" />
-    <link rel="next" title="Package reference" href="reference.html" />
-    <link rel="prev" title="Installation" href="installation.html" />
-   
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
   
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Karta tutorial &mdash; karta 0.6dev documentation</title>
+  
 
-  </head>
-  <body role="document">  
+  
+  
 
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body" role="main">
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="karta 0.6dev documentation" href="index.html"/>
+        <link rel="next" title="Package reference" href="reference.html"/>
+        <link rel="prev" title="Installation" href="installation.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="karta-manual.html" class="icon icon-home"> karta
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.6
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Karta tutorial</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#definitions">Definitions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#vector-data">Vector data</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#associated-data">Associated data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#visualizing-and-importing-exporting-data">Visualizing and importing/exporting data</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#raster-data">Raster data</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="reference.html">Package reference</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="karta-manual.html">karta</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="karta-manual.html">Docs</a> &raquo;</li>
+      
+    <li>Karta tutorial</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/tutorial.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
             
   <p><a class="reference external" href="../karta-manual.html">Back to manual</a></p>
 <div class="section" id="karta-tutorial">
@@ -83,13 +183,13 @@ accomplish in the future.</li>
 <div class="section" id="vector-data">
 <h2>Vector data<a class="headerlink" href="#vector-data" title="Permalink to this headline">¶</a></h2>
 <p>Let&#8217;s experiment with some vector data.</p>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">karta.vector</span> <span class="kn">import</span> <span class="n">Point</span><span class="p">,</span> <span class="n">Multipoint</span><span class="p">,</span> <span class="n">Line</span><span class="p">,</span> <span class="n">Polygon</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">karta.vector</span> <span class="kn">import</span> <span class="n">Point</span><span class="p">,</span> <span class="n">Multipoint</span><span class="p">,</span> <span class="n">Line</span><span class="p">,</span> <span class="n">Polygon</span>
 </pre></div>
 </div>
 <p>The <code class="docutils literal"><span class="pre">Point</span></code>, <code class="docutils literal"><span class="pre">Multipoint</span></code>, <code class="docutils literal"><span class="pre">Line</span></code>, and <code class="docutils literal"><span class="pre">Polygon</span></code> classes can all
 be instantiated by providing vertices, and optionally, associated data
 and metadata.</p>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="n">pt</span> <span class="o">=</span> <span class="n">Point</span><span class="p">((</span><span class="o">-</span><span class="mf">123.1</span><span class="p">,</span> <span class="mf">49.25</span><span class="p">))</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span></span><span class="n">pt</span> <span class="o">=</span> <span class="n">Point</span><span class="p">((</span><span class="o">-</span><span class="mf">123.1</span><span class="p">,</span> <span class="mf">49.25</span><span class="p">))</span>
 
 <span class="n">mpt</span> <span class="o">=</span> <span class="n">Multipoint</span><span class="p">([(</span><span class="o">-</span><span class="mf">122.93</span><span class="p">,</span> <span class="mf">48.62</span><span class="p">),</span>
                   <span class="p">(</span><span class="o">-</span><span class="mf">123.10</span><span class="p">,</span> <span class="mf">48.54</span><span class="p">),</span>
@@ -115,7 +215,7 @@ and metadata.</p>
 <span class="k">print</span><span class="p">(</span><span class="n">poly</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre>Point((-123.1, 49.25))
+<div class="highlight-python"><div class="highlight"><pre><span></span>Point((-123.1, 49.25))
 &lt;class &#39;karta.vector.geometry.Multipoint&#39;([(-122.93, 48.62), (-123.1, 48.54), (-122.9, 48.49), (-122.81, 48.56)])&gt;
 &lt;class &#39;karta.vector.geometry.Line&#39;([(-124.35713, 49.31437), (-124.37857, 49.3172)...(-124.41681, 49.32477), (-124.42278, 49.32588)])&gt;
 &lt;class &#39;karta.vector.geometry.Polygon&#39;([(-25.41, 67.03), (-24.83, 62.92), (-12.76, 63.15), (-11.44, 66.82)])&gt;
@@ -125,75 +225,75 @@ and metadata.</p>
 plane.</p>
 <p>We may be interested in determining whether our point is within our
 polygon</p>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="k">print</span><span class="p">(</span><span class="n">poly</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="n">pt</span><span class="p">))</span>       <span class="c"># False</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="n">poly</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="n">pt</span><span class="p">))</span>       <span class="c1"># False</span>
 
 <span class="n">pt2</span> <span class="o">=</span> <span class="n">Point</span><span class="p">((</span><span class="o">-</span><span class="mi">25</span><span class="p">,</span> <span class="mi">65</span><span class="p">))</span>
-<span class="k">print</span><span class="p">(</span><span class="n">poly</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="n">pt2</span><span class="p">))</span>      <span class="c"># True</span>
+<span class="k">print</span><span class="p">(</span><span class="n">poly</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="n">pt2</span><span class="p">))</span>      <span class="c1"># True</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="bp">False</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="bp">False</span>
 <span class="bp">True</span>
 </pre></div>
 </div>
 <p>or whether our line crosses the polygon</p>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="k">print</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">intersects</span><span class="p">(</span><span class="n">poly</span><span class="p">))</span>   <span class="c"># False</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">intersects</span><span class="p">(</span><span class="n">poly</span><span class="p">))</span>   <span class="c1"># False</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="bp">False</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="bp">False</span>
 </pre></div>
 </div>
 <p>There are methods for computing the nearest vertex to an external point,
 or the nearest point on an edge to an external point:</p>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="n">pt</span> <span class="o">=</span> <span class="n">Point</span><span class="p">((</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">60.0</span><span class="p">))</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span></span><span class="n">pt</span> <span class="o">=</span> <span class="n">Point</span><span class="p">((</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">60.0</span><span class="p">))</span>
 <span class="k">print</span><span class="p">(</span><span class="n">poly</span><span class="o">.</span><span class="n">nearest_point_to</span><span class="p">(</span><span class="n">pt</span><span class="p">))</span>
 <span class="k">print</span><span class="p">(</span><span class="n">poly</span><span class="o">.</span><span class="n">nearest_on_boundary</span><span class="p">(</span><span class="n">pt</span><span class="p">))</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">Point</span><span class="p">((</span><span class="o">-</span><span class="mf">12.76</span><span class="p">,</span> <span class="mf">63.15</span><span class="p">))</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">Point</span><span class="p">((</span><span class="o">-</span><span class="mf">12.76</span><span class="p">,</span> <span class="mf">63.15</span><span class="p">))</span>
 <span class="n">Point</span><span class="p">((</span><span class="o">-</span><span class="mf">12.301580009598124</span><span class="p">,</span> <span class="mf">64.42454648846582</span><span class="p">))</span>
 </pre></div>
 </div>
 <p>The vertices of multiple vertex objects can be iterated through and
 sliced:</p>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="n">section</span> <span class="o">=</span> <span class="n">line</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span></span><span class="n">section</span> <span class="o">=</span> <span class="n">line</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span>
 <span class="k">for</span> <span class="n">pt</span> <span class="ow">in</span> <span class="n">section</span><span class="p">:</span>
     <span class="k">print</span><span class="p">(</span><span class="n">pt</span><span class="o">.</span><span class="n">vertex</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="p">(</span><span class="o">-</span><span class="mf">124.39442</span><span class="p">,</span> <span class="mf">49.31833</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="p">(</span><span class="o">-</span><span class="mf">124.39442</span><span class="p">,</span> <span class="mf">49.31833</span><span class="p">)</span>
 <span class="p">(</span><span class="o">-</span><span class="mf">124.40311</span><span class="p">,</span> <span class="mf">49.31942</span><span class="p">)</span>
 <span class="p">(</span><span class="o">-</span><span class="mf">124.41052</span><span class="p">,</span> <span class="mf">49.32203</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>A slice that takes part of a polygon returns a line.</p>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="k">print</span><span class="p">(</span><span class="n">poly</span><span class="p">[:</span><span class="mi">2</span><span class="p">])</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="n">poly</span><span class="p">[:</span><span class="mi">2</span><span class="p">])</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre>&lt;class &#39;karta.vector.geometry.Line&#39;([(-25.41, 67.03), (-24.83, 62.92)])&gt;
+<div class="highlight-python"><div class="highlight"><pre><span></span>&lt;class &#39;karta.vector.geometry.Line&#39;([(-25.41, 67.03), (-24.83, 62.92)])&gt;
 </pre></div>
 </div>
 <p>Points have a <code class="docutils literal"><span class="pre">distance</span></code> that calculates the distance to another
 point. However, if we do</p>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="n">pt</span> <span class="o">=</span> <span class="n">Point</span><span class="p">((</span><span class="o">-</span><span class="mf">123.1</span><span class="p">,</span> <span class="mf">49.25</span><span class="p">))</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span></span><span class="n">pt</span> <span class="o">=</span> <span class="n">Point</span><span class="p">((</span><span class="o">-</span><span class="mf">123.1</span><span class="p">,</span> <span class="mf">49.25</span><span class="p">))</span>
 <span class="n">pt2</span> <span class="o">=</span> <span class="n">Point</span><span class="p">((</span><span class="o">-</span><span class="mf">70.66</span><span class="p">,</span> <span class="mf">41.52</span><span class="p">))</span>
 <span class="k">print</span><span class="p">(</span><span class="n">pt</span><span class="o">.</span><span class="n">distance</span><span class="p">(</span><span class="n">pt2</span><span class="p">))</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="mf">53.00666467530286</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="mf">53.00666467530286</span>
 </pre></div>
 </div>
 <p>this probably isn&#8217;t what we wanted. Be default, geometries in Karta use
 a planar cartesian coordinate system. If our positions are meant to be
 geographical coordinates, then we can provide the <code class="docutils literal"><span class="pre">crs</span></code> argument to
 each geometry at creation, as in</p>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">karta</span> <span class="kn">import</span> <span class="n">crs</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">karta</span> <span class="kn">import</span> <span class="n">crs</span>
 
 <span class="n">pt</span> <span class="o">=</span> <span class="n">Point</span><span class="p">((</span><span class="o">-</span><span class="mf">123.1</span><span class="p">,</span> <span class="mf">49.25</span><span class="p">),</span> <span class="n">crs</span><span class="o">=</span><span class="n">crs</span><span class="o">.</span><span class="n">LonLatWGS84</span><span class="p">)</span>
 <span class="n">pt2</span> <span class="o">=</span> <span class="n">Point</span><span class="p">((</span><span class="o">-</span><span class="mf">70.66</span><span class="p">,</span> <span class="mf">41.52</span><span class="p">),</span> <span class="n">crs</span><span class="o">=</span><span class="n">crs</span><span class="o">.</span><span class="n">LonLatWGS84</span><span class="p">)</span>
 <span class="n">pt</span><span class="o">.</span><span class="n">distance</span><span class="p">(</span><span class="n">pt2</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="mf">4109559.587727985</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="mf">4109559.587727985</span>
 </pre></div>
 </div>
 <p>which now gives the great circle distance between point on the Earth, in
@@ -201,16 +301,16 @@ meters.</p>
 <p>When the coordinate system is specified, all geometrical methods obey
 that coordinate system. We can use this to perform queries, such which
 American state capitols are within 2000 km of Mexico City?</p>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">karta.examples</span> <span class="kn">import</span> <span class="n">us_capitols</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">karta.examples</span> <span class="kn">import</span> <span class="n">us_capitols</span>
 <span class="n">mexico_city</span> <span class="o">=</span> <span class="n">Point</span><span class="p">((</span><span class="o">-</span><span class="mf">99.13</span><span class="p">,</span> <span class="mf">19.43</span><span class="p">),</span> <span class="n">crs</span><span class="o">=</span><span class="n">crs</span><span class="o">.</span><span class="n">LonLatWGS84</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="c"># List all US state capitols</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span></span><span class="c1"># List all US state capitols</span>
 <span class="k">for</span> <span class="n">capitol</span> <span class="ow">in</span> <span class="n">us_capitols</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">capitol</span><span class="o">.</span><span class="n">properties</span><span class="p">[</span><span class="s">&quot;n&quot;</span><span class="p">],</span> <span class="n">capitol</span><span class="o">.</span><span class="n">vertex</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">capitol</span><span class="o">.</span><span class="n">properties</span><span class="p">[</span><span class="s2">&quot;n&quot;</span><span class="p">],</span> <span class="n">capitol</span><span class="o">.</span><span class="n">vertex</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre>Phoenix, Arizona, United States (-112.1, 33.57)
+<div class="highlight-python"><div class="highlight"><pre><span></span>Phoenix, Arizona, United States (-112.1, 33.57)
 Sacramento, California, United States (-121.5, 38.57)
 Atlanta, Georgia, United States (-84.42, 33.76)
 Indianapolis, Indiana, United States (-86.15, 39.78)
@@ -263,13 +363,13 @@ Madison, Wisconsin, United States (-89.43, 43.09)
 Cheyenne, Wyoming, United States (-104.8, 41.15)
 </pre></div>
 </div>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="c"># Filter those within 2000 km of Mexico City</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span></span><span class="c1"># Filter those within 2000 km of Mexico City</span>
 <span class="n">nearby</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">pt</span><span class="p">:</span> <span class="n">pt</span><span class="o">.</span><span class="n">distance</span><span class="p">(</span><span class="n">mexico_city</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">2000e3</span><span class="p">,</span> <span class="n">us_capitols</span><span class="p">))</span>
 <span class="k">for</span> <span class="n">capitol</span> <span class="ow">in</span> <span class="n">nearby</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">capitol</span><span class="o">.</span><span class="n">properties</span><span class="p">[</span><span class="s">&quot;n&quot;</span><span class="p">])</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">capitol</span><span class="o">.</span><span class="n">properties</span><span class="p">[</span><span class="s2">&quot;n&quot;</span><span class="p">])</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre>Oklahoma City, Oklahoma, United States
+<div class="highlight-python"><div class="highlight"><pre><span></span>Oklahoma City, Oklahoma, United States
 Montgomery, Alabama, United States
 Little Rock, Arkansas, United States
 Tallahassee, Florida, United States
@@ -279,14 +379,14 @@ Santa Fe, New Mexico, United States
 Austin, Texas, United States
 </pre></div>
 </div>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="c"># Or, list capitols from nearest to furthest from Mexico City</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span></span><span class="c1"># Or, list capitols from nearest to furthest from Mexico City</span>
 <span class="n">distances</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">pt</span><span class="p">:</span> <span class="n">mexico_city</span><span class="o">.</span><span class="n">distance</span><span class="p">(</span><span class="n">pt</span><span class="p">),</span> <span class="n">us_capitols</span><span class="p">)</span>
 <span class="n">distances_capitols</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">distances</span><span class="p">,</span> <span class="n">us_capitols</span><span class="p">))</span>
 <span class="k">for</span> <span class="n">d</span><span class="p">,</span> <span class="n">pt</span> <span class="ow">in</span> <span class="n">distances_capitols</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="s">&quot;{km:.0f} km, {name}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">km</span><span class="o">=</span><span class="n">d</span><span class="o">/</span><span class="mf">1e3</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">pt</span><span class="o">.</span><span class="n">properties</span><span class="p">[</span><span class="s">&quot;n&quot;</span><span class="p">]))</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;{km:.0f} km, {name}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">km</span><span class="o">=</span><span class="n">d</span><span class="o">/</span><span class="mf">1e3</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">pt</span><span class="o">.</span><span class="n">properties</span><span class="p">[</span><span class="s2">&quot;n&quot;</span><span class="p">]))</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre>1213 km, Austin, Texas, United States
+<div class="highlight-python"><div class="highlight"><pre><span></span>1213 km, Austin, Texas, United States
 1463 km, Baton Rouge, Louisiana, United States
 1683 km, Jackson, Mississippi, United States
 1785 km, Oklahoma City, Oklahoma, United States
@@ -347,38 +447,38 @@ Austin, Texas, United States
 <h3>Associated data<a class="headerlink" href="#associated-data" title="Permalink to this headline">¶</a></h3>
 <p>By using the <code class="docutils literal"><span class="pre">data</span></code> keyword argument, additional data can be
 associated with a vector geometry.</p>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="n">mp</span> <span class="o">=</span> <span class="n">Multipoint</span><span class="p">([(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)],</span>
-                <span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="s">&quot;species&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s">&quot;T. officianale&quot;</span><span class="p">,</span> <span class="s">&quot;C. tectorum&quot;</span><span class="p">,</span>
-                                  <span class="s">&quot;M. alba&quot;</span><span class="p">,</span> <span class="s">&quot;V. cracca&quot;</span><span class="p">]})</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span></span><span class="n">mp</span> <span class="o">=</span> <span class="n">Multipoint</span><span class="p">([(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)],</span>
+                <span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;species&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;T. officianale&quot;</span><span class="p">,</span> <span class="s2">&quot;C. tectorum&quot;</span><span class="p">,</span>
+                                  <span class="s2">&quot;M. alba&quot;</span><span class="p">,</span> <span class="s2">&quot;V. cracca&quot;</span><span class="p">]})</span>
 </pre></div>
 </div>
 <p>The data can be a list or a dictionary of lists, and are propogated
 through subsequent operations.</p>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="n">pt</span> <span class="o">=</span> <span class="n">mp</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span></span><span class="n">pt</span> <span class="o">=</span> <span class="n">mp</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
 
 <span class="k">print</span><span class="p">(</span><span class="n">pt</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">pt</span><span class="o">.</span><span class="n">d</span><span class="p">[</span><span class="s">&quot;species&quot;</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="n">pt</span><span class="o">.</span><span class="n">d</span><span class="p">[</span><span class="s2">&quot;species&quot;</span><span class="p">])</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">Point</span><span class="p">((</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
-<span class="p">[</span><span class="s">&#39;M. alba&#39;</span><span class="p">]</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">Point</span><span class="p">((</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="p">[</span><span class="s1">&#39;M. alba&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
 <p>Metadata at the geometry level rather than the point level can be
 provided using the <code class="docutils literal"><span class="pre">properties</span></code> keyword argument, which accepts a
 dictionary. Derived geometries carry the properties of their parent
 geometry.</p>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="n">poly</span> <span class="o">=</span> <span class="n">Polygon</span><span class="p">([(</span><span class="o">-</span><span class="mf">25.41</span><span class="p">,</span> <span class="mf">67.03</span><span class="p">),</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span></span><span class="n">poly</span> <span class="o">=</span> <span class="n">Polygon</span><span class="p">([(</span><span class="o">-</span><span class="mf">25.41</span><span class="p">,</span> <span class="mf">67.03</span><span class="p">),</span>
                 <span class="p">(</span><span class="o">-</span><span class="mf">24.83</span><span class="p">,</span> <span class="mf">62.92</span><span class="p">),</span>
                 <span class="p">(</span><span class="o">-</span><span class="mf">12.76</span><span class="p">,</span> <span class="mf">63.15</span><span class="p">),</span>
                 <span class="p">(</span><span class="o">-</span><span class="mf">11.44</span><span class="p">,</span> <span class="mf">66.82</span><span class="p">)],</span>
-               <span class="n">properties</span><span class="o">=</span><span class="p">{</span><span class="s">&quot;geology&quot;</span><span class="p">:</span> <span class="s">&quot;volcanic&quot;</span><span class="p">,</span>
-                           <span class="s">&quot;alcohol&quot;</span><span class="p">:</span> <span class="s">&quot;brennivin&quot;</span><span class="p">})</span>
+               <span class="n">properties</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;geology&quot;</span><span class="p">:</span> <span class="s2">&quot;volcanic&quot;</span><span class="p">,</span>
+                           <span class="s2">&quot;alcohol&quot;</span><span class="p">:</span> <span class="s2">&quot;brennivin&quot;</span><span class="p">})</span>
 
 <span class="k">print</span><span class="p">(</span><span class="n">poly</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">])</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre>&lt;class &#39;karta.vector.geometry.Line&#39;([(-25.41, 67.03), (-24.83, 62.92), (-12.76, 63.15)])&gt;
+<div class="highlight-python"><div class="highlight"><pre><span></span>&lt;class &#39;karta.vector.geometry.Line&#39;([(-25.41, 67.03), (-24.83, 62.92), (-12.76, 63.15)])&gt;
 </pre></div>
 </div>
 </div>
@@ -386,7 +486,7 @@ geometry.</p>
 <h3>Visualizing and importing/exporting data<a class="headerlink" href="#visualizing-and-importing-exporting-data" title="Permalink to this headline">¶</a></h3>
 <p>The <code class="docutils literal"><span class="pre">get_coordinate_lists</span></code> method provides lists of coordinates, which
 make is easy to visualize a geometry.</p>
-<div class="code python highlight-python"><div class="highlight"><pre>import matplotlib.pyplot as plt
+<div class="code python highlight-python"><div class="highlight"><pre><span></span>import matplotlib.pyplot as plt
 %matplotlib qt
 plt.plot(*line.coordinates)
 </pre></div>
@@ -396,17 +496,17 @@ plt.plot(*line.coordinates)
 separated value tables. Convenience functions are kept in the
 <code class="docutils literal"><span class="pre">karta.vector.read</span></code> namespace.</p>
 <p>Each geometry has appropriate methods to save data:</p>
-<div class="code python highlight-python"><div class="highlight"><pre><span class="n">mp</span><span class="o">.</span><span class="n">to_vtk</span><span class="p">(</span><span class="s">&quot;my_vtk.vtk&quot;</span><span class="p">)</span>
-<span class="n">line</span><span class="o">.</span><span class="n">to_shapefile</span><span class="p">(</span><span class="s">&quot;my_shapefile&quot;</span><span class="p">)</span>
-<span class="n">poly</span><span class="o">.</span><span class="n">to_geojson</span><span class="p">(</span><span class="s">&quot;my_json.json&quot;</span><span class="p">)</span>
+<div class="code python highlight-python"><div class="highlight"><pre><span></span><span class="n">mp</span><span class="o">.</span><span class="n">to_vtk</span><span class="p">(</span><span class="s2">&quot;my_vtk.vtk&quot;</span><span class="p">)</span>
+<span class="n">line</span><span class="o">.</span><span class="n">to_shapefile</span><span class="p">(</span><span class="s2">&quot;my_shapefile&quot;</span><span class="p">)</span>
+<span class="n">poly</span><span class="o">.</span><span class="n">to_geojson</span><span class="p">(</span><span class="s2">&quot;my_json.json&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre>Warning: CRS URN lookup not implemented
+<div class="highlight-python"><div class="highlight"><pre><span></span>Warning: CRS URN lookup not implemented
 &lt;class &#39;karta.crs.Cartesian&#39;&gt;
 returning CRS name instead
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre>&lt;karta.vector.geojson.GeoJSONWriter at 0x7f5939d389b0&gt;
+<div class="highlight-python"><div class="highlight"><pre><span></span>&lt;karta.vector.geojson.GeoJSONWriter at 0x7f5939d389b0&gt;
 </pre></div>
 </div>
 </div>
@@ -418,72 +518,72 @@ returning CRS name instead
 </div>
 
 
+           </div>
           </div>
-        </div>
-      </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper">
-  <h3><a href="karta-manual.html">Table Of Contents</a></h3>
-  <ul>
-<li><a class="reference internal" href="#">Karta tutorial</a><ul>
-<li><a class="reference internal" href="#introduction">Introduction</a></li>
-<li><a class="reference internal" href="#definitions">Definitions</a></li>
-<li><a class="reference internal" href="#vector-data">Vector data</a><ul>
-<li><a class="reference internal" href="#associated-data">Associated data</a></li>
-<li><a class="reference internal" href="#visualizing-and-importing-exporting-data">Visualizing and importing/exporting data</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#raster-data">Raster data</a></li>
-</ul>
-</li>
-</ul>
-<div class="relations">
-<h3>Related Topics</h3>
-<ul>
-  <li><a href="karta-manual.html">Documentation overview</a><ul>
-      <li>Previous: <a href="installation.html" title="previous chapter">Installation</a></li>
-      <li>Next: <a href="reference.html" title="next chapter">Package reference</a></li>
-  </ul></li>
-</ul>
-</div>
-  <div role="note" aria-label="source link">
-    <h3>This Page</h3>
-    <ul class="this-page-menu">
-      <li><a href="_sources/tutorial.txt"
-            rel="nofollow">Show Source</a></li>
-    </ul>
-   </div>
-<div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
-    <form class="search" action="search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
-    </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="reference.html" class="btn btn-neutral float-right" title="Package reference" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="installation.html" class="btn btn-neutral" title="Installation" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015, Nat Wilson.
+
     </p>
-</div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
         </div>
       </div>
-      <div class="clearer"></div>
-    </div>
-    <div class="footer">
-      &copy;2015, Nat Wilson.
-      
-      |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.1</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.6</a>
-      
-      |
-      <a href="_sources/tutorial.txt"
-          rel="nofollow">Page source</a>
-    </div>
 
-    
+    </section>
 
-    
-  </body>
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.6dev',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
 </html>
