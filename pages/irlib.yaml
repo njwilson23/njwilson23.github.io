@@ -2,5 +2,5 @@ oro-template: ../templates/cover-template.html
 raw-title: Radar tools (irlib)
 #html-header: karta/header.html
 raw-header: <link href="stylesheets/cover-manpage.css" rel="stylesheet">
-html-nav: index/nav.html
+raw-nav: ""
 html-body: irlib/body.html
