@@ -3,6 +3,7 @@
     <meta charset="utf-8">
     <title>Where is Nat?</title>
     <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="https://d3js.org/d3-ease.v1.min.js"></script>
     <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
     <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
   </head>
@@ -11,10 +12,11 @@
     <style type="text/css">
       #completed {
         background-color: steelblue;
+        opacity: 0.1;
       }
       #remaining {
         background-color: firebrick;
-        opacity: 0.8;
+        opacity: 0.1;
       }
       div.bar {
         width: auto;
@@ -55,19 +57,32 @@
     <script>
 
       function update() {
+        var easing = d3.easeCubicInOut;
         var startTime = new Date(2016, 6, 8, 14),
             endTime = new Date(2016, 8, 9, 20);
 
         var totalMilliseconds = endTime - startTime;
 
-        d3.select("#completed").style("width",
-            function() { return Math.min(100, Math.max(0, (new Date()-startTime) / totalMilliseconds * 100)) + "%" });
+        d3.select("#completed")
+          .transition()
+          .ease(easing)
+          .duration(1000)
+          .style("width",
+            function() { return Math.min(100, Math.max(0, (new Date()-startTime) / totalMilliseconds * 100)) + "%" })
+          .style("opacity", 1.0);
 
-        d3.select("#remaining").style("width",
-            function() { return Math.min(100, Math.max(0, (endTime-new Date()) / totalMilliseconds * 100)) + "%" });
+        d3.select("#remaining")
+          .transition()
+          .ease(easing)
+          .duration(1000)
+          .style("width",
+            function() { return Math.min(100, Math.max(0, (endTime-new Date()) / totalMilliseconds * 100)) + "%" })
+          .style("opacity", 0.8);
+
+        console.log(Math.min(100, Math.max(0, (endTime-new Date()) / totalMilliseconds * 100)) + "%");
       }
       update();
-      setInterval(update, 5000)
+      //setInterval(update, 500);
 
     </script>
 
