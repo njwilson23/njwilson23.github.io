@@ -35,7 +35,7 @@
 
                 <h3>GSW integration</h3>
                 <p>Narwhal provides a <em>ctypes</em> wrapper for the <a href="http://www.teos-10.org/pubs/gsw/html/gsw_contents.html">Gibbs Seawater Toolbox</a> in the <code>narwhal.gsw</code> submodule. It can be used with or without the rest of Narwhal, as in:</p>
-                <pre><code>density = narwhal.gsw.rho(cast[&quot;sa&quot;], cast[&quot;ct&quot;], cast[&quot;p&quot;])</code></pre>
+                <pre><code>from narwhal import gsw<br>density = gsw.rho(cast[&quot;sa&quot;], cast[&quot;ct&quot;], cast[&quot;p&quot;])</code></pre>
 
               </div>
 
