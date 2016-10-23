@@ -1,8 +1,245 @@
 <!DOCTYPE html>
 <html lang="en">
-  <body>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="description" content="Geospatial analysis in Python">
+    <meta name="author" content="Nat Wilson">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#000000">
+    <meta name="theme-color" content="#85adb0">
+
+    <title>Karta - lightweight geospatial analysis in Python</title>
+    <link href="stylesheets/bootstrap.css" rel="stylesheet">
+
+    <link href="stylesheets/cover.css" rel="stylesheet">
+    <link href="stylesheets/karta.css" rel="stylesheet">
+
     <script>
-      window.location.replace("http://www.fortyninemaps.com/karta.html");
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-47441592-3', 'auto');
+      ga('send', 'pageview');
+
     </script>
-  </body>
-</html>
+
+
+    
+    
+  </head>
+
+  <body>
+
+    <div id="top-container">
+      <div class="navbar-wrapper cover-container">
+          <div class="masthead clearfix">
+            <div class="inner">
+              <img class="masthead-brand" src="images/mustache_mtn_bw_small_inverted.png" alt="logo">
+              <nav>
+                <ul class="nav masthead-nav">
+                  <li><a href="index.html">IronicMtn</a></li>
+
+                  <li><a href="http://web.mit.edu/njwilson/www">Research</a></li>
+
+                  <li class="dropdown">
+                    <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                      Projects<span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                      <li><a href="http://www.fortyninemaps.com/karta.html">Karta</a></li>
+                      <li><a href="narwhal.html">Narwhal</a></li>
+                      <li><a href="irlib.html">irlib</a></li>
+                      <li><a href="https://itm5live.herokuapp.com">79N mooring</a></li>
+                      <li><a href="http://isitquaking.ca">Is it Quaking in Vancouver?</a></li>
+                    </ul>
+                  </li>
+
+                  <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                      Social<span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                      <li><a href="https://twitter.com/njwilson23">Twitter</a></li>
+                      <li><a href="https://www.flickr.com/photos/24946690@N03/">Flickr</a></li>
+                      <li><a href="http://www.github.com/njwilson23">Github</a></li>
+                    </ul>
+                  </li>
+                </ul>
+              </nav>
+
+            </div>
+          </div>
+
+      </div>
+    <div class="container marketing" style="margin-bottom: 20px;">
+
+      <div class="row options" style="padding-top: 260px; padding-bottom: 50px;" id="banner">
+        <div class="col-lg-12">
+          <h2>Karta is a Pythonic toolkit for small- and medium-sized geospatial data tasks</h2>
+        </div>
+      </div>
+
+      <div class="row options" id="top-feature">
+
+        <div class="col-md-4">
+          <a href="#vector">
+            <img class="img-circle" src="images/vector-icon.png" alt="Vector icon" height="140" width="140">
+          </a>
+          <h2>Vector data</h2>
+          <p>Karta computes properties and relationships between vector geometries such as points, lines, and polygons. Performance relies on Cython-accelerated methods.</p>
+        </div><!-- /.col-md-4 -->
+
+        <div class="col-md-4">
+          <a href="#raster">
+            <img class="img-circle" src="images/raster-icon.jpg" alt="Raster icon" height="140" width="140">
+          </a>
+          <h2>Raster data</h2>
+          <p>Karta simplifies management of in-memory digital elevation models, satellite imagery, and land classification maps and enables simple sampling and transformation operations.</p>
+        </div><!-- /.col-md-4 -->
+
+        <div class="col-md-4">
+          <a href="#geod">
+            <img class="img-circle" src="images/geodesy-icon.png" alt="CRS icon" height="140" width="140">
+          </a>
+          <h2>Geodesy</h2>
+          <p>Karta is coordinate-system aware and performs forward and inverse geodetic calculations on spheres and ellipsoids. Map projections leverage <a href="http://jswhit.github.io/pyproj/">pyproj</a>.</p>
+        </div><!-- /.col-md-4 -->
+
+      </div><!-- /.row -->
+      <div class="row options">
+        <div class="col-md-12">
+          <p>
+             <a class="btn btn-default" href="kartadocs/karta-manual.html" role="button">API Docs</a>
+             <a class="btn btn-default" href="https://pypi.python.org/pypi/karta/" role="button">PyPI</a>
+             <a class="btn btn-default" href="https://github.com/fortyninemaps/karta" role="button">Github</a>
+          </p>
+        </div>
+      </div>
+    </div>
+
+
+    </div>
+
+
+    <!-- START THE FEATURETTES -->
+    <div class="container marketing">
+
+      <div class="row featurette"><a name="vector"></a>
+        <div class="col-md-7">
+          <h2 class="featurette-heading">Vector geometries</h2>
+          <h3 class="text-muted">Bounding boxes, distances and lengths, intersection calculations, convex hulls</h3>
+          <p class="lead text-left">
+          <code>karta.Point</code>, <code>karta.Multipoint</code>, <code>karta.Line</code> and <code>karta.Polygon</code> are all subclasses of <code>karta.Geometry</code>. All geometry objects can contain singlepart and multipart metadata, as well as a reference to a coordinate reference system object. Methods of geometry objects handle basic queries about geometry properties and relationships.</p>
+
+          <p class="lead text-left">GeoJSON I/O is handled natively while ESRI shapefile access is thanks to <a href="https://github.com/GeospatialPython/pyshp">pyshp</a>. Geometries implement the <code>__geo_interface__</code> attribute, permitting interchange with other libraries such as <a href="http://toblerity.org/shapely/">Shapely</a>.</p>
+        </div>
+        <div class="col-md-5">
+            <pre class="text-left">
+point = Point((-130.0, 52.0), crs=LonLatWGS84)
+
+line = read_geojson("linedata.json")
+
+polygon = Polygon([(-515005.78, -1301130.53),
+                   (-579174.89, -1282271.94),
+                   (-542977.83, -1221147.82),
+                   (-437864.05, -1251641.55),
+                   (-438160.72, -1252421.48),
+                   (-437961.28, -1285314.00)],
+                   crs=NSIDCNorth)
+
+polygon.to_shapefile("outline.shp") </pre>
+        </div>
+      </div>
+
+    </div>
+
+    <hr class="featurette-divider">
+
+    <div class="container marketing">
+
+      <div class="row featurette"><a name="raster"></a>
+        <div class="col-md-7 col-md-push-5">
+          <h2 class="featurette-heading">Raster grids</h2>
+          <h3 class="text-muted">Grid statistics, resizing, resampling, and profile extraction</h3>
+          <p class="lead text-left">Regularly-spaced grids are represented by <code>karta.RegularGrid</code>, with data backed by numpy arrays. Grids with arbitrary spacing can be represented by the somewhat-experimental <code>karta.WarpedGrid</code> class. Grids can be clipped, resampled, queried at geographical points, and read or written to ESRI ASCII files or to GeoTiff via GDAL.</p>
+
+          <pre class="text-left">
+grid = read_gtiff("LC80360272015200.tif")
+grid = grid.resample(100, 100)
+plt.imshow(grid.values, extent=grid.get_extent(), origin="bottom") </pre>
+        </div>
+        <div class="col-md-5 col-md-pull-7">
+          <!-- place an image here -->
+          <img class="featurette-image img-responsive center-block" src="images/raster.jpg">
+        </div>
+      </div>
+
+    </div>
+
+    <hr class="featurette-divider">
+
+    <div class="container marketing">
+
+      <div class="row featurette"><a name="geod"></a>
+        <div class="col-md-12">
+          <h2 class="featurette-heading">Coordinate reference systems and geodesy</h2>
+          <h3 class="text-muted">Placing data on Earth</h3>
+          <p class="lead text-left">Geometries and Grids are referenced to coordinate reference system objects (<code>karta.crs.CRS</code>) that provide information about the geographical projection and geodetic relationships between positions. Distances and areas on planes, spheres, and ellipsoids are handled in Karta, while coordinate projection relies on <a href="http://jswhit.github.io/pyproj/">pyproj</a> via the <code>Proj4CRS</code> subclass.</p>
+        </div>
+      </div>
+
+      <hr class="featurette-divider">
+
+      <div class="row featurette">
+        <div class="col-md-12">
+          <h2 class="text-muted">Karta is open source. Pull requests are welcome!</h2>
+        </div>
+      </div>
+
+      <!-- /END THE FEATURETTES -->
+
+
+      <!-- FOOTER -->
+      <footer>
+        <p class="pull-right"><a href="#">Back to top</a></p>
+        <p class="pull-left"><a href="https://github.com/fortyninemaps/karta">Github</a></p>
+      </footer>
+
+    </div><!-- /.container -->
+
+
+
+    
+    
+    <script src="js/external/jquery.js"></script>
+    <script src="js/external/bootstrap.js"></script>
+    
+    <script src="js/external/ie10-viewport-bug-workaround.js"></script>
+
+    <script type="text/javascript">
+
+    var media_wide = window.matchMedia("all and (min-width: 768px)");
+    if (media_wide.matches) {
+      $(document).scroll(function () {
+        if ($(window).scrollTop() > $("#top-feature").offset().top) {
+          $(".masthead").fadeOut()
+        } else {
+          $(".masthead").fadeIn()
+        }
+      });
+    };
+
+    </script>
+
+</body></html>
+
