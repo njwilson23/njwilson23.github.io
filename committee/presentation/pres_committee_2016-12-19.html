@@ -42,7 +42,8 @@
         </section>
 
         <section>
-          <h4>Submarine melt rates: mass continuity</h4>
+          <h3>Submarine melt rates</h3>
+          <h4>Recap: mass continuity</h4>
           $$ \frac{Dh}{Dt} + h\nabla\cdot\vec{u} + \dot{h}_\text{firn} = \dot{m}_\text{subaerial} + \dot{m}_\text{submarine} $$
 
           <small>
@@ -61,7 +62,7 @@
           <h4>Thickness: WorldView DEMs</h4>
           <p>Digital Elevation Models (DEMs) constructed by exploiting <em>Ames Stereo Pipeline</em> (Moratto, 2010)</p>
           <p>Using all cloud-free WorldView-1/2/3 imagery from the PGC for northern Greenland ice tongues, 2011&mdash;2015</p>
-          <p>Initially running on lab computers at WHOI; transitioned to the <strong>engaging</strong> cluster at MIT</p>
+          <p>Initially running on lab computers at WHOI; transitioned to a cluster at MIT</p>
         </section>
 
         <section>
@@ -111,10 +112,9 @@
         </section>
 
         <section>
-          <h4>Dh/Dt uncertainty</h4>
+          <h4>Dh/Dt uncertainty from jackknife resampling</h4>
           <div>
             <div style="float: left; width: 50%;">
-              <p>Iteratively withhold one DEM and recompute mean of all remaining DEM pairs</p>
               <ul>
                 <li>Time-averaged Dh/Dt uncertainties typically 2&mdash;4 meters/year</li>
                 <li>Higher in regions of few observations or poor grid co-registration</li>
