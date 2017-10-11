@@ -1,5 +1,15 @@
 body {
-  font-family: "Lato";
+  font-family: "Fira Mono";
+  background-image: url(images/serm5_horizon.jpg);
+  background-size: cover;
+}
+
+h1 {
+  font-size: x-large;
+}
+
+h2 {
+  font-size: large;
 }
 
 section#main {
