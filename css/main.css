@@ -43,3 +43,9 @@ pre>code {
   padding: 1em 1em;
   border-radius: 3px;
 }
+
+@media screen and (orientation: portrait) {
+  section#main {
+    width: 95%;
+  }
+}
