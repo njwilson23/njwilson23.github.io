@@ -1,3 +1,4 @@
+
 body {
   font-family: "Fira Mono";
   background-image: url(images/serm5_horizon.jpg);
@@ -14,7 +15,7 @@ h2 {
 
 section#main {
   margin: auto auto;
-  width: 70%;
+  margin: 1em;
   max-width: 800px;
 }
 
@@ -42,10 +43,4 @@ img {
 pre>code {
   padding: 1em 1em;
   border-radius: 3px;
-}
-
-@media screen and (orientation: portrait) {
-  section#main {
-    width: 95%;
-  }
 }
