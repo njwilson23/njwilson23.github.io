@@ -1,3 +1,0 @@
-oro-template: ../templates/narwhal-template.html
-html-body: narwhal/docs.html
-oro-output: ../narwhal/docs.html

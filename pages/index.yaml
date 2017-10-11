@@ -1,5 +1,0 @@
-oro-template: ../templates/cover-template.html
-raw-title: ironicmtn
-html-header: index/header.html
-html-nav: nav-global.html
-html-body: index/body.html

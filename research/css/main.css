@@ -1,0 +1,28 @@
+body {
+  font-family: "Lato";
+}
+
+section#main {
+  margin: auto auto;
+  width: 70%;
+  max-width: 800px;
+}
+
+div.list {
+  text-align: center;
+}
+
+
+a,a:visited {
+  color: blue
+}
+
+a:hover {
+  color: steelblue;
+}
+
+img {
+  display: block;
+  margin: auto auto;
+  max-width: 100%;
+}

@@ -1,7 +1,0 @@
-oro-template: ../templates/karta-template.html
-oro-output: ../karta.html
-raw-title: Karta
-html-header: header-tracking.html
-html-nav: nav-global.html
-html-topcontainer: karta/topcontainer.html
-html-body: karta/features.html
