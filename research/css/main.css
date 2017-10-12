@@ -1,8 +1,11 @@
 
 body {
-  font-family: "Fira Mono";
+  font-family: "Fira Mono", monospace;
   background-image: url(images/serm5_horizon.jpg);
   background-size: cover;
+  -moz-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
 }
 
 h1 {
@@ -15,8 +18,8 @@ h2 {
 
 section#main {
   margin: auto auto;
-  margin: 1em;
-  max-width: 800px;
+  width: 98%;
+  max-width: 900px;
 }
 
 div.list {
