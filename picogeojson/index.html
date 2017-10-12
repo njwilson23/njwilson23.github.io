@@ -28,19 +28,20 @@ geographical features in JSON. GeoJSON is simple, reasonably flexible, and can
 be read using any stdlib JSON package.</p>
 <p><code>picogeojson</code> is a pure-Python package that ensures that the GeoJSON you create
 adheres to the 2016 GeoJSON specification, taking care of details such as
-polygon winding order and antimeridian-cutting. It also handles unmarshaling
-GeoJSON strings from unknown sources, allowing you to skip a lot of boilerplate
-and key-checking. <code>picogeojson</code> was extracted from the
-<a href="karta.fortyninemaps.com">Karta</a> package, and continues to serve as the GeoJSON
-interface for that project.</p>
+polygon closing, winding order, and antimeridian-cutting. It also handles
+unmarshaling GeoJSON strings from unknown sources, allowing you to skip a lot of
+boilerplate and key-checking.</p>
 <h2 id="installation">Installation</h2>
 <pre><code>pip install -U picogeojson
 </code></pre><h2 id="usage">Usage</h2>
-<p>Create and serialize a Geometry:</p>
-<pre><code class="hljs python">pt = picogeojson.fromstring(<span class="hljs-string">'{"type": "Point", "coordinates": [1.0, 3.0]}'</span>)
+<p>Create and serialize a <em>Geometry</em>:</p>
+<pre><code class="hljs python">pt = picogeojson.Point((<span class="hljs-number">1.0</span>, <span class="hljs-number">3.0</span>))
 json_str = picogeojson.tostring(pt)</code></pre>
 
-<p>Extract Geometries from a foreign string:</p>
+<p>Or, load from a JSON string:</p>
+<pre><code class="hljs python">pt_from_json = picogeojson.fromstring(<span class="hljs-string">'{"type": "Point", "coordinates": [1.0, 3.0]}'</span>)</code></pre>
+
+<p>Skip boilerplate error-checking using <code>GeoJSONResult</code> and extractor methods:</p>
 <pre><code class="hljs python">result = picogeojson.result_fromstring(api_response.decode(<span class="hljs-string">"utf-8"</span>))
 
 <span class="hljs-comment"># Expecting one or more points or multipoints</span>
@@ -52,7 +53,7 @@ json_str = picogeojson.tostring(pt)</code></pre>
     <span class="hljs-comment"># do something with multilinestrings</span>
     <span class="hljs-comment"># ...</span></code></pre>
 
-<p>Extract Features from a foreign string and filter by <code>.properties</code></p>
+<p>Extractor also work with <em>Feature</em> objects and can filter by <code>.properties</code></p>
 <pre><code class="hljs python">result = picogeojson.result_fromstring(api_response.decode(<span class="hljs-string">"utf-8"</span>))
 
 <span class="hljs-keyword">for</span> feature <span class="hljs-keyword">in</span> result.features(<span class="hljs-string">"Polygon"</span>, {<span class="hljs-string">"type"</span>: <span class="hljs-string">"Lake"</span>, <span class="hljs-string">"state"</span>: <span class="hljs-string">"Oregon"</span>}):
@@ -67,7 +68,9 @@ json_str = picogeojson.tostring(pt)</code></pre>
 merged_points = picogeojson.merge(points)
 original_points = picogeojson.burst(merged_points)</code></pre>
 
-<h2 id="development">Development</h2>
+<p>For a more full-featured Python geospatial package, take a look as
+<a href="karta.fortyninemaps.com">Karta</a>.</p>
+<h2 id="source">Source</h2>
 <p><a href="https://github.com/fortyninemaps/picogeojson">github.com/fortyninemaps/picogeojson</a></p>
 
   </section>
